@@ -15,13 +15,27 @@ class VideoView: UIView {
     
     init(frame: CGRect, videoModel: Video) {
         super.init(frame: frame)
-        videoImageView.image = videoModel.image
-        videoTitle.text = videoModel.title
-        videoDurationAndDate.text = videoModel.duration + "." + videoModel.date.description(with: Locale.current)
+        setViewInfoWith(videoModel)
+        setUpImageView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setViewInfoWith(_ video: Video) {
+        videoImageView.image = video.image
+        videoTitle.text = video.title
+        videoDurationAndDate.text = video.duration + "." + video.date.description(with: Locale.current)
+    }
+    
+    private func setUpImageView() {
+        videoImageView.layer.cornerRadius = 15
+        videoImageView.layer.shadowOffset = CGSize(width: videoImageView.frame.width,
+                                                   height: videoImageView.frame.height)
+        videoImageView.layer.shadowColor = UIColor.black.cgColor
+        videoImageView.layer.opacity = 5
+        videoImageView.layer.shadowRadius = -10
     }
     
     /*
