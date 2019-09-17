@@ -1,0 +1,56 @@
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+.DS_Store
+*.xcscmblueprint
+
+*.sqlite-shm
+*.sqlite-wal
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
+#
+# Pods/
+
+# Carthage
+Carthage/Checkouts
+!Carthage/Build
+Carthage/Build/tvOS
+Carthage/Build/iOS/BAMSDK.framework/authenticate.sh
+Carthage/Build/iOS/ComScore.framework/strip-framework.sh
+*.bcsymbolmap
+
+# We need this specific file for chrome cast support
+!Carthage/Checkouts/espn-watchsdk-apple/ESPNWatchSDK/Shared/GoogleCastUtils.swift
+
+# Fastlane
+fastlane/report.xml
+fastlane/test_output*
+test_output*
+
+# TeamCity
+vendor
+.bundle
+Gemfile.lock
+build-scripts
+
+# IntelliJ Editor
+.idea/
