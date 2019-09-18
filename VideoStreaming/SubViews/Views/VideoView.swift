@@ -24,13 +24,13 @@ class VideoView: UIView {
     }
     
     func resetViewInfoWith(_ video: Video) {
-        videoImageView.image = video.image
+        videoImageView.image = UIImage(named: video.imageName)
         videoTitle.text = video.title
         videoDurationAndDate.text = video.duration + "." + video.date.description(with: Locale.current)
     }
     
     private func setViewInfoWith(_ video: Video) {
-        videoImageView.image = video.image
+        videoImageView.image = UIImage(named: video.imageName)
         videoTitle.text = video.title
         videoDurationAndDate.text = video.duration + "." + video.date.description(with: Locale.current)
     }

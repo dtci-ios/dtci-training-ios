@@ -6,11 +6,11 @@
 //  Copyright © 2019 ESPN. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 struct Video {
     let title: String
     let duration: String
     let date: Date
-    let image: UIImage
+    let imageName: String
 }
