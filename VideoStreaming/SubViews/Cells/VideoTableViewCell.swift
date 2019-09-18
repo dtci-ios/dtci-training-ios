@@ -9,7 +9,8 @@
 import UIKit
 
 class VideoTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var videoView: VideoView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

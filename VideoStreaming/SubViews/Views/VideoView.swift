@@ -13,14 +13,20 @@ class VideoView: UIView {
     @IBOutlet weak var videoTitle: UILabel!
     @IBOutlet weak var videoDurationAndDate: UILabel!
     
-    init(frame: CGRect, videoModel: Video) {
+    init(frame: CGRect, video: Video) {
         super.init(frame: frame)
-        setViewInfoWith(videoModel)
+        setViewInfoWith(video)
         setUpImageView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func resetViewInfoWith(_ video: Video) {
+        videoImageView.image = video.image
+        videoTitle.text = video.title
+        videoDurationAndDate.text = video.duration + "." + video.date.description(with: Locale.current)
     }
     
     private func setViewInfoWith(_ video: Video) {
@@ -30,19 +36,6 @@ class VideoView: UIView {
     }
     
     private func setUpImageView() {
-        videoImageView.layer.cornerRadius = 15
-        videoImageView.layer.shadowOffset = CGSize(width: videoImageView.frame.width,
-                                                   height: videoImageView.frame.height)
-        videoImageView.layer.shadowColor = UIColor.black.cgColor
-        videoImageView.layer.opacity = 5
-        videoImageView.layer.shadowRadius = -10
+        videoImageView.layer.cornerRadius = 10
     }
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 }
