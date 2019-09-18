@@ -9,13 +9,13 @@
 import UIKit
 
 class VideoView: UIView {
-    @IBOutlet weak var videoImageView: UIImageView!
-    @IBOutlet weak var videoTitle: UILabel!
-    @IBOutlet weak var videoDurationAndDate: UILabel!
+    @IBOutlet private weak var videoImageView: UIImageView!
+    @IBOutlet private weak var videoTitle: UILabel!
+    @IBOutlet private weak var videoDurationAndDate: UILabel!
     
     init(frame: CGRect, video: Video) {
         super.init(frame: frame)
-        setViewInfoWith(video)
+        configure(with: video)
         setUpImageView()
     }
     
@@ -23,13 +23,7 @@ class VideoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func resetViewInfoWith(_ video: Video) {
-        videoImageView.image = UIImage(named: video.imageName)
-        videoTitle.text = video.title
-        videoDurationAndDate.text = video.duration + "." + video.date.description(with: Locale.current)
-    }
-    
-    private func setViewInfoWith(_ video: Video) {
+    func configure(with video: Video) {
         videoImageView.image = UIImage(named: video.imageName)
         videoTitle.text = video.title
         videoDurationAndDate.text = video.duration + "." + video.date.description(with: Locale.current)
