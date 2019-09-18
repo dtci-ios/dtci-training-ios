@@ -9,16 +9,29 @@
 import UIKit
 
 class VideoTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    @IBOutlet weak var vidImage: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
+    
+    var video: Video? {
+        didSet {
+            if let video = video {
+                if let image = UIImage(named: video.image) {
+                    vidImage.image = image
+                } else {
+                    vidImage.image = UIImage(named: "Placeholder")
+                }
+                titleLabel.text = video.title
+                durationLabel.text = video.duration
+            }
+        }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        vidImage.image = UIImage(named: "Placeholder")
+        titleLabel.text = "-"
+        durationLabel.text = "--:--:--"
     }
     
 }
