@@ -10,11 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var tableView: UIViewController!
+//    var tableView: UIViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView = UIViewController() as! VideoPlaylistViewController
+//        tableView = UIViewController() as! VideoPlaylistViewController
         // Do any additional setup after loading the view.
     }
 
