@@ -14,8 +14,6 @@ class VideoView: UIView {
     @IBOutlet weak var videoStack: UIStackView!
     @IBOutlet private weak var videoTitle: UILabel!
     @IBOutlet private weak var videoDurationAndDate: UILabel!
-
-    // var nibName: String = "VideoView"
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -64,6 +64,7 @@
             <connections>
                 <outlet property="videoDurationAndDate" destination="C9e-U2-Vnt" id="Vnf-kj-dkd"/>
                 <outlet property="videoImageView" destination="hpU-Y2-bOK" id="hXm-ZP-1tP"/>
+                <outlet property="videoStack" destination="qcZ-cg-e3F" id="KR5-aL-3qF"/>
                 <outlet property="videoTitle" destination="YIK-jS-oQG" id="CxM-5u-zFr"/>
             </connections>
             <point key="canvasLocation" x="151.19999999999999" y="-88.15592203898052"/>

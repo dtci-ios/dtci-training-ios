@@ -15,25 +15,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNg-XS-vuj" customClass="VideoView" customModule="VideoStreaming" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="78" width="414" height="135"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kGu-ni-X0S">
+                                <rect key="frame" x="0.0" y="71" width="414" height="727"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="414" id="Lw8-ef-BXq"/>
-                                    <constraint firstAttribute="height" constant="135" id="bt0-8e-i54"/>
-                                </constraints>
-                            </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="VideoCell" id="dWl-Py-kCT" customClass="VideoTableViewCell" customModule="VideoStreaming" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dWl-Py-kCT" id="wLW-Xs-Cc7">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FNg-XS-vuj" secondAttribute="trailing" id="1Lp-qS-hqd"/>
-                            <constraint firstItem="FNg-XS-vuj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Ng-Xm-ion"/>
-                            <constraint firstItem="FNg-XS-vuj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="34" id="w7c-3u-yD0"/>
+                            <constraint firstItem="kGu-ni-X0S" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Kpf-QP-rYy"/>
+                            <constraint firstItem="kGu-ni-X0S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Tiu-Rw-MGY"/>
+                            <constraint firstItem="kGu-ni-X0S" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="27" id="fuB-y8-8dj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kGu-ni-X0S" secondAttribute="bottom" constant="64" id="zJY-zj-hjM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="videoView" destination="FNg-XS-vuj" id="cUo-qa-lv4"/>
+                        <outlet property="tableView" destination="kGu-ni-X0S" id="hJZ-eo-fyx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
