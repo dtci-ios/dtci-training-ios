@@ -8,6 +8,16 @@
 
 import UIKit
 
+/*
+protocol NibLoadableView: class where Self: UIView {
+    var contentView: UIView! { get }
+}
+
+protocol <#name#> {
+    <#requirements#>
+}
+*/
+ 
 class VideoView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet private weak var videoImageView: UIImageView!
@@ -26,7 +36,7 @@ class VideoView: UIView {
         nibSetup()
         videoImageView?.image = UIImage(named: video.imageName)
         videoTitle?.text = video.title
-        videoDurationAndDate?.text = video.duration + "." + video.date.description(with: Locale.current)
+        videoDurationAndDate?.text = video.durationAndDate
         videoImageView?.layer.cornerRadius = 10
     }
     
