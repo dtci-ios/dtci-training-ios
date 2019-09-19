@@ -7,31 +7,11 @@
 //
 
 import UIKit
-
-
-/// -------------------
-public protocol NibInstantiatable {
-    static func nibName() -> String
-}
-
-extension NibInstantiatable {
-    static func nibName() -> String {
-        return String(describing: self)
-    }
-}
-
-extension NibInstantiatable where Self: UIView {
-    static func fromNib() -> Self {
-        let bundle = Bundle(for: self)
-        let nib = bundle.loadNibNamed(nibName(), owner: self, options: nil)
-        return nib!.first as! Self
-    }
-}
-/// --------------------
-
-@IBDesignable class VideoView: UIView {
+ 
+class VideoView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet private weak var videoImageView: UIImageView!
+    @IBOutlet weak var videoStack: UIStackView!
     @IBOutlet private weak var videoTitle: UILabel!
     @IBOutlet private weak var videoDurationAndDate: UILabel!
 
@@ -49,7 +29,10 @@ extension NibInstantiatable where Self: UIView {
         nibSetup()
         videoImageView?.image = UIImage(named: video.imageName)
         videoTitle?.text = video.title
-        videoDurationAndDate?.text = video.duration + "." + video.date.description(with: Locale.current)
+        videoDurationAndDate?.text = video.durationAndDate
+        videoImageView?.translatesAutoresizingMaskIntoConstraints = true
+        videoStack?.translatesAutoresizingMaskIntoConstraints = true
+        videoImageView?.layer.masksToBounds = true
         videoImageView?.layer.cornerRadius = 10
     }
 

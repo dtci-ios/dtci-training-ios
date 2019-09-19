@@ -15,30 +15,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rii-G6-rfN" customClass="VideoView" customModule="VideoStreaming" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="96" width="414" height="135"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNg-XS-vuj" customClass="VideoView" customModule="VideoStreaming" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="78" width="414" height="135"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="135" id="URD-fM-0Ln"/>
-                                    <constraint firstAttribute="width" constant="414" id="vJQ-pw-zpM"/>
+                                    <constraint firstAttribute="width" constant="414" id="Lw8-ef-BXq"/>
+                                    <constraint firstAttribute="height" constant="135" id="bt0-8e-i54"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="rii-G6-rfN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="69N-kF-y8l"/>
-                            <constraint firstItem="rii-G6-rfN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bZ8-65-i79"/>
-                            <constraint firstItem="rii-G6-rfN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="52" id="zQw-vE-H2Y"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FNg-XS-vuj" secondAttribute="trailing" id="1Lp-qS-hqd"/>
+                            <constraint firstItem="FNg-XS-vuj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Ng-Xm-ion"/>
+                            <constraint firstItem="FNg-XS-vuj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="34" id="w7c-3u-yD0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="videoView" destination="rii-G6-rfN" id="PXo-AE-jzz"/>
+                        <outlet property="videoView" destination="FNg-XS-vuj" id="cUo-qa-lv4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="91.741071428571431"/>
+            <point key="canvasLocation" x="131.8840579710145" y="90.401785714285708"/>
         </scene>
     </scenes>
 </document>
