@@ -21,6 +21,7 @@ protocol <#name#> {
 class VideoView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet private weak var videoImageView: UIImageView!
+    @IBOutlet weak var videoStack: UIStackView!
     @IBOutlet private weak var videoTitle: UILabel!
     @IBOutlet private weak var videoDurationAndDate: UILabel!
     
@@ -37,6 +38,9 @@ class VideoView: UIView {
         videoImageView?.image = UIImage(named: video.imageName)
         videoTitle?.text = video.title
         videoDurationAndDate?.text = video.durationAndDate
+        videoImageView?.translatesAutoresizingMaskIntoConstraints = true
+        videoStack?.translatesAutoresizingMaskIntoConstraints = true
+        videoImageView?.layer.masksToBounds = true
         videoImageView?.layer.cornerRadius = 10
     }
     
