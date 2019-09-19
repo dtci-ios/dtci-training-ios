@@ -8,8 +8,8 @@
 
 import UIKit
 
-class VideoTableViewCell: UITableViewCell {
-    @IBOutlet private weak var videoView: VideoView!
+@IBDesignable class VideoTableViewCell: UITableViewCell {
+    @IBOutlet private var videoView: VideoView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,4 +21,7 @@ class VideoTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configure(with video: Video) {
+        self.videoView.configure(with: video)
+    }
 }
