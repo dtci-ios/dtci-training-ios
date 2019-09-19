@@ -9,12 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet private weak var videoView: VideoView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        videoView.configure(with: Video(title: "The Hupmobile", duration: "20:45", date: Date(), imageName: "hupmobile"))
     }
-
-
 }
 

@@ -23,9 +23,16 @@ class VideoView: UIView {
     }
     
     func configure(with video: Video) {
+        nibSetup()
         videoImageView?.image = UIImage(named: video.imageName)
         videoTitle?.text = video.title
         videoDurationAndDate?.text = video.duration + "." + video.date.description(with: Locale.current)
         videoImageView?.layer.cornerRadius = 10
+    }
+    
+    private func nibSetup() {
+        Bundle.main.loadNibNamed(String(describing: VideoView.self), owner: self, options: nil)
+        guard let contentView = contentView else { return }
+        self.addSubview(contentView)
     }
 }
