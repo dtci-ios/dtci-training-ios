@@ -13,7 +13,7 @@ struct Video {
         let formatter = DateFormatter()
         formatter.dateFormat = "E, MM/dd"
         let dateFormatted = formatter.string(from: date)
-        return duration + "." + dateFormatted
+        return duration + " • " + dateFormatted
     }
     
     let title: String

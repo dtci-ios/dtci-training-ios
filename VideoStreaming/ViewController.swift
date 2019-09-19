@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        videoView.configure(with: Video(title: "The Hupmobile", duration: "20:45", date: Date(), imageName: "hupmobile"))
+        videoView.configure(with: Video(title: "The Hupmobile (Ep. 1)", duration: "20:45", date: Date(), imageName: "hupmobile"))
     }
 }
 
