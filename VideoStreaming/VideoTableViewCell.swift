@@ -8,11 +8,18 @@
 
 import UIKit
 
+
 class VideoTableViewCell: UITableViewCell {
+
+    enum Constants {
+        static let nibName = "VideoTableViewCell"
+        static let reuseIdentifier = "videoCell"
+        static let placeholderImg = "Placeholder"
+    }
     
-    @IBOutlet weak var vidImage: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet private weak var vidImage: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var durationLabel: UILabel!
     
     var video: Video? {
         didSet {
@@ -20,7 +27,7 @@ class VideoTableViewCell: UITableViewCell {
                 if let image = UIImage(named: video.image) {
                     vidImage.image = image
                 } else {
-                    vidImage.image = UIImage(named: "Placeholder")
+                    vidImage.image = UIImage(named: Constants.placeholderImg)
                 }
                 titleLabel.text = video.title
                 durationLabel.text = video.duration
@@ -29,7 +36,7 @@ class VideoTableViewCell: UITableViewCell {
     }
 
     override func prepareForReuse() {
-        vidImage.image = UIImage(named: "Placeholder")
+        vidImage.image = UIImage(named: Constants.placeholderImg)
         titleLabel.text = "-"
         durationLabel.text = "--:--:--"
     }
