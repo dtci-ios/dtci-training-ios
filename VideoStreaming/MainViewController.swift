@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.showHUD(progressLabel: "Loading...")
+        showHUD(progressLabel: "Loading...")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             self.mainLabel.text = "Hellow world"
