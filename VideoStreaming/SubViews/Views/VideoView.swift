@@ -9,22 +9,24 @@
 import UIKit
  
 class VideoView: UIView {
-    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var videoImageView: UIImageView!
     @IBOutlet private weak var videoStack: UIStackView!
     @IBOutlet private weak var videoTitle: UILabel!
     @IBOutlet private weak var videoDurationAndDate: UILabel!
     
+    private let nibName = String(describing: VideoView.self)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        nibSetup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        nibSetup()
     }
     
     func configure(with video: Video) {
-        nibSetup()
         videoImageView?.image = UIImage(named: video.imageName)
         videoTitle?.text = video.title
         videoDurationAndDate?.text = video.durationAndDate
@@ -35,8 +37,10 @@ class VideoView: UIView {
     }
 
     private func nibSetup() {
-        Bundle.main.loadNibNamed(String(describing: VideoView.self), owner: self, options: nil)
-        guard let contentView = contentView else { return }
-        addSubview(contentView)
+        guard let view = Bundle.main.loadNibNamed(nibName, owner: self, options: nil)?.first as? UIView else {
+            return
+        }
+        
+        addSubview(view)
     }
 }

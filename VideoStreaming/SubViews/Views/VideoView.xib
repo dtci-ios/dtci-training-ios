@@ -9,7 +9,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoView" customModule="VideoStreaming" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="eCP-iN-XIC"/>
                 <outlet property="videoDurationAndDate" destination="YIK-jS-oQG" id="JIw-wy-l9c"/>
                 <outlet property="videoImageView" destination="hpU-Y2-bOK" id="Epf-N2-nd6"/>
                 <outlet property="videoStack" destination="qcZ-cg-e3F" id="AeN-a1-S4J"/>
@@ -17,7 +16,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VideoView" customModule="VideoStreaming" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -61,12 +60,6 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <connections>
-                <outlet property="videoDurationAndDate" destination="C9e-U2-Vnt" id="Vnf-kj-dkd"/>
-                <outlet property="videoImageView" destination="hpU-Y2-bOK" id="hXm-ZP-1tP"/>
-                <outlet property="videoStack" destination="qcZ-cg-e3F" id="KR5-aL-3qF"/>
-                <outlet property="videoTitle" destination="YIK-jS-oQG" id="CxM-5u-zFr"/>
-            </connections>
             <point key="canvasLocation" x="151.19999999999999" y="-88.15592203898052"/>
         </view>
     </objects>
