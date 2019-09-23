@@ -16,6 +16,9 @@
 		9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */; };
 		A72C3A4E233565BF00723C01 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; };
 		A72C3A4F233565BF00723C01 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A7A5BF39233911C5001D2C96 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5BF38233911C5001D2C96 /* NetworkManager.swift */; };
+		A7A5BF3B23394683001D2C96 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5BF3A23394683001D2C96 /* GameTableViewCell.swift */; };
+		A7A5BF3D233952BF001D2C96 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5BF3C233952BF001D2C96 /* Models.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStreamingTests.swift; sourceTree = "<group>"; };
 		9C04F3E9233045CC005FBE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A72C3A4D233565BF00723C01 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		A7A5BF38233911C5001D2C96 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A7A5BF3A23394683001D2C96 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
+		A7A5BF3C233952BF001D2C96 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,9 @@
 				9C04F3D0233045CA005FBE8E /* AppDelegate.swift */,
 				9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */,
 				9C04F3D4233045CA005FBE8E /* ViewController.swift */,
+				A7A5BF38233911C5001D2C96 /* NetworkManager.swift */,
+				A7A5BF3C233952BF001D2C96 /* Models.swift */,
+				A7A5BF3A23394683001D2C96 /* GameTableViewCell.swift */,
 				9C04F3D6233045CA005FBE8E /* Main.storyboard */,
 				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
 				9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */,
@@ -250,7 +259,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7A5BF3B23394683001D2C96 /* GameTableViewCell.swift in Sources */,
+				A7A5BF39233911C5001D2C96 /* NetworkManager.swift in Sources */,
 				9C04F3D5233045CA005FBE8E /* ViewController.swift in Sources */,
+				A7A5BF3D233952BF001D2C96 /* Models.swift in Sources */,
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
 				9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */,
 			);
