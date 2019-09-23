@@ -9,9 +9,9 @@
 import UIKit
  
 class VideoView: UIView {
-    @IBOutlet var contentView: UIView!
+    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var videoImageView: UIImageView!
-    @IBOutlet weak var videoStack: UIStackView!
+    @IBOutlet private weak var videoStack: UIStackView!
     @IBOutlet private weak var videoTitle: UILabel!
     @IBOutlet private weak var videoDurationAndDate: UILabel!
     
@@ -37,6 +37,6 @@ class VideoView: UIView {
     private func nibSetup() {
         Bundle.main.loadNibNamed(String(describing: VideoView.self), owner: self, options: nil)
         guard let contentView = contentView else { return }
-        self.addSubview(contentView)
+        addSubview(contentView)
     }
 }
