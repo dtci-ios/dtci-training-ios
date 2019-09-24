@@ -14,7 +14,11 @@ class VideoView: UIView {
     @IBOutlet private weak var videoTitle: UILabel!
     @IBOutlet private weak var videoDurationAndDate: UILabel!
     
-    private let nibName = String(describing: VideoView.self)
+    private enum Constants {
+        static let nibName = String(describing: VideoView.self)
+        static let placeholderImageName = "Placeholder"
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,13 +41,13 @@ class VideoView: UIView {
     }
     
     func reset() {
-        videoImageView.image = nil
+        videoImageView.image = UIImage(named: Constants.placeholderImageName)
         videoTitle.text = nil
         videoDurationAndDate.text = nil
     }
 
     private func nibSetup() {
-        guard let view = Bundle.main.loadNibNamed(nibName, owner: self, options: nil)?.first as? UIView else {
+        guard let view = Bundle.main.loadNibNamed(Constants.nibName, owner: self, options: nil)?.first as? UIView else {
             return
         }
         
