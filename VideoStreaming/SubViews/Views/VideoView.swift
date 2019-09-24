@@ -27,13 +27,19 @@ class VideoView: UIView {
     }
     
     func configure(with video: Video) {
-        videoImageView?.image = UIImage(named: video.imageName)
-        videoTitle?.text = video.title
-        videoDurationAndDate?.text = video.durationAndDate
-        videoImageView?.translatesAutoresizingMaskIntoConstraints = true
-        videoStack?.translatesAutoresizingMaskIntoConstraints = true
-        videoImageView?.layer.masksToBounds = true
-        videoImageView?.layer.cornerRadius = 10
+        videoImageView.image = UIImage(named: video.imageName)
+        videoTitle.text = video.title
+        videoDurationAndDate.text = video.durationAndDate
+        videoImageView.translatesAutoresizingMaskIntoConstraints = true
+        videoStack.translatesAutoresizingMaskIntoConstraints = true
+        videoImageView.layer.masksToBounds = true
+        videoImageView.layer.cornerRadius = 10
+    }
+    
+    func reset() {
+        videoImageView.image = nil
+        videoTitle.text = nil
+        videoDurationAndDate.text = nil
     }
 
     private func nibSetup() {
