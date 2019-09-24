@@ -23,6 +23,7 @@ import UIKit
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        isSelected = false 
         videoView.reset()
     }
 }
