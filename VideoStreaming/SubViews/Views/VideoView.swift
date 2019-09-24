@@ -37,9 +37,9 @@ class VideoView: UIView {
     }
     
     func reset() {
-        videoImageView.image = nil
-        videoTitle.text = nil
-        videoDurationAndDate.text = nil
+        videoImageView.image = UIImage(named: VideoTableViewCell.Constants.placeholderImg)
+        videoTitle.text = "-"
+        videoDurationAndDate.text = "-, --"
     }
 
     private func nibSetup() {

@@ -11,6 +11,12 @@ import UIKit
 @IBDesignable class VideoTableViewCell: UITableViewCell {
     @IBOutlet private weak var videoView: VideoView!
     
+    enum Constants {
+        static let nibName = "VideoTableViewCell"
+        static let reuseIdentifier = "videoCell"
+        static let placeholderImg = "Placeholder"
+    }
+    
     func configure(with video: Video) {
         videoView.configure(with: video)
     }
