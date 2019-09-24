@@ -16,6 +16,7 @@ import UIKit
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         videoView.reset()
     }
 }

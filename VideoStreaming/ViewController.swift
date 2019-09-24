@@ -32,6 +32,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as! VideoTableViewCell
+        cell.prepareForReuse()
         cell.configure(with: Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"))
         return cell
     }
