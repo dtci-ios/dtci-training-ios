@@ -14,4 +14,8 @@ import UIKit
     func configure(with video: Video) {
         videoView.configure(with: video)
     }
+    
+    override func prepareForReuse() {
+        videoView.reset()
+    }
 }
