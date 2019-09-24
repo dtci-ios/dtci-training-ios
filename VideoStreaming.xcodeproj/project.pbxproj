@@ -19,6 +19,11 @@
 		A7A5BF39233911C5001D2C96 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5BF38233911C5001D2C96 /* NetworkManager.swift */; };
 		A7A5BF3B23394683001D2C96 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5BF3A23394683001D2C96 /* GameTableViewCell.swift */; };
 		A7A5BF3D233952BF001D2C96 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5BF3C233952BF001D2C96 /* Models.swift */; };
+		A7253F4423326D710004F0A9 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7253F4223326D710004F0A9 /* VideoTableViewCell.swift */; };
+		A7253F4523326D710004F0A9 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7253F4323326D710004F0A9 /* VideoTableViewCell.xib */; };
+		A77553122333DE9E00915930 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77553112333DE9E00915930 /* VideoModel.swift */; };
+		A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */; };
+		A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
