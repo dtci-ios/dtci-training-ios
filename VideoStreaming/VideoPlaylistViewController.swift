@@ -26,7 +26,7 @@ class VideoPlaylistViewController: UIViewController {
                           Video(title: "Tool - Lateralus", duration: "1:18:51", date: Date(), image: "Tool-L"),
                           Video(title: "Red Hot Chilly Peppers - One Hot Minute", duration: "1:01:24", date: Date(), image: "RHCP-OHM"),
                           Video(title: "Testing Placeholder Image", duration: "--:--:--", date: Date(), image: "")]
-    var playlist : [Video?] = []
+    private var playlist : [Video?] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class VideoPlaylistViewController: UIViewController {
             tableView.reloadData()
         }
     }
-
+    
 }
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {

@@ -12,8 +12,10 @@ class ViewController: UIViewController {
     
     @IBOutlet private var tableView: UITableView!
     
-    private let networkManager = NetworkManager()
+    private let topGamesManager = TopGamesAPI()
+    private let gameStreamManager = GameStreamsAPI()
     private var gamesArr: [Game?]?
+    private var gameStreamsArr: [Stream?]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +23,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        networkManager.getGames { (incomingArray) in
+        topGamesManager.fetchTopGames { (incomingArray) in
             self.gamesArr = incomingArray
             self.tableView.reloadData()
         }
