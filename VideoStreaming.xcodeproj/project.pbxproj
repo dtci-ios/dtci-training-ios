@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		265C74E3233A4E150033C139 /* TopGamesCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 265C74E2233A4E150033C139 /* TopGamesCollectionViewController.xib */; };
+		265C74E5233A4FEF0033C139 /* TopGamesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C74E4233A4FEF0033C139 /* TopGamesCollectionViewController.swift */; };
+		265C74E7233A53CD0033C139 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C74E6233A53CD0033C139 /* GameModel.swift */; };
+		265C74EB233A5B320033C139 /* GameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */; };
+		265C74ED233A65B00033C139 /* GameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */; };
 		9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3D0233045CA005FBE8E /* AppDelegate.swift */; };
 		9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */; };
 		9C04F3D5233045CA005FBE8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3D4233045CA005FBE8E /* ViewController.swift */; };
@@ -27,6 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		265C74E2233A4E150033C139 /* TopGamesCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopGamesCollectionViewController.xib; sourceTree = "<group>"; };
+		265C74E4233A4FEF0033C139 /* TopGamesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesCollectionViewController.swift; sourceTree = "<group>"; };
+		265C74E6233A53CD0033C139 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewCell.swift; sourceTree = "<group>"; };
+		265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameCollectionViewCell.xib; sourceTree = "<group>"; };
 		9C04F3CD233045CA005FBE8E /* VideoStreaming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoStreaming.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C04F3D0233045CA005FBE8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +96,11 @@
 				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
 				9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */,
 				9C04F3DE233045CC005FBE8E /* Info.plist */,
+				265C74E2233A4E150033C139 /* TopGamesCollectionViewController.xib */,
+				265C74E4233A4FEF0033C139 /* TopGamesCollectionViewController.swift */,
+				265C74E6233A53CD0033C139 /* GameModel.swift */,
+				265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */,
+				265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */,
 			);
 			path = VideoStreaming;
 			sourceTree = "<group>";
@@ -181,7 +196,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C04F3DD233045CC005FBE8E /* LaunchScreen.storyboard in Resources */,
+				265C74ED233A65B00033C139 /* GameCollectionViewCell.xib in Resources */,
 				9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */,
+				265C74E3233A4E150033C139 /* TopGamesCollectionViewController.xib in Resources */,
 				9C04F3D8233045CA005FBE8E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,6 +217,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				265C74E7233A53CD0033C139 /* GameModel.swift in Sources */,
+				265C74E5233A4FEF0033C139 /* TopGamesCollectionViewController.swift in Sources */,
+				265C74EB233A5B320033C139 /* GameCollectionViewCell.swift in Sources */,
 				9C04F3D5233045CA005FBE8E /* ViewController.swift in Sources */,
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
 				9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */,
