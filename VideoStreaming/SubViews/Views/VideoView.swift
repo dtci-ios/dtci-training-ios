@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
  
 class VideoView: UIView {
     @IBOutlet private weak var videoImageView: UIImageView!
@@ -31,7 +32,7 @@ class VideoView: UIView {
     }
     
     func configure(with video: Video) {
-        videoImageView.image = UIImage(named: video.imageName)
+        videoImageView.sd_setImage(with: nil, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
         videoTitle.text = video.title
         videoDurationAndDate.text = video.durationAndDate
         videoImageView.translatesAutoresizingMaskIntoConstraints = true
