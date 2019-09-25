@@ -19,11 +19,8 @@
 		9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C04F3D9233045CC005FBE8E /* Assets.xcassets */; };
 		9C04F3DD233045CC005FBE8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */; };
 		9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */; };
-		A7253F4423326D710004F0A9 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7253F4223326D710004F0A9 /* VideoTableViewCell.swift */; };
-		A7253F4523326D710004F0A9 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7253F4323326D710004F0A9 /* VideoTableViewCell.xib */; };
 		A72C3A4E233565BF00723C01 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; };
 		A72C3A4F233565BF00723C01 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A77553122333DE9E00915930 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77553112333DE9E00915930 /* VideoModel.swift */; };
 		A77DB5E8233BA9140071220F /* TopGamesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DB5E7233BA9140071220F /* TopGamesAPI.swift */; };
 		A77DB5EA233BACFD0071220F /* GameStreamsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DB5E9233BACFD0071220F /* GameStreamsAPI.swift */; };
 		A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */; };
@@ -74,10 +71,7 @@
 		9C04F3E3233045CC005FBE8E /* VideoStreamingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoStreamingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStreamingTests.swift; sourceTree = "<group>"; };
 		9C04F3E9233045CC005FBE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7253F4223326D710004F0A9 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
-		A7253F4323326D710004F0A9 /* VideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
 		A72C3A4D233565BF00723C01 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		A77553112333DE9E00915930 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
 		A77DB5E7233BA9140071220F /* TopGamesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesAPI.swift; sourceTree = "<group>"; };
 		A77DB5E9233BACFD0071220F /* GameStreamsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStreamsAPI.swift; sourceTree = "<group>"; };
 		A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlaylistViewController.xib; sourceTree = "<group>"; };
@@ -128,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				5CE97CEA2331793D008CF451 /* Video.swift */,
+				A7A5BF3C233952BF001D2C96 /* Models.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -165,15 +160,10 @@
 			children = (
 				5CE97E512331857900D844CB /* Models */,
 				5CE97E4F2331854F00D844CB /* SubViews */,
+				A79B1D62233C07DD003D4099 /* Networking */,
 				9C04F3D0233045CA005FBE8E /* AppDelegate.swift */,
 				9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */,
-				9C04F3D4233045CA005FBE8E /* ViewController.swift */,
-				A7A5BF38233911C5001D2C96 /* NetworkManager.swift */,
-				A77DB5E7233BA9140071220F /* TopGamesAPI.swift */,
-				A77DB5E9233BACFD0071220F /* GameStreamsAPI.swift */,
-				A7A5BF3C233952BF001D2C96 /* Models.swift */,
 				A7A5BF3A23394683001D2C96 /* SomeTableViewCells.swift */,
-				A77553112333DE9E00915930 /* VideoModel.swift */,
 				A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */,
 				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
 				9C04F3D6233045CA005FBE8E /* Main.storyboard */,
@@ -200,6 +190,16 @@
 				A72C3A4D233565BF00723C01 /* Alamofire.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A79B1D62233C07DD003D4099 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A7A5BF38233911C5001D2C96 /* NetworkManager.swift */,
+				A77DB5E7233BA9140071220F /* TopGamesAPI.swift */,
+				A77DB5E9233BACFD0071220F /* GameStreamsAPI.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,8 +332,6 @@
 				A7A5BF3B23394683001D2C96 /* SomeTableViewCells.swift in Sources */,
 				A7A5BF39233911C5001D2C96 /* NetworkManager.swift in Sources */,
 				A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */,
-				A77553122333DE9E00915930 /* VideoModel.swift in Sources */,
-				9C04F3D5233045CA005FBE8E /* ViewController.swift in Sources */,
 				A7A5BF3D233952BF001D2C96 /* Models.swift in Sources */,
 				A77DB5E8233BA9140071220F /* TopGamesAPI.swift in Sources */,
 				5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */,
