@@ -29,10 +29,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Vgg-ik-bmT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5lo-nA-Spa"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Vgg-ik-bmT" secondAttribute="bottom" id="7To-1D-gfE"/>
-                <constraint firstItem="Vgg-ik-bmT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Aac-eR-Omw"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Vgg-ik-bmT" secondAttribute="trailing" id="sPH-UF-U9d"/>
+                <constraint firstItem="Vgg-ik-bmT" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="4RA-h6-eom"/>
+                <constraint firstItem="Vgg-ik-bmT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Qeq-Eh-8fN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Vgg-ik-bmT" secondAttribute="bottom" id="R4v-V7-8K0"/>
+                <constraint firstItem="Vgg-ik-bmT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hUE-oP-vKU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

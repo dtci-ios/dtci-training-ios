@@ -46,7 +46,7 @@ class VideoPlaylistViewController: UIViewController {
             tableView.reloadData()
         }
     }
-
+    
 }
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {

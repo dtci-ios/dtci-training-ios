@@ -19,8 +19,18 @@
 		9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C04F3D9233045CC005FBE8E /* Assets.xcassets */; };
 		9C04F3DD233045CC005FBE8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */; };
 		9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */; };
+		A7253F4423326D710004F0A9 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7253F4223326D710004F0A9 /* VideoTableViewCell.swift */; };
+		A7253F4523326D710004F0A9 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7253F4323326D710004F0A9 /* VideoTableViewCell.xib */; };
+		A72C3A4E233565BF00723C01 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; };
+		A72C3A4F233565BF00723C01 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A77553122333DE9E00915930 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77553112333DE9E00915930 /* VideoModel.swift */; };
+		A77DB5E8233BA9140071220F /* TopGamesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DB5E7233BA9140071220F /* TopGamesAPI.swift */; };
+		A77DB5EA233BACFD0071220F /* GameStreamsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DB5E9233BACFD0071220F /* GameStreamsAPI.swift */; };
 		A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */; };
 		A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */; };
+		A7A5BF39233911C5001D2C96 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5BF38233911C5001D2C96 /* NetworkManager.swift */; };
+		A7A5BF3B23394683001D2C96 /* SomeTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5BF3A23394683001D2C96 /* SomeTableViewCells.swift */; };
+		A7A5BF3D233952BF001D2C96 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A5BF3C233952BF001D2C96 /* Models.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +42,20 @@
 			remoteInfo = VideoStreaming;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A72C3A50233565BF00723C01 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A72C3A4F233565BF00723C01 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -50,8 +74,17 @@
 		9C04F3E3233045CC005FBE8E /* VideoStreamingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoStreamingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStreamingTests.swift; sourceTree = "<group>"; };
 		9C04F3E9233045CC005FBE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7253F4223326D710004F0A9 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		A7253F4323326D710004F0A9 /* VideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
+		A72C3A4D233565BF00723C01 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		A77553112333DE9E00915930 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		A77DB5E7233BA9140071220F /* TopGamesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesAPI.swift; sourceTree = "<group>"; };
+		A77DB5E9233BACFD0071220F /* GameStreamsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStreamsAPI.swift; sourceTree = "<group>"; };
 		A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlaylistViewController.xib; sourceTree = "<group>"; };
 		A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlaylistViewController.swift; sourceTree = "<group>"; };
+		A7A5BF38233911C5001D2C96 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A7A5BF3A23394683001D2C96 /* SomeTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeTableViewCells.swift; sourceTree = "<group>"; };
+		A7A5BF3C233952BF001D2C96 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A72C3A4E233565BF00723C01 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +147,7 @@
 				9C04F3CF233045CA005FBE8E /* VideoStreaming */,
 				9C04F3E6233045CC005FBE8E /* VideoStreamingTests */,
 				9C04F3CE233045CA005FBE8E /* Products */,
+				A72C3A4C233565BF00723C01 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,6 +167,13 @@
 				5CE97E4F2331854F00D844CB /* SubViews */,
 				9C04F3D0233045CA005FBE8E /* AppDelegate.swift */,
 				9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */,
+				9C04F3D4233045CA005FBE8E /* ViewController.swift */,
+				A7A5BF38233911C5001D2C96 /* NetworkManager.swift */,
+				A77DB5E7233BA9140071220F /* TopGamesAPI.swift */,
+				A77DB5E9233BACFD0071220F /* GameStreamsAPI.swift */,
+				A7A5BF3C233952BF001D2C96 /* Models.swift */,
+				A7A5BF3A23394683001D2C96 /* SomeTableViewCells.swift */,
+				A77553112333DE9E00915930 /* VideoModel.swift */,
 				A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */,
 				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
 				9C04F3D6233045CA005FBE8E /* Main.storyboard */,
@@ -152,6 +194,14 @@
 			path = VideoStreamingTests;
 			sourceTree = "<group>";
 		};
+		A72C3A4C233565BF00723C01 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A72C3A4D233565BF00723C01 /* Alamofire.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -162,6 +212,8 @@
 				9C04F3C9233045CA005FBE8E /* Sources */,
 				9C04F3CA233045CA005FBE8E /* Frameworks */,
 				9C04F3CB233045CA005FBE8E /* Resources */,
+				A72C3A50233565BF00723C01 /* Embed Frameworks */,
+				A72C3A512335660600723C01 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -251,17 +303,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A72C3A512335660600723C01 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9C04F3C9233045CA005FBE8E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7A5BF3B23394683001D2C96 /* SomeTableViewCells.swift in Sources */,
+				A7A5BF39233911C5001D2C96 /* NetworkManager.swift in Sources */,
+				A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */,
+				A77553122333DE9E00915930 /* VideoModel.swift in Sources */,
+				9C04F3D5233045CA005FBE8E /* ViewController.swift in Sources */,
+				A7A5BF3D233952BF001D2C96 /* Models.swift in Sources */,
+				A77DB5E8233BA9140071220F /* TopGamesAPI.swift in Sources */,
 				5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */,
 				5CE97CE92331786F008CF451 /* VideoView.swift in Sources */,
-				A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */,
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
 				5CE97CEB2331793D008CF451 /* Video.swift in Sources */,
 				9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */,
+				A77DB5EA233BACFD0071220F /* GameStreamsAPI.swift in Sources */,
 				5CFFC5432332A3A400D78035 /* VideoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,6 +504,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4QBG52MSRJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = VideoStreaming/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -442,6 +526,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4QBG52MSRJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = VideoStreaming/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
