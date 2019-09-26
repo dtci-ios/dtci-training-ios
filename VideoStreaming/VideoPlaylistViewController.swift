@@ -12,21 +12,22 @@ class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var videos = [
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile")
-    ]
+    private let videosAPI: VideosAPI = VideosAPI()
+    private var videos = [Video]()
     
-    var playlist : [Video?] = []
+    var playlist: [Video?] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        playlist.append(contentsOf: Array(videos.prefix(3)))
-        videos.removeFirst(3)
+        videosAPI.fetchVideoList(byUserId: "183192") { (retrievedVideos) in
+            if let videos = retrievedVideos?.compactMap({ $0 }) {
+                self.videos.append(contentsOf: videos)
+            }
+            self.playlist.append(contentsOf: self.videos)
+        }
+        
+        // videos.removeFirst(3)
         
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)

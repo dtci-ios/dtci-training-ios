@@ -15,6 +15,7 @@
 		5CE97CE723317662008CF451 /* VideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CE97CE623317662008CF451 /* VideoView.xib */; };
 		5CE97CE92331786F008CF451 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CE82331786F008CF451 /* VideoView.swift */; };
 		5CE97CEB2331793D008CF451 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CEA2331793D008CF451 /* Video.swift */; };
+		5CFB597C233CDF87009C1220 /* VideosAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB597B233CDF87009C1220 /* VideosAPI.swift */; };
 		5CFFC5432332A3A400D78035 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFFC5412332A3A400D78035 /* VideoTableViewCell.swift */; };
 		5CFFC5442332A3A400D78035 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CFFC5422332A3A400D78035 /* VideoTableViewCell.xib */; };
 		9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3D0233045CA005FBE8E /* AppDelegate.swift */; };
@@ -68,6 +69,7 @@
 		5CE97CE623317662008CF451 /* VideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoView.xib; sourceTree = "<group>"; };
 		5CE97CE82331786F008CF451 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		5CE97CEA2331793D008CF451 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		5CFB597B233CDF87009C1220 /* VideosAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosAPI.swift; sourceTree = "<group>"; };
 		5CFFC5412332A3A400D78035 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		5CFFC5422332A3A400D78035 /* VideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
 		7A3E7F65AD54E7A4B68B33F3 /* Pods-VideoStreamingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreamingTests.release.xcconfig"; path = "Target Support Files/Pods-VideoStreamingTests/Pods-VideoStreamingTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -202,9 +204,10 @@
 				A7A5BF38233911C5001D2C96 /* NetworkManager.swift */,
 				A77DB5E7233BA9140071220F /* TopGamesAPI.swift */,
 				A77DB5E9233BACFD0071220F /* GameStreamsAPI.swift */,
-				A7A5BF3C233952BF001D2C96 /* Models.swift */,
+				5CFB597B233CDF87009C1220 /* VideosAPI.swift */,
 				A7A5BF3A23394683001D2C96 /* SomeTableViewCells.swift */,
 				A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */,
+				A7A5BF3C233952BF001D2C96 /* Models.swift */,
 				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
 				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
 				263E8573233CF331003D3DC9 /* Main.storyboard */,
@@ -451,6 +454,7 @@
 				2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */,
 				A77DB5EA233BACFD0071220F /* GameStreamsAPI.swift in Sources */,
 				5CFFC5432332A3A400D78035 /* VideoTableViewCell.swift in Sources */,
+				5CFB597C233CDF87009C1220 /* VideosAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

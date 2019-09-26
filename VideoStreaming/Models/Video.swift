@@ -8,17 +8,45 @@
 
 import Foundation
 
-struct Video {
+struct Video: Codable {
+    let id: String
+    let userId: String
+    let userName: String
+    let title: String
+    let description: String
+    let duration: String
+    let publishedAt: String
+    let url: String
+    let thumbnailUrl: String
+    let viewCount: Int
+    
     var durationAndDate: String {
         let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        guard let publishedAtDate = formatter.date(from: publishedAt) else {
+            return duration + " • --"
+        }
         formatter.dateFormat = "E, MM/dd"
-        let dateFormatted = formatter.string(from: date)
-        return duration + " • " + dateFormatted
+        let publishedDateFormatted = formatter.string(from: publishedAtDate)
+        return duration + " • " + publishedDateFormatted
     }
     
-    let title: String
-    let duration: String
-    let date: Date
-    let imageName: String
+    var imageUrl: URL? {
+        let url = URL(string: thumbnailUrl)
+        return url
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userId = "user_id"
+        case userName = "user_name"
+        case title
+        case description
+        case duration
+        case publishedAt = "published_at"
+        case url
+        case thumbnailUrl = "thumbnail_url"
+        case viewCount = "view_count"
+    }
 }
 

@@ -32,7 +32,7 @@ class VideoView: UIView {
     }
     
     func configure(with video: Video) {
-        videoImageView.sd_setImage(with: nil, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
+        videoImageView.sd_setImage(with: video.imageUrl, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
         videoTitle.text = video.title
         videoDurationAndDate.text = video.durationAndDate
         videoImageView.translatesAutoresizingMaskIntoConstraints = true
