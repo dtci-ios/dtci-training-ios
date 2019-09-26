@@ -150,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				5CE97CEA2331793D008CF451 /* Video.swift */,
+				A7A5BF3C233952BF001D2C96 /* Models.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,6 +190,7 @@
 			children = (
 				5CE97E512331857900D844CB /* Models */,
 				5CE97E4F2331854F00D844CB /* SubViews */,
+				A79B1D62233C07DD003D4099 /* Networking */,
 				9C04F3D0233045CA005FBE8E /* AppDelegate.swift */,
 				9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */,
 				2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */,
@@ -224,6 +226,16 @@
 				E98740DF5946522F98B6926B /* Pods_VideoStreamingTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A79B1D62233C07DD003D4099 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				A7A5BF38233911C5001D2C96 /* NetworkManager.swift */,
+				A77DB5E7233BA9140071220F /* TopGamesAPI.swift */,
+				A77DB5E9233BACFD0071220F /* GameStreamsAPI.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

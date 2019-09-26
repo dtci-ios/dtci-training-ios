@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GameStreamsAPI : NetworkManager {
+class GameStreamsAPI: NetworkManager {
     var request = "https://api.twitch.tv/helix/streams"
  
     func fetchGameStreams(ofGame gameId: String = "21779", completion: @escaping ([Stream?]?) -> Void) {

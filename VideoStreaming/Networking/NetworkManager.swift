@@ -34,12 +34,16 @@ extension NetworkManager {
                 completion(nil)
                 return
             }
-            let gamesResponse = try? jsonDecoder.decode(ReceivedData<T>.self, from: data)
-            guard let arr = gamesResponse?.dataArr else {
-                completion(nil)
-                return
+            do {
+                let gamesResponse = try jsonDecoder.decode(ReceivedData<T>.self, from: data)
+                guard let array = gamesResponse.dataArray else {
+                    completion(nil)
+                    return
+                }
+                completion(array)
+            } catch let jsonError {
+                print("Error decoding JSON", jsonError)
             }
-            completion(arr)
         }
     }
     
