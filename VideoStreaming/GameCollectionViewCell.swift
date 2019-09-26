@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 
 class GameCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var gameImageView: UIImageView!
@@ -20,12 +20,12 @@ class GameCollectionViewCell: UICollectionViewCell {
     
     var game: Game? {
         didSet {
-            if let game = game {
-                if let image = UIImage(named: game.image) {
-                    gameImageView.image = image
-                } else {
-                    gameImageView.image = UIImage(named: Constants.noImage)
-                }
+            if let game = game, let gameImage = game.boxArtUrl {
+                let thumbnailUrlWithWidthAndHeight = gameImage.replacingOccurrences(of: "{width}x{height}", with: "x")
+                gameImageView.sd_setImage(with: URL(string: thumbnailUrlWithWidthAndHeight),
+                                          placeholderImage: UIImage(named: Constants.noImage),
+                                          options: .continueInBackground,
+                                          context: nil)
             }
         }
     }

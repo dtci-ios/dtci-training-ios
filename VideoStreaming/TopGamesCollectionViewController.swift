@@ -12,33 +12,23 @@ class TopGamesCollectionViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    // mock data
-    private var mockGames = [Game(image: "apex"),
-                             Game(image: "civilization"),
-                             Game(image: "doom"),
-                             Game(image: "grandTheftAuto"),
-                             Game(image: "minicraft"),
-                             Game(image: "rdrII"),
-                             Game(image: "skyrim"),
-                             Game(image: "spiderman"),
-                             Game(image: "stardew-valley"),
-                             Game(image: "super-mario-boxart-2"),
-                             Game(image: "tetris"),
-                             Game(image: "wow"),
-                             Game(image: "zelda")]
-    
     var games : [Game?] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        games.append(contentsOf: Array(mockGames))
 
+        TopGamesAPI().fetchTopGames { (retrievedTopGames) in
+            if let unRetrivedTopGames = retrievedTopGames?.compactMap({ $0 }) {
+                self.games.append(contentsOf: unRetrivedTopGames)
+            }
+            self.collectionView.reloadData()
+        }
+        
         collectionView.register(UINib(nibName: GameCollectionViewCell.Constants.nibName, bundle: nil), forCellWithReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier)
         
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        
     }
 }
 
