@@ -32,7 +32,9 @@ struct Video: Codable {
     }
     
     var imageUrl: URL? {
-        let url = URL(string: thumbnailUrl)
+        let thumbnailUrlWithWidthAndHeight = thumbnailUrl.replacingOccurrences(of: "%{width}", with: "680")
+                                                         .replacingOccurrences(of: "%{height}", with: "540")
+        let url = URL(string: thumbnailUrlWithWidthAndHeight)
         return url
     }
     

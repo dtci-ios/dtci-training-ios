@@ -20,7 +20,6 @@ class VideoView: UIView {
         static let placeholderImageName = "Placeholder"
     }
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         nibSetup()
