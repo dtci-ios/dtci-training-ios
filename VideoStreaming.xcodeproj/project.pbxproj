@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2677444B2332B2CF003E4B52 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2677444A2332B2CF003E4B52 /* MainViewController.swift */; };
 		2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */; };
 		2D80E3ADBF9E432CE6976360 /* Pods_VideoStreamingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98740DF5946522F98B6926B /* Pods_VideoStreamingTests.framework */; };
 		9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3D0233045CA005FBE8E /* AppDelegate.swift */; };
 		9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */; };
-		9C04F3D8233045CA005FBE8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C04F3D6233045CA005FBE8E /* Main.storyboard */; };
 		9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C04F3D9233045CC005FBE8E /* Assets.xcassets */; };
 		9C04F3DD233045CC005FBE8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */; };
 		9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */; };
@@ -31,13 +29,11 @@
 
 /* Begin PBXFileReference section */
 		1C0440054E5099523CAFE5C3 /* Pods-VideoStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreaming.debug.xcconfig"; path = "Target Support Files/Pods-VideoStreaming/Pods-VideoStreaming.debug.xcconfig"; sourceTree = "<group>"; };
-		2677444A2332B2CF003E4B52 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
 		7A3E7F65AD54E7A4B68B33F3 /* Pods-VideoStreamingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreamingTests.release.xcconfig"; path = "Target Support Files/Pods-VideoStreamingTests/Pods-VideoStreamingTests.release.xcconfig"; sourceTree = "<group>"; };
 		9C04F3CD233045CA005FBE8E /* VideoStreaming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoStreaming.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C04F3D0233045CA005FBE8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9C04F3D7233045CA005FBE8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9C04F3D9233045CC005FBE8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C04F3DC233045CC005FBE8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C04F3DE233045CC005FBE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,11 +102,9 @@
 			children = (
 				9C04F3D0233045CA005FBE8E /* AppDelegate.swift */,
 				9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */,
-				9C04F3D6233045CA005FBE8E /* Main.storyboard */,
 				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
 				9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */,
 				9C04F3DE233045CC005FBE8E /* Info.plist */,
-				2677444A2332B2CF003E4B52 /* MainViewController.swift */,
 				2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */,
 			);
 			path = VideoStreaming;
@@ -220,7 +214,6 @@
 			files = (
 				9C04F3DD233045CC005FBE8E /* LaunchScreen.storyboard in Resources */,
 				9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */,
-				9C04F3D8233045CA005FBE8E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +297,6 @@
 			files = (
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
 				9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */,
-				2677444B2332B2CF003E4B52 /* MainViewController.swift in Sources */,
 				2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,14 +320,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9C04F3D6233045CA005FBE8E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9C04F3D7233045CA005FBE8E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
