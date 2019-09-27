@@ -8,6 +8,38 @@
 
 import UIKit
 
+struct ColumsLayout {
+    let columns: Int = 2
+    let padding: CGFloat = 20
+    let cellAspectRatio = CellAspectRatio()
+    
+    func cellSize(frameWidth: CGFloat) -> CGSize {
+        let itemWidth = (frameWidth - CGFloat(columns + 1) * padding) / CGFloat(columns)
+        return CGSize(width: itemWidth, height: itemWidth * CGFloat(cellAspectRatio.heightRatioFactor))
+    }
+    
+}
+
+struct CellAspectRatio {
+    // Portrait mode => 4:3 is 4 heigth and 3 width
+    var width: Int
+    var height: Int
+    
+    init(width: Int = 3, height: Int = 4) {
+        self.width = width
+        self.height = height
+    }
+        
+    var heightRatioFactor: Float {
+        return Float(height) / Float(width)
+    }
+    
+    var widthRatioFactor: Float {
+        return Float(width) / Float(height)
+    }
+    
+}
+
 class TopGamesCollectionViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -68,36 +100,4 @@ extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return columsLayout.padding
     }
-}
-
-struct ColumsLayout {
-    let columns: Int = 2
-    let padding: CGFloat = 20
-    let cellAspectRatio = CellAspectRatio()
-    
-    func cellSize(frameWidth: CGFloat) -> CGSize {
-        let itemWidth = (frameWidth - CGFloat(columns + 1) * padding) / CGFloat(columns)
-        return CGSize(width: itemWidth, height: itemWidth * CGFloat(cellAspectRatio.heightRatioFactor))
-    }
-    
-}
-
-struct CellAspectRatio {
-    // Portrait mode => 4:3 is 4 heigth and 3 width
-    var width: Int
-    var height: Int
-    
-    init(width: Int = 3, height: Int = 4) {
-        self.width = width
-        self.height = height
-    }
-        
-    var heightRatioFactor: Float {
-        return Float(height) / Float(width)
-    }
-    
-    var widthRatioFactor: Float {
-        return Float(width) / Float(height)
-    }
-    
 }
