@@ -20,15 +20,13 @@ class VideoPlaylistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        videosAPI.fetchVideoList(byGameId: "456") { (retrievedVideos) in
+        videosAPI.fetchVideoList(byGameId: "1902") { (retrievedVideos) in
             if let videos = retrievedVideos?.compactMap({ $0 }) {
                 self.videos.append(contentsOf: videos)
             }
             self.playlist.append(contentsOf: self.videos)
             self.tableView.reloadData()
         }
-        
-        // videos.removeFirst(3)
         
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)

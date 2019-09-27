@@ -20,15 +20,15 @@ struct Video: Codable {
     let thumbnailUrl: String
     let viewCount: Int
     
-    var durationAndDate: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        guard let publishedAtDate = formatter.date(from: publishedAt) else {
-            return duration + " • --"
+    var durationAndDate: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        guard let publishedAtDate = dateFormatter.date(from: publishedAt) else {
+            return "- • --"
         }
-        formatter.dateFormat = "E, MM/dd"
-        let publishedDateFormatted = formatter.string(from: publishedAtDate)
-        return duration + " • " + publishedDateFormatted
+        dateFormatter.dateFormat = "HH:mm • E, MM/dd"
+        let publishedDateFormatted = dateFormatter.string(from: publishedAtDate)
+        return publishedDateFormatted
     }
     
     var imageUrl: URL? {
