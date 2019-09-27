@@ -11,12 +11,12 @@ import UIKit
 import MBProgressHUD
  
 extension UIViewController {
-    func showHUD(progressLabel:String){
+    func showHUD(progressLabel: String = "") {
         let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         progressHUD.label.text = progressLabel
     }
 
-    func dismissHUD(isAnimated:Bool) {
+    func dismissHUD(isAnimated: Bool = false) {
         MBProgressHUD.hide(for: self.view, animated: isAnimated)
     }
 }
