@@ -14,6 +14,8 @@ class TopGamesCollectionViewController: UIViewController {
 
     var games : [Game?] = []
 
+    let columsLayout = ColumsLayout()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,7 +34,7 @@ class TopGamesCollectionViewController: UIViewController {
     }
 }
 
-extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return games.count
     }
@@ -45,14 +47,46 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollecti
         return viewCell
     }
     
+}
+
+extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let flowayout = collectionViewLayout as? UICollectionViewFlowLayout
-        //flowayout?.minimumLineSpacing = 20
-        //flowayout?.minimumInteritemSpacing = 25
-        flowayout?.itemSize = CGSize(width: 100, height: 100)
-        let space: CGFloat = (flowayout?.minimumInteritemSpacing ?? 0.0) + (flowayout?.sectionInset.left ?? 0.0) + (flowayout?.sectionInset.right ?? 0.0)
-        let size:CGFloat = (collectionView.frame.size.width - space) / 2.0
-        return CGSize(width: size, height: 250)
+        
+        let itemWidth = (collectionView.frame.size.width - CGFloat(columsLayout.columns + 1) * columsLayout.padding) / CGFloat(columsLayout.columns)
+        
+        return CGSize(width: itemWidth, height: itemWidth * columsLayout.cellAspectRatio.heightRatioFactor)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsets(top: columsLayout.padding, left: columsLayout.padding, bottom: columsLayout.padding, right: columsLayout.padding)
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return columsLayout.padding
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return columsLayout.padding
+    }
+}
+
+struct ColumsLayout {
+    let columns: Int = 2
+    let padding: CGFloat = 20
+    let cellAspectRatio = CellAspectRatio(width: 3, height: 4)
+}
+
+struct CellAspectRatio {
+    // Portrait mode => 4:3 is 4 heigth and 3 width
+    var width: Float
+    var height: Float
+    
+    var heightRatioFactor: CGFloat {
+        return CGFloat(height / width)
+    }
+    
+    var widthRatioFactor: CGFloat {
+        return CGFloat(width / height)
+    }
 }

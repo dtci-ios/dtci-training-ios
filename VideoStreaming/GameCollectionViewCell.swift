@@ -30,8 +30,13 @@ class GameCollectionViewCell: UICollectionViewCell {
         }
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gameImageView.layer.cornerRadius = 3
+    }
+    
     override func prepareForReuse() {
         gameImageView.image = UIImage(named: Constants.noImage)
     }
-    
+
 }
