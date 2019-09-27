@@ -14,10 +14,12 @@ class VideoPlaylistViewController: UIViewController {
     
     private var videos = [
         Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile")
+        Video(title: "The Greatest Catch (Ep. 2)", duration: "16:30", date: Date(), imageName: "hupmobile"),
+        Video(title: "History of the QB (Ep. 3)", duration: "22:30", date: Date(), imageName: "hupmobile"),
+        Video(title: "The Draft (Ep. 4)", duration: "12:30", date: Date(), imageName: "hupmobile"),
+        Video(title: "The Evolution of the Wide Receiver (Ep. 5)", duration: "10:30", date: Date(), imageName: "hupmobile"),
+        Video(title: "Ray Lewis (Ep. 6)", duration: "16:30", date: Date(), imageName: "hupmobile"),
+        Video(title: "The Origins of Fantasy Football (Ep. 7)", duration: "20:30", date: Date(), imageName: "hupmobile")
     ]
     
     var playlist : [Video?] = []
@@ -52,7 +54,7 @@ class VideoPlaylistViewController: UIViewController {
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 135
+        return 100
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
