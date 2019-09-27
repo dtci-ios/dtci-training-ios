@@ -17,6 +17,7 @@ class TopGamesCollectionViewController: UIViewController {
     let columsLayout = ColumsLayout()
     
     override func viewDidLoad() {
+        showHUD()
         super.viewDidLoad()
 
         TopGamesAPI().fetchTopGames { (retrievedTopGames) in
@@ -24,6 +25,7 @@ class TopGamesCollectionViewController: UIViewController {
                 self.games.append(contentsOf: unRetrivedTopGames)
             }
             self.collectionView.reloadData()
+            self.dismissHUD(isAnimated: true)
         }
         
         collectionView.register(UINib(nibName: GameCollectionViewCell.Constants.nibName, bundle: nil), forCellWithReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier)
