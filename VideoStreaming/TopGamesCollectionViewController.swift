@@ -71,26 +71,31 @@ extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
 struct ColumsLayout {
     let columns: Int = 2
     let padding: CGFloat = 20
-    let cellAspectRatio = CellAspectRatio(width: 3, height: 4)
+    let cellAspectRatio = CellAspectRatio()
     
     func cellSize(frameWidth: CGFloat) -> CGSize {
         let itemWidth = (frameWidth - CGFloat(columns + 1) * padding) / CGFloat(columns)
-        return CGSize(width: itemWidth, height: itemWidth * cellAspectRatio.heightRatioFactor)
+        return CGSize(width: itemWidth, height: itemWidth * CGFloat(cellAspectRatio.heightRatioFactor))
     }
     
 }
 
 struct CellAspectRatio {
     // Portrait mode => 4:3 is 4 heigth and 3 width
-    var width: Float
-    var height: Float
+    var width: Int
+    var height: Int
     
-    var heightRatioFactor: CGFloat {
-        return CGFloat(height / width)
+    init(width: Int = 3, height: Int = 4) {
+        self.width = width
+        self.height = height
+    }
+        
+    var heightRatioFactor: Float {
+        return Float(height) / Float(width)
     }
     
-    var widthRatioFactor: CGFloat {
-        return CGFloat(width / height)
+    var widthRatioFactor: Float {
+        return Float(width) / Float(height)
     }
     
 }
