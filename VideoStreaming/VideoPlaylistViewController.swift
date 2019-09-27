@@ -46,7 +46,7 @@ class VideoPlaylistViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    
+
 }
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
@@ -70,4 +70,12 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let playerViewController = PlayerViewController(coder: NSCoder()) else { return }
+        if let video = playlist[indexPath.row] {
+            playerViewController.set(videoToPlay: video) {
+                // navigationController.pushViewController(playerViewController, animated: true)
+            }
+        }
+    }
 }

@@ -12,6 +12,9 @@
 		5C206257233C186C00A3859E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
 		5C24B7AE233C09F100DE2123 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C6EB7233A830700829078 /* MainViewController.swift */; };
+		5CAB544E233E6072007A6CDE /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB544C233E6072007A6CDE /* PlayerViewController.swift */; };
+		5CAB544F233E6072007A6CDE /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CAB544D233E6072007A6CDE /* PlayerViewController.xib */; };
+		5CAB5451233E810B007A6CDE /* PlayerViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAB5450233E810B007A6CDE /* PlayerViewControllerPresenter.swift */; };
 		5CE97CE723317662008CF451 /* VideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CE97CE623317662008CF451 /* VideoView.xib */; };
 		5CE97CE92331786F008CF451 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CE82331786F008CF451 /* VideoView.swift */; };
 		5CE97CEB2331793D008CF451 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CEA2331793D008CF451 /* Video.swift */; };
@@ -65,6 +68,9 @@
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
 		5C24B7AD233C09F100DE2123 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		5CAB544C233E6072007A6CDE /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		5CAB544D233E6072007A6CDE /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
+		5CAB5450233E810B007A6CDE /* PlayerViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewControllerPresenter.swift; sourceTree = "<group>"; };
 		5CE97CE623317662008CF451 /* VideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoView.xib; sourceTree = "<group>"; };
 		5CE97CE82331786F008CF451 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		5CE97CEA2331793D008CF451 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
@@ -198,15 +204,18 @@
 				A79B1D62233C07DD003D4099 /* Networking */,
 				9C04F3D0233045CA005FBE8E /* AppDelegate.swift */,
 				9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */,
-				2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */,
-				A7A5BF3A23394683001D2C96 /* SomeTableViewCells.swift */,
-				A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */,
-				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
-				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
 				263E8573233CF331003D3DC9 /* Main.storyboard */,
 				9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */,
-				9C04F3DE233045CC005FBE8E /* Info.plist */,
+				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
+				5CAB544D233E6072007A6CDE /* PlayerViewController.xib */,
+				2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */,
+				A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */,
 				5C5C6EB7233A830700829078 /* MainViewController.swift */,
+				5CAB5450233E810B007A6CDE /* PlayerViewControllerPresenter.swift */,
+				5CAB544C233E6072007A6CDE /* PlayerViewController.swift */,
+				A7A5BF3A23394683001D2C96 /* SomeTableViewCells.swift */,
+				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
+				9C04F3DE233045CC005FBE8E /* Info.plist */,
 			);
 			path = VideoStreaming;
 			sourceTree = "<group>";
@@ -331,6 +340,7 @@
 				9C04F3DD233045CC005FBE8E /* LaunchScreen.storyboard in Resources */,
 				A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */,
 				9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */,
+				5CAB544F233E6072007A6CDE /* PlayerViewController.xib in Resources */,
 				5CFFC5442332A3A400D78035 /* VideoTableViewCell.xib in Resources */,
 				9C04F3D8233045CA005FBE8E /* (null) in Resources */,
 			);
@@ -436,8 +446,10 @@
 				A7A5BF3B23394683001D2C96 /* SomeTableViewCells.swift in Sources */,
 				A7518BF2233D09650050D8D5 /* Models.swift in Sources */,
 				A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */,
+				5CAB544E233E6072007A6CDE /* PlayerViewController.swift in Sources */,
 				A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */,
 				5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */,
+				5CAB5451233E810B007A6CDE /* PlayerViewControllerPresenter.swift in Sources */,
 				5CE97CE92331786F008CF451 /* VideoView.swift in Sources */,
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
 				A7518BF0233D09570050D8D5 /* GameStreamsAPI.swift in Sources */,
