@@ -52,20 +52,17 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollecti
 extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let itemWidth = (collectionView.frame.size.width - CGFloat(columsLayout.columns + 1) * columsLayout.padding) / CGFloat(columsLayout.columns)
-        
-        return CGSize(width: itemWidth, height: itemWidth * columsLayout.cellAspectRatio.heightRatioFactor)
+        return columsLayout.cellSize(frameWidth: collectionView.frame.size.width)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
         return UIEdgeInsets(top: columsLayout.padding, left: columsLayout.padding, bottom: columsLayout.padding, right: columsLayout.padding)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return columsLayout.padding
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return columsLayout.padding
     }
@@ -75,6 +72,12 @@ struct ColumsLayout {
     let columns: Int = 2
     let padding: CGFloat = 20
     let cellAspectRatio = CellAspectRatio(width: 3, height: 4)
+    
+    func cellSize(frameWidth: CGFloat) -> CGSize {
+        let itemWidth = (frameWidth - CGFloat(columns + 1) * padding) / CGFloat(columns)
+        return CGSize(width: itemWidth, height: itemWidth * cellAspectRatio.heightRatioFactor)
+    }
+    
 }
 
 struct CellAspectRatio {
@@ -89,4 +92,5 @@ struct CellAspectRatio {
     var widthRatioFactor: CGFloat {
         return CGFloat(width / height)
     }
+    
 }
