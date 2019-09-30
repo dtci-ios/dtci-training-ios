@@ -49,8 +49,9 @@ class TopGamesCollectionViewController: UIViewController {
     let columsLayout = ColumsLayout()
     
     override func viewDidLoad() {
-        showHUD()
         super.viewDidLoad()
+        
+        showHUD()
 
         TopGamesAPI().fetchTopGames { (retrievedTopGames) in
             if let unRetrivedTopGames = retrievedTopGames?.compactMap({ $0 }) {

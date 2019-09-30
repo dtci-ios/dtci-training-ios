@@ -10,11 +10,11 @@ import UIKit
 import SDWebImage
 
 class GameCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var gameImageView: UIImageView!
+    @IBOutlet private weak var gameImageView: UIImageView!
     
     enum Constants {
-        static let nibName = "GameCollectionViewCell"
-        static let reuseIdentifier = "gameCell"
+        static let nibName = String(describing: GameCollectionViewCell.self)
+        static let reuseIdentifier = String(describing: GameCollectionViewCell.self)
         static let noImage = "noImage"
     }
     
@@ -23,6 +23,8 @@ class GameCollectionViewCell: UICollectionViewCell {
             if let game = game {
                 gameImageView.sd_setImage(with: URL(string: game.boxArtThumbnailUrl()),
                                           placeholderImage: UIImage(named: Constants.noImage))
+            } else {
+                gameImageView.image = UIImage(named: Constants.noImage)
             }
         }
     }
@@ -33,7 +35,7 @@ class GameCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
-        gameImageView.image = UIImage(named: Constants.noImage)
+        game = nil
     }
 
 }
