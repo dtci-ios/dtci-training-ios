@@ -23,11 +23,14 @@ struct Video: Codable {
     var durationAndDate: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
         guard let publishedAtDate = dateFormatter.date(from: publishedAt) else {
             return "- • --"
         }
+        
         dateFormatter.dateFormat = "HH:mm • E, MM/dd"
         let publishedDateFormatted = dateFormatter.string(from: publishedAtDate)
+        
         return publishedDateFormatted
     }
     

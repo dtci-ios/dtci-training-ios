@@ -12,7 +12,7 @@ class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private let videosAPI: VideosAPI = VideosAPI()
+    private var videosAPI: VideosAPI?
     private var videos = [Video]()
     
     var playlist: [Video?] = []
@@ -20,11 +20,13 @@ class VideoPlaylistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        videosAPI.fetchVideoList(byGameId: "1902") { (retrievedVideos) in
-            if let videos = retrievedVideos?.compactMap({ $0 }) {
-                self.videos.append(contentsOf: videos)
+        videosAPI = VideosAPI()
+        
+        videosAPI?.fetchVideoList(byGameId: "1902") { (retrievedVideos) in
+            if let videos = retrievedVideos {
+                self.videos = videos
             }
-            self.playlist.append(contentsOf: self.videos)
+            self.playlist = self.videos
             self.tableView.reloadData()
         }
         

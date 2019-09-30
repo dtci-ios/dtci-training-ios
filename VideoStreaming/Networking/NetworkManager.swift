@@ -27,7 +27,7 @@ extension NetworkManager {
         return ["Client-ID": "xzpd1f4527fu8fct7p7own0pgi35v5"]
     }
     
-    func fetchData <T:Codable> (request: String, parameters: [String:Any] = [:], completion: @escaping (([T?]?)->Void)) {
+    func fetchData <T:Codable> (request: String, parameters: [String:Any] = [:], completion: @escaping (([T]?)->Void)) {
         
         Alamofire.request(request, parameters: parameters, headers: Self.headers).responseJSON { (response) in
             let jsonDecoder = JSONDecoder()
