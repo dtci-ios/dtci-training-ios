@@ -23,9 +23,7 @@ class VideoPlaylistViewController: UIViewController {
         videosAPI = VideosAPI()
         
         videosAPI?.fetchVideoList(byGameId: "1902") { (retrievedVideos) in
-            if let videos = retrievedVideos {
-                self.videos = videos
-            }
+            self.videos = retrievedVideos
             self.playlist = self.videos
             self.tableView.reloadData()
         }

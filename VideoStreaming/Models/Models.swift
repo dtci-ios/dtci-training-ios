@@ -49,7 +49,7 @@ struct Stream: Codable {
 }
 
 struct ReceivedData<T:Codable>: Codable {
-    var dataArray: [T]?
+    var dataArray: [T]
     
     enum CodingKeys: String, CodingKey {
         case dataArray = "data"
