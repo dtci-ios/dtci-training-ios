@@ -14,6 +14,12 @@ class VideoPlaylistViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     private let gameStreamsAPI = GameStreamsAPI()
     private var streams: [Stream?] = [Stream]()
+    
+    enum UrlConstants {
+        var baseUrl: String {
+            return "https://api.twitch.tv/helix/streams?client-id=xzpd1f4527fu8fct7p7own0pgi35v5"
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,21 +61,31 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier, for: indexPath) as? VideoTableViewCell else {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier,
+                                                       for: indexPath) as? VideoTableViewCell else {
             return UITableViewCell()
         }
+        
         guard let video = streams[indexPath.row] else {
             return UITableViewCell()
         }
+        
         cell.configure(with: video)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = AVPlayer(url: )
-        playerViewController.player?.play()
+        let streamPlayerViewController = StreamPlayerViewController()
+        
+        if let streamId = streams[indexPath.row]?.id {
+            streamPlayerViewController.set(streamingUrl: "https://api.twitch.tv/helix/streams?client-id=xzpd1f4527fu8fct7p7own0pgi35v5&id=" + streamId)
+            present(streamPlayerViewController, animated: true) {
+                streamPlayerViewController.play()
+            }
+        }
     }
+    
 }
 
 extension VideoPlaylistViewController {
