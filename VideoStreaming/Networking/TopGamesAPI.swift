@@ -11,7 +11,7 @@ import Foundation
 class TopGamesAPI: NetworkManager {
     var request = "https://api.twitch.tv/helix/games/top"
  
-    func fetchTopGames(completion:  @escaping ([Game?]?) -> Void) {
+    func fetchTopGames(completion:  @escaping ([Game]) -> Void) {
         fetchData(request: request, completion: completion)
     }
 }

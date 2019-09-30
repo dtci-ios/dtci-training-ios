@@ -7,43 +7,38 @@
 //
 
 import UIKit
+import AVKit
 
 class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
-    
-    private var videos = [
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile")
-    ]
-    
-    var playlist : [Video?] = []
+    private let gameStreamsAPI = GameStreamsAPI()
+    private var streams: [Stream?] = [Stream]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        showHUD(progressLabel: "Loading")
         
-        playlist.append(contentsOf: Array(videos.prefix(3)))
-        videos.removeFirst(3)
+        registerCellAndSetTableViewDelegates { [unowned self] in
+            self.tableView.refreshControl = UIRefreshControl()
+            self.tableView.refreshControl?.tintColor = .white
+            self.tableView.refreshControl?.addTarget(self, action: #selector(self.refreshData(_:)), for: .valueChanged)
+        }
         
-        tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
-                           forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
+        gameStreamsAPI.fetchGameStreams(ofGame: "417752") { [weak self] (retrivedStreams) in
+            self?.streams = retrivedStreams
+            self?.tableView.reloadData()
+        }
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        dismissHUD(isAnimated: true)
     }
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
-        if !videos.isEmpty {
-            playlist.append(videos.removeFirst())
-            tableView.reloadData()
+        gameStreamsAPI.fetchGameStreams(ofGame: "417752") { (retrivedStreams) in
+            self.streams = retrivedStreams
+            self.tableView.reloadData()
         }
     }
 
@@ -56,14 +51,14 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playlist.count
+        return streams.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier, for: indexPath) as? VideoTableViewCell else {
             return UITableViewCell()
         }
-        guard let video = playlist[indexPath.row] else {
+        guard let video = streams[indexPath.row] else {
             return UITableViewCell()
         }
         cell.configure(with: video)
@@ -71,11 +66,20 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let playerViewController = PlayerViewController(coder: NSCoder()) else { return }
-        if let video = playlist[indexPath.row] {
-            playerViewController.set(videoToPlay: video) {
-                // navigationController.pushViewController(playerViewController, animated: true)
-            }
-        }
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = AVPlayer(url: )
+        playerViewController.player?.play()
+    }
+}
+
+extension VideoPlaylistViewController {
+    private func registerCellAndSetTableViewDelegates(completion: (() -> Void)?) {
+        tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
+                           forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        completion?()
     }
 }

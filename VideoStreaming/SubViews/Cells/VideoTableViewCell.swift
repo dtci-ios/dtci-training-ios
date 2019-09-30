@@ -17,8 +17,8 @@ import UIKit
         static let placeholderImg = "Placeholder"
     }
     
-    func configure(with video: Video) {
-        videoView.configure(with: video)
+    func configure(with stream: Stream) {
+        videoView.configure(with: stream)
     }
     
     override func prepareForReuse() {
