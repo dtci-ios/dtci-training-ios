@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		263E8575233CF331003D3DC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 263E8573233CF331003D3DC9 /* Main.storyboard */; };
 		2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */; };
+		5C0BEF3F2343C22900ADEFBB /* video.m3u8 in Resources */ = {isa = PBXBuildFile; fileRef = 5C0BEF3E2343C22900ADEFBB /* video.m3u8 */; };
 		5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */; };
 		5C0CBDD423429F6E00D2973B /* StreamPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C0CBDD223429F6E00D2973B /* StreamPlayerViewController.xib */; };
 		5C206257233C186C00A3859E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
@@ -64,6 +65,7 @@
 		1C0440054E5099523CAFE5C3 /* Pods-VideoStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreaming.debug.xcconfig"; path = "Target Support Files/Pods-VideoStreaming/Pods-VideoStreaming.debug.xcconfig"; sourceTree = "<group>"; };
 		263E8574233CF331003D3DC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
+		5C0BEF3E2343C22900ADEFBB /* video.m3u8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = video.m3u8; sourceTree = "<group>"; };
 		5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerViewController.swift; sourceTree = "<group>"; };
 		5C0CBDD223429F6E00D2973B /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
 		5C24B7AD233C09F100DE2123 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				9C04F3DE233045CC005FBE8E /* Info.plist */,
 				5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */,
 				5C0CBDD223429F6E00D2973B /* StreamPlayerViewController.xib */,
+				5C0BEF3E2343C22900ADEFBB /* video.m3u8 */,
 			);
 			path = VideoStreaming;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			files = (
 				263E8575233CF331003D3DC9 /* Main.storyboard in Resources */,
 				5CE97CE723317662008CF451 /* VideoView.xib in Resources */,
+				5C0BEF3F2343C22900ADEFBB /* video.m3u8 in Resources */,
 				9C04F3DD233045CC005FBE8E /* LaunchScreen.storyboard in Resources */,
 				A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */,
 				9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */,
