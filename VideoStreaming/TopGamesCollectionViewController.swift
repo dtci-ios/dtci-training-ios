@@ -33,12 +33,10 @@ struct CellAspectRatio {
         
     var heightRatioFactor: Float {
         return Float(height) / Float(width)
-        
     }
     
     var widthRatioFactor: Float {
         return Float(width) / Float(height)
-        
     }
     
 }
@@ -54,19 +52,16 @@ class TopGamesCollectionViewController: UIViewController {
     private var topGamesAPI : TopGamesAPIProtocol?
     
     static var nibName: String {
-        return String(describing: TopGamesCollectionViewController.self)
-
+        return String(describing: self)
     }
     
     init(topGamesAPI: TopGamesAPIProtocol) {
         super.init(nibName: TopGamesCollectionViewController.nibName, bundle: nil)
         self.topGamesAPI = topGamesAPI
-
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
     }
     
     override func viewDidLoad() {
@@ -84,25 +79,22 @@ class TopGamesCollectionViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
     }
 }
 
 extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return games.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let viewCell = collectionView.dequeueReusableCell(withReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier, for: indexPath) as? GameCollectionViewCell else {
             return UICollectionViewCell()
-            
         }
         viewCell.game = games[indexPath.row]
-        return viewCell
         
+        return viewCell
     }
     
 }
@@ -111,21 +103,17 @@ extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return columsLayout.cellSize(frameWidth: collectionView.frame.size.width)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: columsLayout.padding, left: columsLayout.padding, bottom: columsLayout.padding, right: columsLayout.padding)
-        
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return columsLayout.padding
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return columsLayout.padding
-        
     }
 }
