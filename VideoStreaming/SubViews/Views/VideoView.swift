@@ -17,7 +17,7 @@ class VideoView: UIView {
     
     private enum Constants {
         static let nibName = String(describing: VideoView.self)
-        static let placeholderImageName = "Placeholder"
+        static let placeholderImageName = "noImage"
     }
     
     
@@ -31,10 +31,10 @@ class VideoView: UIView {
         nibSetup()
     }
     
-    func configure(with video: Video) {
-        videoImageView.sd_setImage(with: nil, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
-        videoTitle.text = video.title
-        videoDurationAndDate.text = video.durationAndDate
+    func configure(with stream: Stream) {
+        videoImageView.sd_setImage(with: stream.imageURL, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
+        videoTitle.text = stream.title
+        videoDurationAndDate.text = stream.durationAndDate
         videoImageView.translatesAutoresizingMaskIntoConstraints = true
         videoStack.translatesAutoresizingMaskIntoConstraints = true
         videoImageView.layer.masksToBounds = true
