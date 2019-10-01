@@ -8,7 +8,12 @@
 
 import Foundation
 
-class VideosAPI : NetworkManager {
+protocol VideosAPIProtocol {
+    func fetchVideoList(byGameId gameId: String, completion: @escaping ([Video]) -> Void)
+    func fetchVideoList(byUserId userId: String, completion: @escaping ([Video]) -> Void)
+}
+
+class VideosAPI : NetworkManager, VideosAPIProtocol {
     var request = "https://api.twitch.tv/helix/videos"
     
     func fetchVideoList(byGameId gameId: String, completion: @escaping ([Video]) -> Void) {

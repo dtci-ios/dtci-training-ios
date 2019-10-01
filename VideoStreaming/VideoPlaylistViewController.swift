@@ -12,15 +12,15 @@ class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var videosAPI: VideosAPI?
+    private var videosAPI: VideosAPIProtocol?
     private var videos = [Video]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         videosAPI = VideosAPI()
         
-        videosAPI?.fetchVideoList(byGameId: "1902") { (retrievedVideos) in
+        videosAPI?.fetchVideoList(byGameId: String(Int.random(in: 1...10000))) { (retrievedVideos) in
             self.videos = retrievedVideos
             self.tableView.reloadData()
         }
@@ -38,7 +38,7 @@ class VideoPlaylistViewController: UIViewController {
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
-        videosAPI?.fetchVideoList(byGameId: "1902") { (retrievedVideos) in
+        videosAPI?.fetchVideoList(byGameId: String(Int.random(in: 1...10000))) { (retrievedVideos) in
             self.videos = retrievedVideos
             self.tableView.reloadData()
         }
@@ -58,7 +58,8 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier, for: indexPath) as? VideoTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier,
+                                                       for: indexPath) as? VideoTableViewCell else {
             return UITableViewCell()
         }
         
