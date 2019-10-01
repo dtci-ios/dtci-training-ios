@@ -16,6 +16,7 @@ struct ColumsLayout {
     func cellSize(frameWidth: CGFloat) -> CGSize {
         let itemWidth = (frameWidth - CGFloat(columns + 1) * padding) / CGFloat(columns)
         return CGSize(width: itemWidth, height: itemWidth * CGFloat(cellAspectRatio.heightRatioFactor))
+        
     }
     
 }
@@ -32,10 +33,12 @@ struct CellAspectRatio {
         
     var heightRatioFactor: Float {
         return Float(height) / Float(width)
+        
     }
     
     var widthRatioFactor: Float {
         return Float(width) / Float(height)
+        
     }
     
 }
@@ -48,15 +51,31 @@ class TopGamesCollectionViewController: UIViewController {
 
     let columsLayout = ColumsLayout()
     
+    private var topGamesAPI : TopGamesAPIProtocol?
+    
+    static var nibName: String {
+        return String(describing: TopGamesCollectionViewController.self)
+
+    }
+    
+    init(topGamesAPI: TopGamesAPIProtocol) {
+        super.init(nibName: TopGamesCollectionViewController.nibName, bundle: nil)
+        self.topGamesAPI = topGamesAPI
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         showHUD()
 
-        TopGamesAPI().fetchTopGames { (retrievedTopGames) in
-            if let unRetrivedTopGames = retrievedTopGames?.compactMap({ $0 }) {
-                self.games.append(contentsOf: unRetrivedTopGames)
-            }
+        topGamesAPI?.fetchTopGames { (retrievedTopGames) in
+            self.games = retrievedTopGames ?? []
             self.collectionView.reloadData()
             self.dismissHUD(isAnimated: true)
         }
@@ -72,14 +91,18 @@ class TopGamesCollectionViewController: UIViewController {
 extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return games.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let viewCell = collectionView.dequeueReusableCell(withReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier, for: indexPath) as? GameCollectionViewCell else {
             return UICollectionViewCell()
+            
         }
         viewCell.game = games[indexPath.row]
         return viewCell
+        
     }
     
 }
@@ -88,17 +111,21 @@ extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return columsLayout.cellSize(frameWidth: collectionView.frame.size.width)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: columsLayout.padding, left: columsLayout.padding, bottom: columsLayout.padding, right: columsLayout.padding)
+        
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return columsLayout.padding
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return columsLayout.padding
+        
     }
 }
