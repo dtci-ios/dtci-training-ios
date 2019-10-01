@@ -13,14 +13,14 @@ class VideoPlaylistViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     
     private var videos = [Video]()
-    var videosAPI: VideosAPIProtocol?
+    private var videosAPI: VideosAPIProtocol?
     
-    private enum Constants {
-        static let nibName = String(describing: VideoPlaylistViewController.self)
+    static var nibName: String {
+        return String(describing: self)
     }
     
     init(videosAPI: VideosAPIProtocol) {
-        super.init(nibName: Constants.nibName, bundle: nil)
+        super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
         self.videosAPI = videosAPI
     }
     
