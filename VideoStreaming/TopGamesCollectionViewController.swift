@@ -45,9 +45,10 @@ class TopGamesCollectionViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    var games : [Game?] = []
+    private let networkManager = TopGamesAPI()
+    private var games : [Game?] = []
 
-    let columsLayout = ColumsLayout()
+    private let columsLayout = ColumsLayout()
     
     private var topGamesAPI : TopGamesAPIProtocol?
     
@@ -65,7 +66,10 @@ class TopGamesCollectionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        self.title = "Top Games"
         
         showHUD()
 
@@ -95,6 +99,13 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollecti
         viewCell.game = games[indexPath.row]
         
         return viewCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = self.collectionView(collectionView, cellForItemAt: indexPath) as! GameCollectionViewCell
+        let videoPlaylistVC = VideoPlaylistViewController()
+        videoPlaylistVC.setGameIdAndName(gameId: cell.game?.id ?? "", gameName: cell.game?.name ?? "")
+        navigationController?.pushViewController(videoPlaylistVC, animated: true)
     }
     
 }

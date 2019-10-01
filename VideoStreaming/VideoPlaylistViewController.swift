@@ -12,21 +12,17 @@ class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var videos = [
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile"),
-        Video(title: "The Hupmobile (Ep. 1)", duration: "20:30", date: Date(), imageName: "hupmobile")
-    ]
-    
-    var playlist : [Video?] = []
+    private let networkManager = GameStreamsAPI()
+    private var playlist: [Stream?] = []
+    private var gameId: String?
+    private var gameName: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        playlist.append(contentsOf: Array(videos.prefix(3)))
-        videos.removeFirst(3)
+        self.title = gameName ?? ""
+        
+        showHUD()
         
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
@@ -35,15 +31,31 @@ class VideoPlaylistViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.tintColor = .white
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        
+        networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreamsArray) in
+            if let unRetrivedGameStreams = retrievedGameStreamsArray?.compactMap({ $0 }) {
+                self.playlist.append(contentsOf: unRetrivedGameStreams)
+            }
+            self.tableView.reloadData()
+            self.dismissHUD()
+        }
+    }
+
+    func setGameIdAndName(gameId: String, gameName: String) {
+        self.gameId = gameId
+        self.gameName = gameName
     }
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
-        if !videos.isEmpty {
-            playlist.append(videos.removeFirst())
-            tableView.reloadData()
+        networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreamsArray) in
+            if let retrivedGameStreams = retrievedGameStreamsArray?.compactMap({ $0 }) {
+                self.playlist.append(contentsOf: retrivedGameStreams)
+            }
+            self.tableView.reloadData()
         }
     }
     

@@ -17,7 +17,7 @@ import UIKit
         static let placeholderImg = "Placeholder"
     }
     
-    func configure(with video: Video) {
+    func configure(with video: Stream) {
         videoView.configure(with: video)
     }
     
