@@ -30,11 +30,14 @@ class StreamPlayerViewController: UIViewController {
             playerViewController.player = AVPlayer(url: url)
         }
         
-        present(playerViewController, animated: true) {
+        present(playerViewController, animated: true) { [weak self] in
             playerViewController.player?.play()
+            if playerViewController.isBeingDismissed {
+                self?.dismiss(animated: true) {
+                    self?.streamingUrl = nil
+                }
+            }
         }
-        
-        dismiss(animated: true)
     }
 }
 
