@@ -51,8 +51,8 @@ class VideoPlaylistViewController: UIViewController {
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
-        networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreamsArray) in
-            if let retrivedGameStreams = retrievedGameStreamsArray?.compactMap({ $0 }) {
+        networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreams) in
+            if let retrivedGameStreams = retrievedGameStreams?.compactMap({ $0 }) {
                 self.playlist.append(contentsOf: retrivedGameStreams)
             }
             self.tableView.reloadData()
