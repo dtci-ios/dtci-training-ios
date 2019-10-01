@@ -45,11 +45,8 @@ class TopGamesCollectionViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    private let networkManager = TopGamesAPI()
     private var games : [Game?] = []
-
     private let columsLayout = ColumsLayout()
-    
     private var topGamesAPI : TopGamesAPIProtocol?
     
     static var nibName: String {
@@ -66,7 +63,6 @@ class TopGamesCollectionViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         self.title = "Top Games"
@@ -92,10 +88,10 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let viewCell = collectionView.dequeueReusableCell(withReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier, for: indexPath) as? GameCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
         viewCell.game = games[indexPath.row]
         
         return viewCell
