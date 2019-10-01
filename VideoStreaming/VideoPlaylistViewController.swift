@@ -12,8 +12,21 @@ class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var videosAPI: VideosAPIProtocol?
     private var videos = [Video]()
+    var videosAPI: VideosAPIProtocol?
+    
+    private enum Constants {
+        static let nibName = String(describing: VideoPlaylistViewController.self)
+    }
+    
+    init(videosAPI: VideosAPIProtocol) {
+        super.init(nibName: Constants.nibName, bundle: nil)
+        self.videosAPI = videosAPI
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
