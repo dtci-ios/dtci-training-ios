@@ -14,8 +14,6 @@ class VideoPlaylistViewController: UIViewController {
     
     private var videosAPI: VideosAPI?
     private var videos = [Video]()
-    
-    var playlist: [Video?] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +22,6 @@ class VideoPlaylistViewController: UIViewController {
         
         videosAPI?.fetchVideoList(byGameId: "1902") { (retrievedVideos) in
             self.videos = retrievedVideos
-            self.playlist = self.videos
             self.tableView.reloadData()
         }
         
@@ -41,9 +38,9 @@ class VideoPlaylistViewController: UIViewController {
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
-        if !videos.isEmpty {
-            playlist.append(videos.removeFirst())
-            tableView.reloadData()
+        videosAPI?.fetchVideoList(byGameId: "1902") { (retrievedVideos) in
+            self.videos = retrievedVideos
+            self.tableView.reloadData()
         }
     }
     
@@ -56,17 +53,17 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playlist.count
+        return videos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier, for: indexPath) as? VideoTableViewCell else {
             return UITableViewCell()
         }
-        guard let video = playlist[indexPath.row] else {
-            return UITableViewCell()
-        }
-        cell.configure(with: video)
+        
+        cell.configure(with: videos[indexPath.row])
+        
         return cell
     }
     
