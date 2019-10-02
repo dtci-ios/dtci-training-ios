@@ -8,7 +8,11 @@
 
 import Foundation
 
-class TopGamesAPI: NetworkManager {
+protocol TopGamesAPIProtocol {
+    func fetchTopGames(completion:  @escaping ([Game?]?) -> Void)
+}
+
+class TopGamesAPI: NetworkManager, TopGamesAPIProtocol {
     var request = "https://api.twitch.tv/helix/games/top"
  
     func fetchTopGames(completion:  @escaping ([Game]) -> Void) {

@@ -34,8 +34,11 @@ class VideoView: UIView {
         videoImageView.sd_setImage(with: stream.imageURL, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
         videoTitle.text = stream.title
         videoDurationAndDate.text = stream.durationAndDate
+        videoTitle.numberOfLines = 0
+        videoTitle.translatesAutoresizingMaskIntoConstraints = false
         videoImageView.translatesAutoresizingMaskIntoConstraints = true
-        videoStack.translatesAutoresizingMaskIntoConstraints = true
+        videoStack.alignment = .leading
+        videoStack.translatesAutoresizingMaskIntoConstraints = false
         videoImageView.layer.masksToBounds = true
         videoImageView.layer.cornerRadius = 10
     }

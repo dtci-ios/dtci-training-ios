@@ -13,6 +13,17 @@ struct Game: Codable {
     var name: String?
     var boxArtUrl: String?
     
+    func boxArtThumbnailUrl (width: Int? = nil, height: Int? = nil) -> String {
+        guard let unBoxArtUrl = boxArtUrl else {
+            return ""
+        }
+        guard let unWidth = width, let unHeight = height else {
+            //for full size image.
+            return unBoxArtUrl.replacingOccurrences(of: "{width}x{height}", with: "x")
+        }
+        return unBoxArtUrl.replacingOccurrences(of: "{width}x{height}", with: "\(unWidth)x\(unHeight)")
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case name

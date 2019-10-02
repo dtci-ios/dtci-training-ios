@@ -15,7 +15,7 @@ class VideoPlaylistViewController: UIViewController {
     private let gameStreamsAPI = GameStreamsAPI()
     private var streams: [Stream?] = [Stream]()
     
-    enum UrlConstants {
+    private enum UrlConstants {
         var baseUrl: String {
             return "https://api.twitch.tv/helix/streams?client-id=xzpd1f4527fu8fct7p7own0pgi35v5"
         }
@@ -53,7 +53,7 @@ class VideoPlaylistViewController: UIViewController {
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 135
+        return 100
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
