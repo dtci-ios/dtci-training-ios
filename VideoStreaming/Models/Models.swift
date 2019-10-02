@@ -57,7 +57,7 @@ struct Stream: Codable {
         
         return startedAtFormatted
     }
-    
+
     var imageURL: URL? {
         let thumbnailUrlWithWidthAndHeight = thumbnailUrl?.replacingOccurrences(of: "{width}", with: "")
                                                           .replacingOccurrences(of: "{height}", with: "")

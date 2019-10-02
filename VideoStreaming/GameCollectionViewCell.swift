@@ -31,7 +31,7 @@ class GameCollectionViewCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        gameImageView.layer.cornerRadius = 3
+        gameImageView.layer.cornerRadius = 10
     }
     
     override func prepareForReuse() {

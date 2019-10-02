@@ -14,6 +14,8 @@ class VideoPlaylistViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     private let gameStreamsAPI = GameStreamsAPI()
     private var streams: [Stream?] = [Stream]()
+    private var gameId: String?
+    private var gameName: String?
     
     private enum UrlConstants {
         var baseUrl: String {
@@ -23,27 +25,40 @@ class VideoPlaylistViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        showHUD(progressLabel: "Loading")
+        self.title = gameName ?? ""
         
-        registerCellAndSetTableViewDelegates { [unowned self] in
-            self.tableView.refreshControl = UIRefreshControl()
-            self.tableView.refreshControl?.tintColor = .white
-            self.tableView.refreshControl?.addTarget(self, action: #selector(self.refreshData(_:)), for: .valueChanged)
+        showHUD()
+        
+        tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
+                           forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
+        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.tintColor = .white
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        
+        gameStreamsAPI.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreamsArray) in
+            if let unRetrivedGameStreams = retrievedGameStreamsArray?.compactMap({ $0 }) {
+                self.streams.append(contentsOf: unRetrivedGameStreams)
+            }
+            self.tableView.reloadData()
+            self.dismissHUD()
         }
-        
-        gameStreamsAPI.fetchGameStreams(ofGame: "417752") { [weak self] (retrivedStreams) in
-            self?.streams = retrivedStreams
-            self?.tableView.reloadData()
-        }
-        
-        dismissHUD(isAnimated: true)
+    }
+
+    func setGameIdAndName(gameId: String, gameName: String) {
+        self.gameId = gameId
+        self.gameName = gameName
     }
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
-        gameStreamsAPI.fetchGameStreams(ofGame: "417752") { (retrivedStreams) in
-            self.streams = retrivedStreams
+        gameStreamsAPI.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreams) in
+            
+            if let retrivedGameStreams = retrievedGameStreams?.compactMap({ $0 }) {
+                self.streams.append(contentsOf: retrivedGameStreams)
+            }
+            
             self.tableView.reloadData()
         }
     }
