@@ -91,8 +91,7 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let streamId = streams[indexPath.row]?.id,
-            let path = Bundle.main.path(forResource: "video", ofType: "m3u8") {
+        if let path = Bundle.main.path(forResource: "video", ofType: "m3u8") {
             let streamPlayerViewController = StreamPlayerViewController(streamingUrl: URL(fileURLWithPath: path))
             
             present(streamPlayerViewController, animated: true) {
