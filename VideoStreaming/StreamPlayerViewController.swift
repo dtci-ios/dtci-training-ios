@@ -38,8 +38,8 @@ class StreamPlayerViewController: UIViewController {
             playerViewController.player = avPlayer
         }
         
-        present(playerViewController, animated: true) {
-            playerViewController.player?.play()
+        present(playerViewController, animated: true) { [weak self] in
+            self?.avPlayer?.play()
         }
     }
 }
