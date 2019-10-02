@@ -69,10 +69,18 @@ class TopGamesCollectionViewController: UIViewController {
         
         showHUD()
 
-        topGamesAPI?.fetchTopGames { (retrievedTopGames) in
-            self.games = retrievedTopGames ?? []
-            self.collectionView.reloadData()
+        topGamesAPI?.fetchTopGames { (success, retrievedTopGames, errorMessage) in
             self.dismissHUD(isAnimated: true)
+            if success {
+                if let topGames = retrievedTopGames {
+                     self.games = topGames
+                     self.collectionView.reloadData()
+                }
+            } else {
+                let alert = UIAlertController(title: "ERROR", message: errorMessage!, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
+            }
         }
         
         collectionView.register(UINib(nibName: GameCollectionViewCell.Constants.nibName, bundle: nil), forCellWithReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier)

@@ -26,24 +26,37 @@ extension NetworkManager {
         return ["Client-ID": "xzpd1f4527fu8fct7p7own0pgi35v5"]
     }
     
-    func fetchData <T:Codable> (request: String, parameters: [String:Any] = [:], completion: @escaping (([T?]?)->Void)) {
+    func fetchData <T:Codable> (request: String,
+                                parameters: [String:Any] = [:],
+                                completion: @escaping ((Bool, [T]?, String?)->Void)) {
         
-        Alamofire.request(request, parameters: parameters, headers: Self.headers).responseJSON { (response) in
-            let jsonDecoder = JSONDecoder()
-            guard let data = response.data else {
-                completion(nil)
-                return
-            }
-            do {
-                let gamesResponse = try jsonDecoder.decode(ReceivedData<T>.self, from: data)
-                guard let array = gamesResponse.dataArray else {
-                    completion(nil)
-                    return
+        Alamofire.request(request, parameters: parameters, headers: Self.headers)
+            .validate(statusCode: 200..<300)
+            .responseJSON { (response) in
+                switch response.result {
+                    case .success:
+                        let jsonDecoder = JSONDecoder()
+                        guard let data = response.data else {
+                            completion(false, nil, "Data is nil")
+                            return
+                        }
+                        do {
+                            let dataResponse = try jsonDecoder.decode(ReceivedData<T>.self, from: data)
+                            guard let array = dataResponse.dataArray else {
+                                completion(false, nil, "Empty dataArray")
+                                return
+                            }
+                            completion(true, array, nil)
+                        } catch let jsonError {
+                            completion(false, nil, jsonError.localizedDescription)
+                        }
+                    case .failure(let error):
+                        if let httpStatusCode = response.response?.statusCode {
+                            completion(false, nil, " Status Code: \(httpStatusCode) ")
+                        } else {
+                            completion(false, nil, error.localizedDescription)
+                        }
                 }
-                completion(array)
-            } catch let jsonError {
-                print("Error decoding JSON", jsonError)
-            }
         }
     }
     
