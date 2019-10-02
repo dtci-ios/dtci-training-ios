@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TopGamesAPIProtocol {
-    func fetchTopGames(completion:  @escaping (Bool, [Game]?, String?) -> Void)
+    func fetchTopGames(completion:  @escaping (Bool, [Game], Error?) -> Void)
 }
 
 class TopGamesAPI: NetworkManager, TopGamesAPIProtocol {
@@ -17,7 +17,7 @@ class TopGamesAPI: NetworkManager, TopGamesAPIProtocol {
     // endpoint for errorAlert
 //    var request = "https://api.twitch.tv/helix/games/sarasa"
  
-    func fetchTopGames(completion:  @escaping (Bool, [Game]?, String?) -> Void) {
+    func fetchTopGames(completion:  @escaping (Bool, [Game], Error?) -> Void) {
         fetchData(request: request, completion: completion)
     }
 }

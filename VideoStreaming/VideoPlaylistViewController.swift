@@ -34,13 +34,8 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.tintColor = .white
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
-        networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreamsArray) in
-            if let unRetrivedGameStreams = retrievedGameStreamsArray?.compactMap({ $0 }) {
-                self.playlist.append(contentsOf: unRetrivedGameStreams)
-            }
-            self.tableView.reloadData()
-            self.dismissHUD()
-        }
+        networkManager.fetchGameStreams(ofGame: gameId ?? "",
+                                        completion: fetchCompletionHandler(success:retrievedGameStreams:error:))
     }
 
     func setGameIdAndName(gameId: String, gameName: String) {
@@ -51,11 +46,21 @@ class VideoPlaylistViewController: UIViewController {
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
-        networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreams) in
-            if let retrivedGameStreams = retrievedGameStreams?.compactMap({ $0 }) {
-                self.playlist.append(contentsOf: retrivedGameStreams)
+        networkManager.fetchGameStreams(ofGame: gameId ?? "",
+                                        completion: fetchCompletionHandler(success:retrievedGameStreams:error:))
+    }
+    
+    func fetchCompletionHandler(success: Bool, retrievedGameStreams: [Stream], error: Error?) {
+        self.dismissHUD()
+        if success {
+            if !retrievedGameStreams.isEmpty {
+                self.playlist.append(contentsOf: retrievedGameStreams)
+                self.tableView.reloadData()
             }
-            self.tableView.reloadData()
+        } else {
+            let alert = UIAlertController(title: "ERROR", message: error?.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
         }
     }
     

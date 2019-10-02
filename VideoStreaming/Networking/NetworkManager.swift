@@ -14,6 +14,21 @@ import Alamofire
 //    - https://api.twitch.tv/helix/streams?game_id=21779
 //    - https://api.twitch.tv/helix/videos?user_id=67955580
 
+enum APIError: Error {
+    case responseDataNil
+    case emptyDataArray
+    case httpStatusCodeFailure(Int)
+    
+    var localizedDescription: String {
+        switch self {
+        case .responseDataNil: return "Data is nil"
+        case .emptyDataArray: return "Data Array is empty"
+        case .httpStatusCodeFailure(let statusCode): return "Status Code: \(statusCode)"
+        
+        }
+    }
+}
+
 protocol NetworkManager {
     
     var request: String { get }
@@ -28,7 +43,7 @@ extension NetworkManager {
     
     func fetchData <T:Codable> (request: String,
                                 parameters: [String:Any] = [:],
-                                completion: @escaping ((Bool, [T]?, String?)->Void)) {
+                                completion: @escaping ((Bool, [T], Error?)->Void)) {
         
         Alamofire.request(request, parameters: parameters, headers: Self.headers)
             .validate(statusCode: 200..<300)
@@ -37,24 +52,23 @@ extension NetworkManager {
                     case .success:
                         let jsonDecoder = JSONDecoder()
                         guard let data = response.data else {
-                            completion(false, nil, "Data is nil")
+                            completion(false, [], APIError.responseDataNil)
                             return
                         }
                         do {
                             let dataResponse = try jsonDecoder.decode(ReceivedData<T>.self, from: data)
-                            guard let array = dataResponse.dataArray else {
-                                completion(false, nil, "Empty dataArray")
+                            if dataResponse.dataArray.isEmpty {
+                                completion(false, [], APIError.emptyDataArray)
                                 return
-                            }
-                            completion(true, array, nil)
+                            } else { completion(true, dataResponse.dataArray, nil) }
                         } catch let jsonError {
-                            completion(false, nil, jsonError.localizedDescription)
+                            completion(false, [], jsonError)
                         }
                     case .failure(let error):
-                        if let httpStatusCode = response.response?.statusCode {
-                            completion(false, nil, " Status Code: \(httpStatusCode) ")
+                        if let statusCode = response.response?.statusCode {
+                            completion(false, [], APIError.httpStatusCodeFailure(statusCode))
                         } else {
-                            completion(false, nil, error.localizedDescription)
+                            completion(false, [], error)
                         }
                 }
         }
