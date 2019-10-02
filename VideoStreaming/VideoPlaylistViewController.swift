@@ -58,7 +58,11 @@ class VideoPlaylistViewController: UIViewController {
                 self.tableView.reloadData()
             }
         } else {
-            let alert = UIAlertController(title: "ERROR", message: error?.localizedDescription, preferredStyle: .alert)
+            guard let error = error else { return }
+            
+            let alert: UIAlertController
+            let message = error is APIError ? (error as! APIError).localizedDescription : error.localizedDescription
+            alert = UIAlertController(title: "ERROR", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true)
         }

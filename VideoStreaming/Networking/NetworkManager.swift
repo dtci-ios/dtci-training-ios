@@ -24,15 +24,12 @@ enum APIError: Error {
         case .responseDataNil: return "Data is nil"
         case .emptyDataArray: return "Data Array is empty"
         case .httpStatusCodeFailure(let statusCode): return "Status Code: \(statusCode)"
-        
         }
     }
 }
 
 protocol NetworkManager {
-    
     var request: String { get }
-
 }
 
 extension NetworkManager {
@@ -49,27 +46,27 @@ extension NetworkManager {
             .validate(statusCode: 200..<300)
             .responseJSON { (response) in
                 switch response.result {
-                    case .success:
-                        let jsonDecoder = JSONDecoder()
-                        guard let data = response.data else {
-                            completion(false, [], APIError.responseDataNil)
+                case .success:
+                    let jsonDecoder = JSONDecoder()
+                    guard let data = response.data else {
+                        completion(false, [], APIError.responseDataNil)
+                        return
+                    }
+                    do {
+                        let dataResponse = try jsonDecoder.decode(ReceivedData<T>.self, from: data)
+                        if dataResponse.dataArray.isEmpty {
+                            completion(false, [], APIError.emptyDataArray)
                             return
-                        }
-                        do {
-                            let dataResponse = try jsonDecoder.decode(ReceivedData<T>.self, from: data)
-                            if dataResponse.dataArray.isEmpty {
-                                completion(false, [], APIError.emptyDataArray)
-                                return
-                            } else { completion(true, dataResponse.dataArray, nil) }
-                        } catch let jsonError {
-                            completion(false, [], jsonError)
-                        }
-                    case .failure(let error):
-                        if let statusCode = response.response?.statusCode {
-                            completion(false, [], APIError.httpStatusCodeFailure(statusCode))
-                        } else {
-                            completion(false, [], error)
-                        }
+                        } else { completion(true, dataResponse.dataArray, nil) }
+                    } catch let jsonError {
+                        completion(false, [], jsonError)
+                    }
+                case .failure(let error):
+                    if let statusCode = response.response?.statusCode {
+                        completion(false, [], APIError.httpStatusCodeFailure(statusCode))
+                    } else {
+                        completion(false, [], error)
+                    }
                 }
         }
     }
