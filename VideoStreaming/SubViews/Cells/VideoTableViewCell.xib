@@ -17,15 +17,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" restorationIdentifier="VideoView" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4D7-2a-y4u" customClass="VideoView" customModule="VideoStreaming" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="413" height="135"/>
+                        <rect key="frame" x="0.0" y="0.0" width="413" height="100"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="4D7-2a-y4u" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" constant="35" id="Lmp-86-1BP"/>
-                    <constraint firstItem="4D7-2a-y4u" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="XeS-hf-4Ch"/>
-                    <constraint firstItem="4D7-2a-y4u" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="hFc-WU-U61"/>
-                    <constraint firstItem="4D7-2a-y4u" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="17.5" id="vBM-sJ-6a3"/>
+                    <constraint firstAttribute="trailing" secondItem="4D7-2a-y4u" secondAttribute="trailing" id="42j-Mn-9NM"/>
+                    <constraint firstAttribute="bottom" secondItem="4D7-2a-y4u" secondAttribute="bottom" id="dUE-KZ-bHH"/>
+                    <constraint firstItem="4D7-2a-y4u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ugh-zK-hqM"/>
+                    <constraint firstItem="4D7-2a-y4u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yHc-jG-W4Y"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
