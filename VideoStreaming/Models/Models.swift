@@ -44,6 +44,24 @@ struct Stream: Codable {
     let thumbnailUrl: String?
     let tagIds: [String?]?
     
+    var durationAndDate: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        guard let startedAtDate = dateFormatter.date(from: startedAt ?? "") else {
+            return "- • --"
+        }
+        dateFormatter.dateFormat = "HH:mm • E, MM/dd"
+        let startedAtFormatted = dateFormatter.string(from: startedAtDate)
+        return startedAtFormatted
+    }
+
+    var imageURL: URL? {
+        let thumbnailUrlWithWidthAndHeight = thumbnailUrl?.replacingOccurrences(of: "{width}", with: "")
+                                                         .replacingOccurrences(of: "{height}", with: "")
+        let url = URL(string: thumbnailUrlWithWidthAndHeight ?? "")
+        return url
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
