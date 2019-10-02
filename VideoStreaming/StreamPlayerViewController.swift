@@ -13,6 +13,8 @@ class StreamPlayerViewController: UIViewController {
     @IBOutlet private weak var descriptionView: UIView!
     @IBOutlet private weak var tableView: UITableView!
     
+    private var avPlayer: AVPlayer?
+    
     private var streamingUrl: URL?
     
     override func viewDidLoad() {
@@ -27,16 +29,12 @@ class StreamPlayerViewController: UIViewController {
         let playerViewController = AVPlayerViewController()
         
         if let url = streamingUrl {
-            playerViewController.player = AVPlayer(url: url)
+            avPlayer = AVPlayer(url: url)
+            playerViewController.player = avPlayer
         }
         
-        present(playerViewController, animated: true) { [weak self] in
+        present(playerViewController, animated: true) {
             playerViewController.player?.play()
-            if playerViewController.isBeingDismissed {
-                self?.dismiss(animated: true) {
-                    self?.streamingUrl = nil
-                }
-            }
         }
     }
 }
