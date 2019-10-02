@@ -33,10 +33,13 @@ class VideoView: UIView {
     
     func configure(with stream: Stream) {
         videoImageView.sd_setImage(with: stream.imageURL, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
-        videoTitle.text = stream.title
         videoDurationAndDate.text = stream.durationAndDate
+        videoTitle.text = stream.title
+        videoTitle.numberOfLines = 0
+        videoTitle.translatesAutoresizingMaskIntoConstraints = false
+        videoStack.alignment = .leading
+        videoStack.translatesAutoresizingMaskIntoConstraints = false
         videoImageView.translatesAutoresizingMaskIntoConstraints = true
-        videoStack.translatesAutoresizingMaskIntoConstraints = true
         videoImageView.layer.masksToBounds = true
         videoImageView.layer.cornerRadius = 10
     }
