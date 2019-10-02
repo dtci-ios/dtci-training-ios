@@ -17,12 +17,17 @@ class StreamPlayerViewController: UIViewController {
     
     private var streamingUrl: URL?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    static var nibName: String {
+        return String(describing: self)
     }
     
-    func set(streamingUrl url: URL?) {
+    init(streamingUrl url: URL?) {
+        super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
         streamingUrl = url
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     func play() {

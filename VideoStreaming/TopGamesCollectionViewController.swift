@@ -70,7 +70,7 @@ class TopGamesCollectionViewController: UIViewController {
         showHUD()
 
         topGamesAPI?.fetchTopGames { (retrievedTopGames) in
-            self.games = retrievedTopGames ?? []
+            self.games = retrievedTopGames
             self.collectionView.reloadData()
             self.dismissHUD(isAnimated: true)
         }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TopGamesAPIProtocol {
-    func fetchTopGames(completion:  @escaping ([Game?]?) -> Void)
+    func fetchTopGames(completion:  @escaping ([Game]) -> Void)
 }
 
 class TopGamesAPI: NetworkManager, TopGamesAPIProtocol {
