@@ -8,7 +8,6 @@
 
 import UIKit
 import AVKit
-import Alamofire
 
 class VideoPlaylistViewController: UIViewController {
     
@@ -84,13 +83,9 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4")
+        guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
         
-        guard let path = filePath else {
-            return
-        }
-        
-        let url = URL(fileURLWithPath: path)
+        let url = URL(fileURLWithPath: filePath)
         
         let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
             

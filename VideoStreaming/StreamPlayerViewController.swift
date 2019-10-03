@@ -19,7 +19,7 @@ class StreamPlayerViewController: UIViewController {
         return String(describing: self)
     }
     
-    init(streamingUrl url: URL?) {
+    init(streamingUrl url: URL) {
         super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
         streamUrl = url
     }
