@@ -17,13 +17,21 @@ import Alamofire
 enum APIError: Error {
     case responseDataNil
     case emptyDataArray
-    case httpStatusCodeFailure(Int)
+//    case httpStatusCodeFailure(Int)
+    case jsonError(DecodingError)
+    case afError(Error)
+    case urlError(Error)
+    case unknownError(Error)
     
     var localizedDescription: String {
         switch self {
-        case .responseDataNil: return "Data is nil"
-        case .emptyDataArray: return "Data Array is empty"
-        case .httpStatusCodeFailure(let statusCode): return "Status Code: \(statusCode)"
+            case .responseDataNil: return "Data is nil"
+            case .emptyDataArray: return "Data Array is empty"
+//            case .httpStatusCodeFailure(let statusCode): return "Status Code: \(statusCode)"
+            case .jsonError(let jsonError): return jsonError.localizedDescription
+            case .afError(let afError): return afError.localizedDescription
+            case .urlError(let urlError): return urlError.localizedDescription
+            case .unknownError(let unknownError): return unknownError.localizedDescription
         }
     }
 }
@@ -40,7 +48,7 @@ extension NetworkManager {
     
     func fetchData <T:Codable> (request: String,
                                 parameters: QueryString = [:],
-                                completion: @escaping ((Bool, [T], Error?)->Void)) {
+                                completion: @escaping ((Bool, [T], APIError?)->Void)) {
         
         Alamofire.request(request, parameters: parameters, headers: Self.headers)
             .validate(statusCode: 200..<300)
@@ -59,13 +67,15 @@ extension NetworkManager {
                             return
                         } else { completion(true, dataResponse.dataArray, nil) }
                     } catch let jsonError {
-                        completion(false, [], jsonError)
+                        completion(false, [], APIError.jsonError(jsonError as! DecodingError))
                     }
                 case .failure(let error):
-                    if let statusCode = response.response?.statusCode {
-                        completion(false, [], APIError.httpStatusCodeFailure(statusCode))
+                    if let error = error as? AFError {
+                        completion(false, [], APIError.afError(error))
+                    } else if let error = error as? URLError {
+                        completion(false, [], APIError.urlError(error))
                     } else {
-                        completion(false, [], error)
+                        completion(false, [], APIError.unknownError(error))
                     }
                 }
         }
