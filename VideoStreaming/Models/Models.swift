@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Game: Codable, Equatable {
+struct Game: Codable {
     var id: String?
     var name: String?
     var boxArtUrl: String?
@@ -31,7 +31,7 @@ struct Game: Codable, Equatable {
     }
 }
 
-struct Stream: Codable, Equatable {
+struct Stream: Codable {
     let id: String?
     let userId: String?
     let userName: String?
