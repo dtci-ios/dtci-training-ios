@@ -12,7 +12,6 @@ import AVFoundation
 
 class StreamPlayerViewController: UIViewController {
     private var avPlayer: AVPlayer!
-    private var avPlayerLayer: AVPlayerLayer!
     
     private var streamUrl: URL?
     
@@ -22,10 +21,7 @@ class StreamPlayerViewController: UIViewController {
     
     init(streamingUrl url: URL?) {
         super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
-        
-        if let streamUrl = streamUrl {
-            initializePlayer(streamUrl: streamUrl)
-        }
+        streamUrl = url
     }
     
     required init?(coder: NSCoder) {
@@ -34,29 +30,15 @@ class StreamPlayerViewController: UIViewController {
     
     func play() {
         let playerViewController = AVPlayerViewController()
-        playerViewController.player = avPlayer
         
-        present(playerViewController, animated: true) { [weak self] in
-            self?.avPlayer?.play()
+        if let url = streamUrl {
+            avPlayer = AVPlayer(url: url)
+            playerViewController.player = avPlayer
+            
+            present(playerViewController, animated: true) {
+                playerViewController.player?.play()
+            }
         }
     }
-    
-    private func initializePlayer(streamUrl: URL) {
-        let videoAsset = AVURLAsset(url: streamUrl)
-        let playerItem = AVPlayerItem(asset: videoAsset)
-        avPlayer = AVPlayer(playerItem: playerItem)
-        avPlayerLayer = AVPlayerLayer(player: avPlayer)
-    }
-    
 }
 
-extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        return cell
-    }
-}
