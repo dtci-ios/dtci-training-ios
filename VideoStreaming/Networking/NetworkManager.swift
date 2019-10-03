@@ -33,10 +33,11 @@ enum APIError: Error {
         }
     }
 }
-
+	
 protocol NetworkManager {
     typealias QueryString = [String:Any]
     var request: String { get }
+//  var manager: SessionManager { get set }
 }
 
 extension NetworkManager {
