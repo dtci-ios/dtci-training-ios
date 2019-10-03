@@ -13,7 +13,7 @@ import AVFoundation
 class StreamPlayerViewController: UIViewController {
     private var avPlayer: AVPlayer!
     
-    private var streamUrl: URL?
+    private var streamUrl: URL = URL(fileURLWithPath: "")
     
     static var nibName: String {
         return String(describing: self)
@@ -31,13 +31,11 @@ class StreamPlayerViewController: UIViewController {
     func play() {
         let playerViewController = AVPlayerViewController()
         
-        if let url = streamUrl {
-            avPlayer = AVPlayer(url: url)
-            playerViewController.player = avPlayer
+        avPlayer = AVPlayer(url: streamUrl)
+        playerViewController.player = avPlayer
             
-            present(playerViewController, animated: true) {
-                playerViewController.player?.play()
-            }
+        present(playerViewController, animated: true) {
+            playerViewController.player?.play()
         }
     }
 }
