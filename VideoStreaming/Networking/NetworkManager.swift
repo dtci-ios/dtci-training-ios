@@ -46,7 +46,7 @@ extension NetworkManager {
     
     func fetchData <T:Codable> (request: String,
                                 parameters: QueryString = [:],
-                                completion: @escaping ((Bool, [T], APIError?)->Void)) {
+                                completion: @escaping ((Swift.Result<[T],APIError>)->Void)) {
         
         Alamofire.request(request, parameters: parameters, headers: Self.headers)
             .validate(statusCode: 200..<300)
@@ -55,25 +55,25 @@ extension NetworkManager {
                 case .success:
                     let jsonDecoder = JSONDecoder()
                     guard let data = response.data else {
-                        completion(false, [], APIError.responseDataNil)
+                        completion(.failure(APIError.responseDataNil))
                         return
                     }
                     do {
                         let dataResponse = try jsonDecoder.decode(ReceivedData<T>.self, from: data)
                         if dataResponse.dataArray.isEmpty {
-                            completion(false, [], APIError.emptyDataArray)
+                            completion(.failure(APIError.emptyDataArray))
                             return
-                        } else { completion(true, dataResponse.dataArray, nil) }
+                        } else { completion(.success(dataResponse.dataArray)) }
                     } catch let jsonError {
-                        completion(false, [], APIError.jsonError(jsonError as! DecodingError))
+                        completion(.failure(APIError.jsonError(jsonError as! DecodingError)))
                     }
                 case .failure(let error):
                     if let error = error as? AFError {
-                        completion(false, [], APIError.afError(error))
+                        completion(.failure(APIError.afError(error)))
                     } else if let error = error as? URLError {
-                        completion(false, [], APIError.urlError(error))
+                        completion(.failure(APIError.urlError(error)))
                     } else {
-                        completion(false, [], APIError.unknownError(error))
+                        completion(.failure(APIError.unknownError(error)))
                     }
                 }
         }

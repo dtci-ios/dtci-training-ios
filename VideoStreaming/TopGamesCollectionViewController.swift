@@ -69,7 +69,7 @@ class TopGamesCollectionViewController: UIViewController {
         
         showHUD()
 
-        topGamesAPI?.fetchTopGames(completion: fetchCompletionHandler(success:retrievedTopGames:error:))
+        topGamesAPI?.fetchTopGames(completion: fetchCompletionHandler(result:))
         
         collectionView.register(UINib(nibName: GameCollectionViewCell.Constants.nibName, bundle: nil), forCellWithReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier)
         
@@ -77,18 +77,15 @@ class TopGamesCollectionViewController: UIViewController {
         collectionView.dataSource = self
     }
     
-    func fetchCompletionHandler(success: Bool, retrievedTopGames: [Game], error: Error?) {
+    func fetchCompletionHandler(result: Result<[Game],APIError>) {
         self.dismissHUD()
-        if success {
-            if !retrievedTopGames.isEmpty {
-                 self.games = retrievedTopGames
-                 self.collectionView.reloadData()
-            }
-        } else {
-            guard let error = error else { return }
-            
+        switch result {
+        case .success(let topGames):
+            self.games = topGames
+            self.collectionView.reloadData()
+        case .failure(let error):
             let alert: UIAlertController
-            let message = error is APIError ? (error as! APIError).localizedDescription : error.localizedDescription
+            let message = error.localizedDescription
             alert = UIAlertController(title: "ERROR", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true)

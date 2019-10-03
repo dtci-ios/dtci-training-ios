@@ -35,7 +35,7 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
         networkManager.fetchGameStreams(ofGame: gameId ?? "",
-                                        completion: fetchCompletionHandler(success:retrievedGameStreams:error:))
+                                        completion: fetchCompletionHandler(result:))
     }
 
     func setGameIdAndName(gameId: String, gameName: String) {
@@ -47,21 +47,18 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.endRefreshing()
 
         networkManager.fetchGameStreams(ofGame: gameId ?? "",
-                                        completion: fetchCompletionHandler(success:retrievedGameStreams:error:))
+                                        completion: fetchCompletionHandler(result:))
     }
     
-    func fetchCompletionHandler(success: Bool, retrievedGameStreams: [Stream], error: Error?) {
+    func fetchCompletionHandler(result: Result<[Stream],APIError>) {
         self.dismissHUD()
-        if success {
-            if !retrievedGameStreams.isEmpty {
-                self.streams.append(contentsOf: retrievedGameStreams)
-                self.tableView.reloadData()
-            }
-        } else {
-            guard let error = error else { return }
-            
+        switch result {
+        case .success(let gameStreams):
+            self.streams = gameStreams
+            self.tableView.reloadData()
+        case .failure(let error):
             let alert: UIAlertController
-            let message = error is APIError ? (error as! APIError).localizedDescription : error.localizedDescription
+            let message = error.localizedDescription
             alert = UIAlertController(title: "ERROR", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true)
