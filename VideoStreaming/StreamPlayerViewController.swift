@@ -21,9 +21,8 @@ class StreamPlayerViewController: UIViewController {
     }
     
     init(streamingUrl url: URL) {
-        super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
-        
         streamUrl = url
+        super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
         setupPlayerViewController()
     }
     
