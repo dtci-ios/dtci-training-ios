@@ -34,7 +34,7 @@ class VideoView: UIView {
         videoImageView.sd_setImage(with: stream.imageURL, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
         videoDurationAndDate.text = stream.durationAndDate
         videoTitle.text = stream.title
-        videoTitle.numberOfLines = 0
+        videoTitle.numberOfLines = 2
         videoTitle.translatesAutoresizingMaskIntoConstraints = false
         videoStack.alignment = .leading
         videoStack.translatesAutoresizingMaskIntoConstraints = false

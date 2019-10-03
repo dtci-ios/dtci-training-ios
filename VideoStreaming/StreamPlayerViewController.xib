@@ -9,52 +9,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StreamPlayerViewController" customModule="VideoStreaming" customModuleProvider="target">
             <connections>
-                <outlet property="descriptionView" destination="Pfn-gp-9CU" id="TWY-Ph-Wbs"/>
-                <outlet property="playerView" destination="db5-RJ-vNj" id="siC-Nq-Zth"/>
-                <outlet property="tableView" destination="TM7-Ij-X36" id="gWJ-3a-lji"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view" destination="iN0-l3-epB" id="yZy-L0-NNH"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pfn-gp-9CU">
-                    <rect key="frame" x="0.0" y="275" width="414" height="50"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Encarnation leaves game with a oblique strain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbf-BO-lbw">
-                            <rect key="frame" x="8" y="15" width="351" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="db5-RJ-vNj">
-                    <rect key="frame" x="0.0" y="44" width="414" height="233"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TM7-Ij-X36">
-                    <rect key="frame" x="0.0" y="325" width="414" height="537"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="teP-70-ACV"/>
-                        <outlet property="delegate" destination="-1" id="xgH-6K-brc"/>
-                    </connections>
-                </tableView>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="TM7-Ij-X36" firstAttribute="top" secondItem="Pfn-gp-9CU" secondAttribute="bottom" id="MQL-vM-CX6"/>
-                <constraint firstItem="Pfn-gp-9CU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Sb0-Bk-GQh"/>
-                <constraint firstItem="Pfn-gp-9CU" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="bQg-ew-TWf"/>
-            </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="131.8840579710145" y="92.410714285714278"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="132" y="93"/>
         </view>
     </objects>
 </document>

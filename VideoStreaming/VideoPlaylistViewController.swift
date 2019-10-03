@@ -13,8 +13,9 @@ import Alamofire
 class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
-    private let gameStreamsAPI = GameStreamsAPI()
-    private var streams: [Stream?] = [Stream]()
+    
+    private let networkManager = GameStreamsAPI()
+    private var streams: [Stream?] = []
     private var gameId: String?
     private var gameName: String?
 
@@ -48,12 +49,8 @@ class VideoPlaylistViewController: UIViewController {
     }
     
     private func fetchGameStreams() {
-        gameStreamsAPI.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreams) in
-            
-            if let retrivedGameStreams = retrievedGameStreams?.compactMap({ $0 }) {
-                self.streams.append(contentsOf: retrivedGameStreams)
-            }
-            
+        networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreamsArray) in
+            self.streams = retrievedGameStreamsArray
             self.tableView.reloadData()
         }
     }
@@ -74,23 +71,32 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier,
                                                        for: indexPath) as? VideoTableViewCell else {
-            return UITableViewCell()
+            return VideoTableViewCell()
         }
         
         guard let video = streams[indexPath.row] else {
-            return UITableViewCell()
+            return VideoTableViewCell()
         }
         
         cell.configure(with: video)
+        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
-        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: urlComponents.url)
-            
-        present(streamPlayerViewController, animated: true) {
-            streamPlayerViewController.play()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4")
+        
+        guard let path = filePath else {
+            return
         }
+        
+        let url = URL(fileURLWithPath: path)
+        
+        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
+            
+        present(streamPlayerViewController, animated: true)
+            
+        streamPlayerViewController.play()
     }
     
 }
