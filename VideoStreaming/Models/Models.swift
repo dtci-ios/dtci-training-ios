@@ -13,6 +13,17 @@ struct Game: Codable {
     var name: String?
     var boxArtUrl: String?
     
+    func boxArtThumbnailUrl (width: Int? = nil, height: Int? = nil) -> String {
+        guard let unBoxArtUrl = boxArtUrl else {
+            return ""
+        }
+        guard let unWidth = width, let unHeight = height else {
+            //for full size image.
+            return unBoxArtUrl.replacingOccurrences(of: "{width}x{height}", with: "x")
+        }
+        return unBoxArtUrl.replacingOccurrences(of: "{width}x{height}", with: "\(unWidth)x\(unHeight)")
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -32,6 +43,24 @@ struct Stream: Codable {
     let language: String?
     let thumbnailUrl: String?
     let tagIds: [String?]?
+    
+    var durationAndDate: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        guard let startedAtDate = dateFormatter.date(from: startedAt ?? "") else {
+            return "- • --"
+        }
+        dateFormatter.dateFormat = "HH:mm • E, MM/dd"
+        let startedAtFormatted = dateFormatter.string(from: startedAtDate)
+        return startedAtFormatted
+    }
+
+    var imageURL: URL? {
+        let thumbnailUrlWithWidthAndHeight = thumbnailUrl?.replacingOccurrences(of: "{width}", with: "")
+                                                         .replacingOccurrences(of: "{height}", with: "")
+        let url = URL(string: thumbnailUrlWithWidthAndHeight ?? "")
+        return url
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
