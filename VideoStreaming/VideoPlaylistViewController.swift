@@ -35,9 +35,7 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
         networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreamsArray) in
-            if let unRetrivedGameStreams = retrievedGameStreamsArray?.compactMap({ $0 }) {
-                self.playlist.append(contentsOf: unRetrivedGameStreams)
-            }
+            self.playlist.append(contentsOf: retrievedGameStreamsArray)
             self.tableView.reloadData()
             self.dismissHUD()
         }
@@ -52,9 +50,7 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.endRefreshing()
 
         networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreams) in
-            if let retrivedGameStreams = retrievedGameStreams?.compactMap({ $0 }) {
-                self.playlist.append(contentsOf: retrivedGameStreams)
-            }
+            self.playlist.append(contentsOf: retrievedGameStreams)
             self.tableView.reloadData()
         }
     }
