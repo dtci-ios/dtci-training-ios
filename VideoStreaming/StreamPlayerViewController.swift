@@ -11,14 +11,10 @@ import AVKit
 import AVFoundation
 
 class StreamPlayerViewController: UIViewController {
-    @IBOutlet private weak var playerView: UIView!
-    @IBOutlet private weak var descriptionView: UIView!
-    @IBOutlet private weak var tableView: UITableView!
-    
     private var avPlayer: AVPlayer!
     private var avPlayerLayer: AVPlayerLayer!
     
-    private var streamingUrl: URL?
+    private var streamUrl: URL?
     
     static var nibName: String {
         return String(describing: self)
@@ -26,30 +22,14 @@ class StreamPlayerViewController: UIViewController {
     
     init(streamingUrl url: URL?) {
         super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
-        streamingUrl = url
+        
+        if let streamUrl = streamUrl {
+            initializePlayer(streamUrl: streamUrl)
+        }
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-    
-    
-    override func viewDidLoad() {
-        
-        if let streamingUrl = streamingUrl {
-            avPlayer = AVPlayer(url: streamingUrl)
-            
-            avPlayerLayer = AVPlayerLayer(player: avPlayer)
-            avPlayerLayer.videoGravity = .resize
-            
-            playerView.layer.addSublayer(avPlayerLayer)
-        }
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        avPlayerLayer.frame = playerView.bounds
     }
     
     func play() {
@@ -60,6 +40,14 @@ class StreamPlayerViewController: UIViewController {
             self?.avPlayer.play()
         }
     }
+    
+    private func initializePlayer(streamUrl: URL) {
+        let videoAsset = AVURLAsset(url: streamUrl)
+        let playerItem = AVPlayerItem(asset: videoAsset)
+        avPlayer = AVPlayer(playerItem: playerItem)
+        avPlayerLayer = AVPlayerLayer(player: avPlayer)
+    }
+    
 }
 
 extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource {

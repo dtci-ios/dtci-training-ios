@@ -85,8 +85,8 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: URL(fileURLWithPath: "https://pwn.sh/tools/streamapi.py?url=" + (encodingStreamUrl()?.absoluteString ?? "")))
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
+        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: urlComponents.url)
             
         present(streamPlayerViewController, animated: true) {
             streamPlayerViewController.play()
