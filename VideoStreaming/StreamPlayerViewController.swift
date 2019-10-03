@@ -43,9 +43,6 @@ class StreamPlayerViewController: UIViewController {
             avPlayerLayer.videoGravity = .resize
             
             playerView.layer.addSublayer(avPlayerLayer)
-            
-            // playerViewController.player = avPlayer
-            avPlayer.play()
         }
         
     }
@@ -56,27 +53,12 @@ class StreamPlayerViewController: UIViewController {
     }
     
     func play() {
-        /*
-        let _ = AVPlayerViewController()
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = avPlayer
         
-        if let url = streamingUrl {            
-            avPlayer = AVPlayer(url: url)
-            
-            avPlayerLayer = AVPlayerLayer(player: avPlayer)
-            avPlayerLayer.videoGravity = .resize
-            
-            playerView.layer.addSublayer(avPlayerLayer)
-            
-            // playerViewController.player = avPlayer
-            avPlayer.play()
-        }
-        */
-        
-        /*
         present(playerViewController, animated: true) { [weak self] in
             self?.avPlayer.play()
         }
-        */
     }
 }
 

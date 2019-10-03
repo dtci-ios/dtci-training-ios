@@ -24,8 +24,6 @@ class VideoPlaylistViewController: UIViewController {
         
         showHUD()
         
-        encodingStreamUrl()
-        
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         
