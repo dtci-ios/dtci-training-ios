@@ -215,7 +215,6 @@
 				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
 				2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */,
 				A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */,
-				5C5C6EB7233A830700829078 /* MainViewController.swift */,
 				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
 				9C04F3DE233045CC005FBE8E /* Info.plist */,
 				5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */,
@@ -460,7 +459,6 @@
 			files = (
 				265C74E5233A4FEF0033C139 /* TopGamesCollectionViewController.swift in Sources */,
 				265C74EB233A5B320033C139 /* GameCollectionViewCell.swift in Sources */,
-				A7A5BF3B23394683001D2C96 /* SomeTableViewCells.swift in Sources */,
 				A7518BF2233D09650050D8D5 /* Models.swift in Sources */,
 				A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */,
 				A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */,

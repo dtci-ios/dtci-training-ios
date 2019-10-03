@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import Alamofire
 
 class VideoPlaylistViewController: UIViewController {
     
@@ -16,18 +17,14 @@ class VideoPlaylistViewController: UIViewController {
     private var streams: [Stream?] = [Stream]()
     private var gameId: String?
     private var gameName: String?
-    
-    private enum UrlConstants {
-        var baseUrl: String {
-            return "https://api.twitch.tv/helix/streams?client-id=xzpd1f4527fu8fct7p7own0pgi35v5"
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = gameName ?? ""
         
         showHUD()
+        
+        encodingStreamUrl()
         
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
@@ -36,13 +33,9 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.tintColor = .white
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
-        gameStreamsAPI.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreamsArray) in
-            if let unRetrivedGameStreams = retrievedGameStreamsArray?.compactMap({ $0 }) {
-                self.streams.append(contentsOf: unRetrivedGameStreams)
-            }
-            self.tableView.reloadData()
-            self.dismissHUD()
-        }
+        fetchGameStreams()
+        
+        self.dismissHUD()
     }
 
     func setGameIdAndName(gameId: String, gameName: String) {
@@ -53,6 +46,10 @@ class VideoPlaylistViewController: UIViewController {
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
+        fetchGameStreams()
+    }
+    
+    private func fetchGameStreams() {
         gameStreamsAPI.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreams) in
             
             if let retrivedGameStreams = retrievedGameStreams?.compactMap({ $0 }) {
@@ -91,12 +88,10 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let path = Bundle.main.path(forResource: "video", ofType: "m3u8") {
-            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: URL(fileURLWithPath: path))
+        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: URL(fileURLWithPath: "https://pwn.sh/tools/streamapi.py?url=" + (encodingStreamUrl()?.absoluteString ?? "")))
             
-            present(streamPlayerViewController, animated: true) {
-                streamPlayerViewController.play()
-            }
+        present(streamPlayerViewController, animated: true) {
+            streamPlayerViewController.play()
         }
     }
     
@@ -111,5 +106,18 @@ extension VideoPlaylistViewController {
         tableView.dataSource = self
         
         completion?()
+    }
+    
+    private func encodingStreamUrl() -> URL? {
+        var urlComponents = URLComponents()
+        
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.twitch.tv"
+        urlComponents.path = "/helix/streams"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "game_id", value: gameId)
+        ]
+
+        return urlComponents.url
     }
 }

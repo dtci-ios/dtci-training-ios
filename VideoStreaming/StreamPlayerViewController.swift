@@ -8,12 +8,15 @@
 
 import UIKit
 import AVKit
+import AVFoundation
 
 class StreamPlayerViewController: UIViewController {
+    @IBOutlet private weak var playerView: UIView!
     @IBOutlet private weak var descriptionView: UIView!
     @IBOutlet private weak var tableView: UITableView!
     
-    private var avPlayer: AVPlayer?
+    private var avPlayer: AVPlayer!
+    private var avPlayerLayer: AVPlayerLayer!
     
     private var streamingUrl: URL?
     
@@ -30,17 +33,50 @@ class StreamPlayerViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    
+    override func viewDidLoad() {
+        
+        if let streamingUrl = streamingUrl {
+            avPlayer = AVPlayer(url: streamingUrl)
+            
+            avPlayerLayer = AVPlayerLayer(player: avPlayer)
+            avPlayerLayer.videoGravity = .resize
+            
+            playerView.layer.addSublayer(avPlayerLayer)
+            
+            // playerViewController.player = avPlayer
+            avPlayer.play()
+        }
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        avPlayerLayer.frame = playerView.bounds
+    }
+    
     func play() {
-        let playerViewController = AVPlayerViewController()
+        /*
+        let _ = AVPlayerViewController()
         
-        if let url = streamingUrl {
+        if let url = streamingUrl {            
             avPlayer = AVPlayer(url: url)
-            playerViewController.player = avPlayer
+            
+            avPlayerLayer = AVPlayerLayer(player: avPlayer)
+            avPlayerLayer.videoGravity = .resize
+            
+            playerView.layer.addSublayer(avPlayerLayer)
+            
+            // playerViewController.player = avPlayer
+            avPlayer.play()
         }
+        */
         
+        /*
         present(playerViewController, animated: true) { [weak self] in
-            self?.avPlayer?.play()
+            self?.avPlayer.play()
         }
+        */
     }
 }
 
