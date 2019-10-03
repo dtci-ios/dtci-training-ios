@@ -17,7 +17,6 @@ import Alamofire
 enum APIError: Error {
     case responseDataNil
     case emptyDataArray
-//    case httpStatusCodeFailure(Int)
     case jsonError(DecodingError)
     case afError(Error)
     case urlError(Error)
@@ -27,7 +26,6 @@ enum APIError: Error {
         switch self {
             case .responseDataNil: return "Data is nil"
             case .emptyDataArray: return "Data Array is empty"
-//            case .httpStatusCodeFailure(let statusCode): return "Status Code: \(statusCode)"
             case .jsonError(let jsonError): return jsonError.localizedDescription
             case .afError(let afError): return afError.localizedDescription
             case .urlError(let urlError): return urlError.localizedDescription
