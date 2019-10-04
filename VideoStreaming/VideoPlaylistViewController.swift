@@ -56,21 +56,6 @@ class VideoPlaylistViewController: UIViewController {
         }
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        let animationHandler: ((UIViewControllerTransitionCoordinatorContext) -> Void) = { [weak self] (context) in
-            self?.tableView.cellLayoutMarginsFollowReadableWidth = true
-            self?.tableView.reloadData()
-        }
-
-        let completionHandler: ((UIViewControllerTransitionCoordinatorContext) -> Void) = { [weak self] (context) in
-            // This block will be called when rotation will be completed
-            self?.tableView.reloadData()
-        }
-
-        coordinator.animate(alongsideTransition: animationHandler, completion: completionHandler)
-    }
 }
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
