@@ -84,9 +84,7 @@ class TopGamesCollectionViewController: UIViewController {
             self.games = topGames
             self.collectionView.reloadData()
         case .failure(let error):
-            let alert: UIAlertController
-            let message = error.localizedDescription
-            alert = UIAlertController(title: "ERROR", message: message, preferredStyle: .alert)
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
