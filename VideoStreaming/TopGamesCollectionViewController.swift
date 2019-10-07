@@ -65,7 +65,7 @@ class TopGamesCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Top Games"
+        title = "Top Games"
         
         showHUD()
 
@@ -78,15 +78,15 @@ class TopGamesCollectionViewController: UIViewController {
     }
     
     func fetchCompletionHandler(result: Result<[Game],APIError>) {
-        self.dismissHUD()
+        dismissHUD()
         switch result {
         case .success(let topGames):
-            self.games = topGames
-            self.collectionView.reloadData()
+            games = topGames
+            collectionView.reloadData()
         case .failure(let error):
             let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            present(alert, animated: true)
         }
     }
 }

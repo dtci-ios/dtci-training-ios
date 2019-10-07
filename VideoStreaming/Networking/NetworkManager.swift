@@ -17,8 +17,8 @@ import Alamofire
 enum APIError: Error {
     case responseDataNil
     case emptyDataArray
-    case jsonError(DecodingError)
-    case afError(Error)
+    case jsonError(Error)
+    case alamofireError(Error)
     case urlError(Error)
     case unknownError(Error)
     
@@ -27,7 +27,7 @@ enum APIError: Error {
             case .responseDataNil: return "Data is nil"
             case .emptyDataArray: return "Data Array is empty"
             case .jsonError(let jsonError): return jsonError.localizedDescription
-            case .afError(let afError): return afError.localizedDescription
+            case .alamofireError(let afError): return afError.localizedDescription
             case .urlError(let urlError): return urlError.localizedDescription
             case .unknownError(let unknownError): return unknownError.localizedDescription
         }
@@ -49,32 +49,28 @@ extension NetworkManager {
                                 completion: @escaping ((Swift.Result<[T],APIError>)->Void)) {
         
         Alamofire.request(request, parameters: parameters, headers: Self.headers)
-            .validate(statusCode: 200..<300)
+            .validate(statusCode: 200 ..< 300)
             .responseJSON { (response) in
                 switch response.result {
-                case .success:
-                    let jsonDecoder = JSONDecoder()
-                    guard let data = response.data else {
-                        completion(.failure(APIError.responseDataNil))
-                        return
-                    }
-                    do {
-                        let dataResponse = try jsonDecoder.decode(ReceivedData<T>.self, from: data)
-                        if dataResponse.dataArray.isEmpty {
-                            completion(.failure(APIError.emptyDataArray))
+                    case .success:
+                        guard let data = response.data else {
+                            completion(.failure(APIError.responseDataNil))
                             return
-                        } else { completion(.success(dataResponse.dataArray)) }
-                    } catch let jsonError {
-                        completion(.failure(APIError.jsonError(jsonError as! DecodingError)))
-                    }
-                case .failure(let error):
-                    if let error = error as? AFError {
-                        completion(.failure(APIError.afError(error)))
-                    } else if let error = error as? URLError {
-                        completion(.failure(APIError.urlError(error)))
-                    } else {
-                        completion(.failure(APIError.unknownError(error)))
-                    }
+                        }
+                        
+                        do {
+                            let dataResponse = try JSONDecoder().decode(ReceivedData<T>.self, from: data)
+                            if dataResponse.dataArray.isEmpty {
+                                completion(.failure(APIError.emptyDataArray))
+                            } else { completion(.success(dataResponse.dataArray)) }
+                        } catch let jsonError { completion(.failure(APIError.jsonError(jsonError))) }
+                    
+                    case .failure(let error):
+                        if let error = error as? AFError {
+                            completion(.failure(APIError.alamofireError(error)))
+                        } else if let error = error as? URLError {
+                            completion(.failure(APIError.urlError(error)))
+                        } else { completion(.failure(APIError.unknownError(error))) }
                 }
         }
     }

@@ -20,7 +20,7 @@ class VideoPlaylistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = gameName ?? ""
+        title = gameName ?? ""
         
         showHUD()
         
@@ -51,15 +51,15 @@ class VideoPlaylistViewController: UIViewController {
     }
     
     func fetchCompletionHandler(result: Result<[Stream],APIError>) {
-        self.dismissHUD()
+        dismissHUD()
         switch result {
         case .success(let gameStreams):
-            self.streams = gameStreams
-            self.tableView.reloadData()
+            streams = gameStreams
+            tableView.reloadData()
         case .failure(let error):
             let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            present(alert, animated: true)
         }
     }
 }
