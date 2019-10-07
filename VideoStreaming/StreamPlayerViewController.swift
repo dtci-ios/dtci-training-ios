@@ -14,7 +14,7 @@ class StreamPlayerViewController: UIViewController {
     private var playerViewController: AVPlayerViewController!
     private var player: AVPlayer!
     
-    private var streamUrl: URL = URL(fileURLWithPath: "")
+    private var streamUrl: URL
     
     static var nibName: String {
         return String(describing: self)
@@ -27,6 +27,7 @@ class StreamPlayerViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
+        streamUrl = URL(fileURLWithPath: "")
         super.init(coder: coder)
     }
     

@@ -16,16 +16,12 @@ class VideoPlaylistViewController: UIViewController {
     private let networkManager = GameStreamsAPI()
     private var streams: [Stream?] = []
     private var streamUrl: URL?
-    
+    private var gameName: String?
     private var gameId: String? {
         didSet {
-            streamUrl = composeStreamUrl(with: gameId ?? "", for: "game_id")
-        }
-    }
-    
-    private var gameName: String? {
-        didSet {
-            streamUrl = composeStreamUrl(with: gameName ?? "", for: "game_name")
+            if let url = composeStreamUrl(with: gameId ?? "", forKey: "game_id") {
+                streamUrl = url
+            }
         }
     }
 
@@ -94,13 +90,19 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
+        guard let streamUrl = streamUrl else { return }
         
-        // let url = URL(fileURLWithPath: filePath)
+        var encodedUrl: String?
         
-        guard let url = URL(string: "https://pwn.sh/tools/streamapi.py?url=\()") else { return }
+        do {
+            encodedUrl = try String(contentsOf: streamUrl, encoding: .utf8)
+        } catch let error {
+            print("Error when try encode stream url \(error.localizedDescription)")
+        }
         
-        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
+        guard let urlToGetStreaming = URL(string: "https://pwn.sh/tools/streamapi.py?url=\(encodedUrl ?? "")") else { return }
+        
+        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: urlToGetStreaming)
             
         present(streamPlayerViewController, animated: true)
             
@@ -120,7 +122,7 @@ extension VideoPlaylistViewController {
         completion?()
     }
     
-    fileprivate func composeStreamUrl(with value: String, for key: String) -> URL? {
+    fileprivate func composeStreamUrl(with value: String, forKey key: String) -> URL? {
         var urlComponents = URLComponents()
         
         urlComponents.scheme = "https"
