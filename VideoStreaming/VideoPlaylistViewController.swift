@@ -15,8 +15,19 @@ class VideoPlaylistViewController: UIViewController {
     
     private let networkManager = GameStreamsAPI()
     private var streams: [Stream?] = []
-    private var gameId: String?
-    private var gameName: String?
+    private var streamUrl: URL?
+    
+    private var gameId: String? {
+        didSet {
+            streamUrl = composeStreamUrl(with: gameId ?? "", for: "game_id")
+        }
+    }
+    
+    private var gameName: String? {
+        didSet {
+            streamUrl = composeStreamUrl(with: gameName ?? "", for: "game_name")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +44,7 @@ class VideoPlaylistViewController: UIViewController {
         
         fetchGameStreams()
         
-        self.dismissHUD()
+        dismissHUD()
     }
 
     func setGameIdAndName(gameId: String, gameName: String) {
@@ -83,9 +94,11 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
+        // guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
         
-        let url = URL(fileURLWithPath: filePath)
+        // let url = URL(fileURLWithPath: filePath)
+        
+        guard let url = URL(string: "https://pwn.sh/tools/streamapi.py?url=\()") else { return }
         
         let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
             
@@ -97,7 +110,7 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
 }
 
 extension VideoPlaylistViewController {
-    private func registerCellAndSetTableViewDelegates(completion: (() -> Void)?) {
+    fileprivate func registerCellAndSetTableViewDelegates(completion: (() -> Void)?) {
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         
@@ -107,16 +120,16 @@ extension VideoPlaylistViewController {
         completion?()
     }
     
-    private func encodingStreamUrl() -> URL? {
+    fileprivate func composeStreamUrl(with value: String, for key: String) -> URL? {
         var urlComponents = URLComponents()
         
         urlComponents.scheme = "https"
         urlComponents.host = "api.twitch.tv"
         urlComponents.path = "/helix/streams"
         urlComponents.queryItems = [
-            URLQueryItem(name: "game_id", value: gameId)
+            URLQueryItem(name: key, value: value)
         ]
-
+        
         return urlComponents.url
     }
 }
