@@ -71,9 +71,9 @@ struct ColumsLayout {
 
     var itemsWidthPercentage: Float // in range of 0..1
 
-    init(ocupedByItemWidthFactor: Float = 0.88, cellAspectRatio: CellAspectRatio = CellAspectRatio()) {
-        let formatedOcupedByItemWidthFactor = ocupedByItemWidthFactor > 1 ? ocupedByItemWidthFactor / 100 : ocupedByItemWidthFactor
-        self.itemsWidthPercentage = formatedOcupedByItemWidthFactor
+    init(itemsWidthPercentage: Float = 0.88, cellAspectRatio: CellAspectRatio = CellAspectRatio()) {
+        let normalizedItemsWidthPercentage = itemsWidthPercentage > 1 ? itemsWidthPercentage / 100 : itemsWidthPercentage
+        self.itemsWidthPercentage = normalizedItemsWidthPercentage
         self.cellAspectRatio = cellAspectRatio
     }
 
@@ -111,7 +111,7 @@ class TopGamesCollectionViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
 
     private var games: [Game?] = []
-    private var columsLayout = ColumsLayout(ocupedByItemWidthFactor: 0.88, cellAspectRatio: CellAspectRatio(width: 3, height: 4))
+    private var columsLayout = ColumsLayout(itemsWidthPercentage: 0.88, cellAspectRatio: CellAspectRatio(width: 3, height: 4))
     private var topGamesAPI: TopGamesAPIProtocol?
     
     static var nibName: String {
