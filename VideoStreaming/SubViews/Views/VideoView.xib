@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoView" customModule="VideoStreaming" customModuleProvider="target">
             <connections>
+                <outlet property="liveLabel" destination="CFO-qW-5QI" id="nav-th-5DC"/>
                 <outlet property="videoDurationAndDate" destination="YIK-jS-oQG" id="JIw-wy-l9c"/>
                 <outlet property="videoImageView" destination="hpU-Y2-bOK" id="Epf-N2-nd6"/>
                 <outlet property="videoStack" destination="qcZ-cg-e3F" id="AeN-a1-S4J"/>
@@ -40,11 +41,11 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                             </variation>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rVh-VV-NVC">
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="rVh-VV-NVC">
                             <rect key="frame" x="0.0" y="23.5" width="225" height="20.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Duration &amp; Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIK-jS-oQG">
-                                    <rect key="frame" x="0.0" y="0.0" width="174" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="225" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                     <nil key="highlightedColor"/>
@@ -52,8 +53,8 @@
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                     </variation>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFO-qW-5QI">
-                                    <rect key="frame" x="194" y="0.0" width="31" height="20.5"/>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFO-qW-5QI">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>

@@ -14,6 +14,7 @@ class VideoView: UIView, NibLoadable {
     @IBOutlet private weak var videoStack: UIStackView!
     @IBOutlet private weak var videoTitle: UILabel!
     @IBOutlet private weak var videoDurationAndDate: UILabel!
+    @IBOutlet private weak var liveLabel: UILabel!
     
     private enum Constants {
         static let nibName = String(describing: VideoView.self)
@@ -33,6 +34,7 @@ class VideoView: UIView, NibLoadable {
     func configure(with stream: Stream) {
         videoImageView.sd_setImage(with: stream.imageURL, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
         videoDurationAndDate.text = stream.durationAndDate
+        if stream.type == "live" { liveLabel.isHidden = false }
         videoTitle.text = stream.title
         videoTitle.numberOfLines = 2
         videoTitle.translatesAutoresizingMaskIntoConstraints = false
