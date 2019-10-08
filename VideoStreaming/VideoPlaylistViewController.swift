@@ -5,9 +5,7 @@
 //  Created by Natalia Brasesco on 17/09/2019.
 //  Copyright © 2019 ESPN. All rights reserved.
 //
-
 import UIKit
-import AVKit
 
 class VideoPlaylistViewController: UIViewController {
     
@@ -15,18 +13,12 @@ class VideoPlaylistViewController: UIViewController {
     
     private let networkManager = GameStreamsAPI()
     private var streams: [Stream?] = []
-    private var streamUrl: URL?
+    private var gameId: String?
     private var gameName: String?
-    private var gameId: String? {
-        didSet {
-            if let url = composeStreamUrl(with: gameId ?? "", forKey: "game_id") {
-                streamUrl = url
-            }
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.title = gameName ?? ""
         
         showHUD()
@@ -34,13 +26,16 @@ class VideoPlaylistViewController: UIViewController {
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.tintColor = .white
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
         fetchGameStreams()
         
-        dismissHUD()
+        self.dismissHUD()
     }
 
     func setGameIdAndName(gameId: String, gameName: String) {
@@ -60,7 +55,6 @@ class VideoPlaylistViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-
 }
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
@@ -90,48 +84,14 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let streamUrl = streamUrl else { return }
+        guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
         
-        var encodedUrl: String?
+        let streamUrl = URL(fileURLWithPath: filePath)
         
-        do {
-            encodedUrl = try String(contentsOf: streamUrl, encoding: .utf8)
-        } catch let error {
-            print("Error when try encode stream url \(error.localizedDescription)")
+        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: streamUrl)
+        
+        present(streamPlayerViewController, animated: true) {
+            streamPlayerViewController.play()
         }
-        
-        guard let urlToGetStreaming = URL(string: "https://pwn.sh/tools/streamapi.py?url=\(encodedUrl ?? "")") else { return }
-        
-        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: urlToGetStreaming)
-            
-        present(streamPlayerViewController, animated: true)
-            
-        streamPlayerViewController.play()
-    }
-    
-}
-
-extension VideoPlaylistViewController {
-    fileprivate func registerCellAndSetTableViewDelegates(completion: (() -> Void)?) {
-        tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
-                           forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        completion?()
-    }
-    
-    fileprivate func composeStreamUrl(with value: String, forKey key: String) -> URL? {
-        var urlComponents = URLComponents()
-        
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.twitch.tv"
-        urlComponents.path = "/helix/streams"
-        urlComponents.queryItems = [
-            URLQueryItem(name: key, value: value)
-        ]
-        
-        return urlComponents.url
     }
 }
