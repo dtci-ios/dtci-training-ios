@@ -20,7 +20,7 @@ class VideoPlaylistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = gameName ?? ""
+        title = gameName ?? ""
         
         showHUD()
         
@@ -34,9 +34,8 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.tintColor = .white
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
-        fetchGameStreams()
-        
-        self.dismissHUD()
+        networkManager.fetchGameStreams(ofGame: gameId ?? "",
+                                        completion: fetchCompletionHandler(result:))
     }
 
     func setGameIdAndName(gameId: String, gameName: String) {
@@ -47,13 +46,20 @@ class VideoPlaylistViewController: UIViewController {
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
-        fetchGameStreams()
+        networkManager.fetchGameStreams(ofGame: gameId ?? "",
+                                        completion: fetchCompletionHandler(result:))
     }
     
-    private func fetchGameStreams() {
-        networkManager.fetchGameStreams(ofGame: gameId ?? "") { (retrievedGameStreamsArray) in
-            self.streams = retrievedGameStreamsArray
-            self.tableView.reloadData()
+    func fetchCompletionHandler(result: Result<[Stream],APIError>) {
+        dismissHUD()
+        switch result {
+        case .success(let gameStreams):
+            streams = gameStreams
+            tableView.reloadData()
+        case .failure(let error):
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
         }
     }
 }

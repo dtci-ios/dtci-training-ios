@@ -110,7 +110,7 @@ class TopGamesCollectionViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    private var games: [Game?] = []
+    private var games: [Game] = []
     private var columsLayout = ColumsLayout(itemsWidthPercentage: 0.88, cellAspectRatio: CellAspectRatio(width: 3, height: 4))
     private var topGamesAPI: TopGamesAPIProtocol?
     
@@ -130,15 +130,11 @@ class TopGamesCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Top Games"
+        title = "Top Games"
         
         showHUD()
 
-        topGamesAPI?.fetchTopGames { (retrievedTopGames) in
-            self.games = retrievedTopGames
-            self.collectionView.reloadData()
-            self.dismissHUD(isAnimated: true)
-        }
+        topGamesAPI?.fetchTopGames(completion: fetchCompletionHandler(result:))
         
         collectionView.register(UINib(nibName: GameCollectionViewCell.Constants.nibName, bundle: nil), forCellWithReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier)
 
@@ -146,12 +142,25 @@ class TopGamesCollectionViewController: UIViewController {
         collectionView.dataSource = self
     }
 
+    func fetchCompletionHandler(result: Result<[Game],APIError>) {
+        dismissHUD()
+        switch result {
+        case .success(let topGames):
+            games = topGames
+            collectionView.reloadData()
+        case .failure(let error):
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
+        }
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
     }
-
 }
+
 
 extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

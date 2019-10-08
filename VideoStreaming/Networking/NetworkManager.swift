@@ -14,12 +14,29 @@ import Alamofire
 //    - https://api.twitch.tv/helix/streams?game_id=21779
 //    - https://api.twitch.tv/helix/videos?user_id=67955580
 
+enum APIError: Error {
+    case responseDataNil
+    case emptyDataArray
+    case jsonError(Error)
+    case alamofireError(Error)
+    case urlError(Error)
+    case unknownError(Error)
+    
+    var localizedDescription: String {
+        switch self {
+            case .responseDataNil: return "Data is nil"
+            case .emptyDataArray: return "Data Array is empty"
+            case .jsonError(let jsonError): return jsonError.localizedDescription
+            case .alamofireError(let afError): return afError.localizedDescription
+            case .urlError(let urlError): return urlError.localizedDescription
+            case .unknownError(let unknownError): return unknownError.localizedDescription
+        }
+    }
+}
+
 protocol NetworkManager {
-    
     typealias QueryString = [String:Any]
-    
     var request: String { get }
-    
 }
 
 extension NetworkManager {
@@ -27,22 +44,34 @@ extension NetworkManager {
         return ["Client-ID": "xzpd1f4527fu8fct7p7own0pgi35v5"]
     }
     
-    func fetchData <T:Codable> (request: String, parameters: [String:Any] = [:], completion: @escaping (([T])->Void)) {
+    func fetchData <T:Codable> (request: String,
+                                parameters: QueryString = [:],
+                                completion: @escaping ((Swift.Result<[T],APIError>)->Void)) {
         
-        Alamofire.request(request, parameters: parameters, headers: Self.headers).responseJSON { (response) in
-            let jsonDecoder = JSONDecoder()
-            
-            guard let data = response.data else {
-                completion([T]())
-                return
-            }
-            
-            do {
-                let gamesResponse = try jsonDecoder.decode(ReceivedData<T>.self, from: data)
-                completion(gamesResponse.dataArray)
-            } catch let jsonError {
-                print("Error decoding JSON", jsonError)
-            }
+        Alamofire.request(request, parameters: parameters, headers: Self.headers)
+            .validate(statusCode: 200 ..< 300)
+            .responseJSON { (response) in
+                switch response.result {
+                    case .success:
+                        guard let data = response.data else {
+                            completion(.failure(APIError.responseDataNil))
+                            return
+                        }
+                        
+                        do {
+                            let dataResponse = try JSONDecoder().decode(ReceivedData<T>.self, from: data)
+                            if dataResponse.dataArray.isEmpty {
+                                completion(.failure(APIError.emptyDataArray))
+                            } else { completion(.success(dataResponse.dataArray)) }
+                        } catch let jsonError { completion(.failure(APIError.jsonError(jsonError))) }
+                    
+                    case .failure(let error):
+                        if let error = error as? AFError {
+                            completion(.failure(APIError.alamofireError(error)))
+                        } else if let error = error as? URLError {
+                            completion(.failure(APIError.urlError(error)))
+                        } else { completion(.failure(APIError.unknownError(error))) }
+                }
         }
     }
 }
