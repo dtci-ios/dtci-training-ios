@@ -29,7 +29,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="qcZ-cg-e3F">
-                    <rect key="frame" x="144" y="24" width="225" height="41.5"/>
+                    <rect key="frame" x="144" y="24" width="225" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9e-U2-Vnt">
                             <rect key="frame" x="0.0" y="0.0" width="225" height="19.5"/>
@@ -40,22 +40,36 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                             </variation>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration &amp; Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIK-jS-oQG">
-                            <rect key="frame" x="0.0" y="23.5" width="225" height="18"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                            <nil key="highlightedColor"/>
-                            <variation key="heightClass=regular-widthClass=regular">
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
-                            </variation>
-                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rVh-VV-NVC">
+                            <rect key="frame" x="0.0" y="23.5" width="225" height="20.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Duration &amp; Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIK-jS-oQG">
+                                    <rect key="frame" x="0.0" y="0.0" width="174" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                    </variation>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Live" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFO-qW-5QI">
+                                    <rect key="frame" x="194" y="0.0" width="31" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="C9e-U2-Vnt" secondAttribute="trailing" id="bTd-34-AtO"/>
+                        <constraint firstItem="C9e-U2-Vnt" firstAttribute="top" secondItem="qcZ-cg-e3F" secondAttribute="top" id="cxW-03-y5v"/>
+                        <constraint firstAttribute="bottom" secondItem="rVh-VV-NVC" secondAttribute="bottom" id="dvd-0x-3jF"/>
                         <constraint firstAttribute="width" constant="225" id="ehO-zF-EUc">
                             <variation key="heightClass=regular-widthClass=regular" constant="200"/>
                         </constraint>
                         <constraint firstItem="C9e-U2-Vnt" firstAttribute="leading" secondItem="qcZ-cg-e3F" secondAttribute="leading" id="gcl-g1-dIV"/>
+                        <constraint firstItem="rVh-VV-NVC" firstAttribute="top" secondItem="C9e-U2-Vnt" secondAttribute="bottom" constant="4" id="vAR-nL-htE"/>
                     </constraints>
                 </stackView>
             </subviews>
