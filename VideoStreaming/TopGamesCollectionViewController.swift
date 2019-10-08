@@ -65,20 +65,29 @@ class TopGamesCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Top Games"
+        title = "Top Games"
         
         showHUD()
 
-        topGamesAPI?.fetchTopGames { (retrievedTopGames) in
-            self.games = retrievedTopGames ?? []
-            self.collectionView.reloadData()
-            self.dismissHUD(isAnimated: true)
-        }
+        topGamesAPI?.fetchTopGames(completion: fetchCompletionHandler(result:))
         
         collectionView.register(UINib(nibName: GameCollectionViewCell.Constants.nibName, bundle: nil), forCellWithReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier)
         
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    func fetchCompletionHandler(result: Result<[Game],APIError>) {
+        dismissHUD()
+        switch result {
+        case .success(let topGames):
+            games = topGames
+            collectionView.reloadData()
+        case .failure(let error):
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
+        }
     }
 }
 

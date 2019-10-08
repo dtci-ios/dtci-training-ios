@@ -9,13 +9,13 @@
 import Foundation
 
 protocol TopGamesAPIProtocol {
-    func fetchTopGames(completion:  @escaping ([Game]) -> Void)
+    func fetchTopGames(completion:  @escaping (Result<[Game],APIError>) -> Void)
 }
 
 class TopGamesAPI: NetworkManager, TopGamesAPIProtocol {
     var request = "https://api.twitch.tv/helix/games/top"
  
-    func fetchTopGames(completion:  @escaping ([Game]) -> Void) {
+    func fetchTopGames(completion:  @escaping (Result<[Game],APIError>) -> Void) {
         fetchData(request: request, completion: completion)
     }
 }
