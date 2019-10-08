@@ -49,6 +49,7 @@ class VideoView: UIView, NibLoadable {
         videoImageView.image = UIImage(named: Constants.placeholderImageName)
         videoTitle.text = nil
         videoDurationAndDate.text = nil
+        liveLabel.isHidden = true
     }
     
 }
