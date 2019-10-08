@@ -8,46 +8,111 @@
 
 import UIKit
 
-struct ColumsLayout {
-    let columns: Int = 2
-    let padding: CGFloat = 20
-    let cellAspectRatio = CellAspectRatio()
-    
-    func cellSize(frameWidth: CGFloat) -> CGSize {
-        let itemWidth = (frameWidth - CGFloat(columns + 1) * padding) / CGFloat(columns)
-        return CGSize(width: itemWidth, height: itemWidth * CGFloat(cellAspectRatio.heightRatioFactor))
-        
+class ColumsLayoutHelper {
+
+    static func widthOfSafeArea() -> CGFloat {
+        guard let rootView = (UIApplication.shared.windows.filter {$0.isKeyWindow}.first) else { return 0 }
+
+        if #available(iOS 11.0, *) {
+            let leftInset = rootView.safeAreaInsets.left
+            let rightInset = rootView.safeAreaInsets.right
+            return rootView.bounds.width - leftInset - rightInset
+        } else {
+            return rootView.bounds.width
+        }
     }
-    
+
+    static func heightOfSafeArea() -> CGFloat {
+        guard let rootView = (UIApplication.shared.windows.filter {$0.isKeyWindow}.first) else { return 0 }
+
+        if #available(iOS 11.0, *) {
+            let topInset = rootView.safeAreaInsets.top
+            let bottomInset = rootView.safeAreaInsets.bottom
+            return rootView.bounds.height - topInset - bottomInset
+        } else {
+            return rootView.bounds.height
+        }
+    }
+
+    static func columnsForTraitCollection() -> Int {
+        switch UITraitCollection.current.horizontalSizeClass {
+        case .compact:
+            return UITraitCollection.current.verticalSizeClass == .compact ? 3 : 2
+        case .regular:
+            return UITraitCollection.current.verticalSizeClass == .compact ? 3 : 4
+        default:
+            return 2
+        }
+    }
 }
 
 struct CellAspectRatio {
     // Portrait mode => 4:3 is 4 heigth and 3 width
     var width: Int
     var height: Int
-    
+
     init(width: Int = 3, height: Int = 4) {
         self.width = width
         self.height = height
     }
-        
+
     var heightRatioFactor: Float {
         return Float(height) / Float(width)
     }
-    
+
     var widthRatioFactor: Float {
         return Float(width) / Float(height)
     }
-    
+}
+
+struct ColumsLayout {
+
+    let cellAspectRatio: CellAspectRatio
+
+    var itemsWidthPercentage: Float // in range of 0..1
+
+    init(ocupedByItemWidthFactor: Float = 0.88, cellAspectRatio: CellAspectRatio = CellAspectRatio()) {
+        let formatedOcupedByItemWidthFactor = ocupedByItemWidthFactor > 1 ? ocupedByItemWidthFactor / 100 : ocupedByItemWidthFactor
+        self.itemsWidthPercentage = formatedOcupedByItemWidthFactor
+        self.cellAspectRatio = cellAspectRatio
+    }
+
+    var paddingsWidthPercentage: Float { // in range of 0..1
+        1 - itemsWidthPercentage
+    }
+
+    var fullDisponibleWidthForItems : CGFloat {
+        floor(ColumsLayoutHelper.widthOfSafeArea() * CGFloat(itemsWidthPercentage))
+    }
+
+    var fullDisponibleWidthForPaddings : CGFloat {
+        floor(ColumsLayoutHelper.widthOfSafeArea() - fullDisponibleWidthForItems)
+    }
+
+    var itemWidth : CGFloat {
+       floor(fullDisponibleWidthForItems / CGFloat(ColumsLayoutHelper.columnsForTraitCollection()))
+    }
+
+    var itemHeight : CGFloat {
+        floor(itemWidth * CGFloat(cellAspectRatio.heightRatioFactor))
+    }
+
+    var padingWidth : CGFloat {
+       floor(fullDisponibleWidthForPaddings / CGFloat(ColumsLayoutHelper.columnsForTraitCollection() + 1))
+    }
+
+    func itemSize() -> CGSize {
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
 }
 
 class TopGamesCollectionViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    private var games : [Game?] = []
-    private let columsLayout = ColumsLayout()
-    private var topGamesAPI : TopGamesAPIProtocol?
+    private var games: [Game?] = []
+    private var columsLayout = ColumsLayout(ocupedByItemWidthFactor: 0.88, cellAspectRatio: CellAspectRatio(width: 3, height: 4))
+    private var topGamesAPI: TopGamesAPIProtocol?
     
     static var nibName: String {
         return String(describing: self)
@@ -70,16 +135,22 @@ class TopGamesCollectionViewController: UIViewController {
         showHUD()
 
         topGamesAPI?.fetchTopGames { (retrievedTopGames) in
-            self.games = retrievedTopGames ?? []
+            self.games = retrievedTopGames
             self.collectionView.reloadData()
             self.dismissHUD(isAnimated: true)
         }
         
         collectionView.register(UINib(nibName: GameCollectionViewCell.Constants.nibName, bundle: nil), forCellWithReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier)
-        
+
         collectionView.delegate = self
         collectionView.dataSource = self
     }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+
 }
 
 extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -107,20 +178,19 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollecti
 }
 
 extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return columsLayout.cellSize(frameWidth: collectionView.frame.size.width)
+        return columsLayout.itemSize()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: columsLayout.padding, left: columsLayout.padding, bottom: columsLayout.padding, right: columsLayout.padding)
+        return UIEdgeInsets(top: columsLayout.padingWidth, left: columsLayout.padingWidth, bottom: columsLayout.padingWidth, right: columsLayout.padingWidth)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return columsLayout.padding
+        return columsLayout.padingWidth
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return columsLayout.padding
+        return columsLayout.padingWidth
     }
 }
