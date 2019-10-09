@@ -37,9 +37,11 @@ enum APIError: Error {
 protocol NetworkManager {
     typealias QueryString = [String:Any]
     var request: String { get }
+//    var sessionManager: SessionManager { get set }
 }
 
 extension NetworkManager {
+    
     static var headers: HTTPHeaders {
         return ["Client-ID": "xzpd1f4527fu8fct7p7own0pgi35v5"]
     }

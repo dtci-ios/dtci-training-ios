@@ -13,10 +13,11 @@ class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private let networkManager = GameStreamsAPI()
-    private var streams: [Stream?] = []
+//    private let networkManager = GameStreamsAPI()
+//    private var streams: [Stream?] = []
     private var gameName: String?
     private var gameId: String?
+    private var dataSource: VideoPlaylistDataSource!
 
     static var nibName: String {
         return String(describing: self)
@@ -26,6 +27,7 @@ class VideoPlaylistViewController: UIViewController {
         super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
         gameName = game.name
         gameId = game.id
+        self.dataSource = VideoPlaylistDataSource(apiManager: GameStreamsAPI(), gameId: game.id ?? "")
     }
     
     required init?(coder: NSCoder) {
@@ -39,6 +41,8 @@ class VideoPlaylistViewController: UIViewController {
         
         showHUD()
         
+        tableView.dataSource = self.dataSource
+        
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         
@@ -47,52 +51,32 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
 
-        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
+//        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
-        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
+//        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
     
-    func fetchCompletionHandler(result: Result<[Stream], APIError>) {
-        dismissHUD()
-        switch result {
-        case .success(let gameStreams):
-            streams = gameStreams
-            tableView.reloadData()
-        case .failure(let error):
-            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true)
-        }
-    }
+//    func fetchCompletionHandler(result: Result<[Stream], APIError>) {
+//        dismissHUD()
+//        switch result {
+//        case .success(let gameStreams):
+//            streams = gameStreams
+//            tableView.reloadData()
+//        case .failure(let error):
+//            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            present(alert, animated: true)
+//        }
+//    }
 }
 
-extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
+extension VideoPlaylistViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return streams.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier,
-                                                       for: indexPath) as? VideoTableViewCell else {
-            return VideoTableViewCell()
-        }
-        
-        guard let video = streams[indexPath.row] else {
-            return VideoTableViewCell()
-        }
-        
-        cell.configure(with: video)
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
