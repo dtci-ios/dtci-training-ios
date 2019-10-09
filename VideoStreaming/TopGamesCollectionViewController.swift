@@ -16,7 +16,6 @@ struct ColumsLayout {
     func cellSize(frameWidth: CGFloat) -> CGSize {
         let itemWidth = (frameWidth - CGFloat(columns + 1) * padding) / CGFloat(columns)
         return CGSize(width: itemWidth, height: itemWidth * CGFloat(cellAspectRatio.heightRatioFactor))
-        
     }
     
 }

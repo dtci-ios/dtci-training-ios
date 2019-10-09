@@ -80,7 +80,6 @@ struct Stream: Codable {
     }
 }
 
-
 struct QualityUrls: Codable {
     let quality160p: String?
     let quality360p: String?
