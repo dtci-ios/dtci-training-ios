@@ -8,7 +8,6 @@
 
 import UIKit
 import AVKit
-import Alamofire
 
 class VideoPlaylistViewController: UIViewController {
     
@@ -19,6 +18,20 @@ class VideoPlaylistViewController: UIViewController {
     private var gameName: String?
     private var gameId: String?
 
+    static var nibName: String {
+        return String(describing: self)
+    }
+    
+    init(with game: Game) {
+        super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
+        gameName = game.name
+        gameId = game.id
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,19 +50,20 @@ class VideoPlaylistViewController: UIViewController {
         networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
 
+    /*
     func setGameIdAndName(gameId: String, gameName: String) {
         self.gameId = gameId
         self.gameName = gameName
     }
+    */
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
 
-        networkManager.fetchGameStreams(ofGame: gameId ?? "",
-                                        completion: fetchCompletionHandler(result:))
+        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
     
-    func fetchCompletionHandler(result: Swift.Result<[Stream], APIError>) {
+    func fetchCompletionHandler(result: Result<[Stream], APIError>) {
         dismissHUD()
         switch result {
         case .success(let gameStreams):
@@ -91,82 +105,16 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let streamUserName = streams[indexPath.row]?.userName else { return }
+        guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
         
-        let urlWithUserName = "https://twitch.tv/" + streamUserName
+        let streamUrl = URL(fileURLWithPath: filePath)
         
-        guard let endpoint = URL(string: "https://pwn.sh/tools/streamapi.py?url=" + urlWithUserName) else { return }
+        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: streamUrl)
         
-        Alamofire.request(endpoint, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
-            
-            guard let dataResponse = response.data else { return }
-            
-            let decoder = JSONDecoder()
-            
-            do {
-                let pwnResponse = try decoder.decode(PwnResponse.self, from: dataResponse)
-                let urlsMirror = Mirror(reflecting: pwnResponse.urls)
-                
-                var urlsValues: [String] = []
-                
-                urlsMirror.children.forEach { (urlProperty) in
-                    if let urlValue = urlProperty.value as? String {
-                        urlsValues.append(urlValue)
-                    }
-                }
-                
-                let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
-                
-                let qualityLabels = ["160p", "360p", "480p", "720p", "720p60", "1080p60"]
-                
-                urlsValues.forEach { (url) in
-                    alert.addAction(UIAlertAction(title: qualityLabels[urlsValues.firstIndex(of: url) ?? -1], style: .default) {
-                        (action) in
-                        
-                        guard let indexForActionSelected = alert.actions.firstIndex(of: action) else { return }
-                        
-                        guard let urlQualitySelected = URL(string: urlsValues[indexForActionSelected]) else { return }
-                        
-                        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: urlQualitySelected)
-                            
-                        self.present(streamPlayerViewController, animated: true)
-                            
-                        streamPlayerViewController.play()
-                    })
-                }
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                
-                self.present(alert, animated: true)
-                
-            } catch let error {
-                print("Error when decode JSON \(error.localizedDescription)")
-            }
-            
+        present(streamPlayerViewController, animated: true) {
+            streamPlayerViewController.play()
         }
-    
-    }
-    
-}
-
-extension VideoPlaylistViewController {
-    private func registerCellAndSetTableViewDelegates(completion: (() -> Void)?) {
-        tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
-                           forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        completion?()
-    }
-    
-    private func composeStreamUrl(with userName: String) -> URL? {
-        var urlComponents = URLComponents()
-        
-        urlComponents.scheme = "https"
-        urlComponents.host = "twitch.tv"
-        urlComponents.path = userName
-
-        return urlComponents.url
     }
 }
+
+

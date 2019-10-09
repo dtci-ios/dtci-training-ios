@@ -108,8 +108,11 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = self.collectionView(collectionView, cellForItemAt: indexPath) as! GameCollectionViewCell
-        let videoPlaylistVC = VideoPlaylistViewController()
-        videoPlaylistVC.setGameIdAndName(gameId: cell.game?.id ?? "", gameName: cell.game?.name ?? "")
+        
+        guard let game = cell.game else { return }
+        
+        let videoPlaylistVC = VideoPlaylistViewController(with: game)
+        
         navigationController?.pushViewController(videoPlaylistVC, animated: true)
     }
     
