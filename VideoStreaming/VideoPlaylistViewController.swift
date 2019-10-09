@@ -59,7 +59,6 @@ class VideoPlaylistViewController: UIViewController {
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
-
         networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
     
@@ -75,7 +74,6 @@ class VideoPlaylistViewController: UIViewController {
             present(alert, animated: true)
         }
     }
-
 }
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {

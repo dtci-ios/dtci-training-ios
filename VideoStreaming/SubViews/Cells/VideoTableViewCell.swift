@@ -17,10 +17,11 @@ import UIKit
         static let placeholderImg = "Placeholder"
     }
     
-    func configure(with stream: Stream) {
-        videoView.configure(with: stream)
+    func configure(with video: Stream) {
+        videoView.configure(with: video)
+        videoView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         isSelected = false 
