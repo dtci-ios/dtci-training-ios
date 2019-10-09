@@ -80,6 +80,29 @@ struct Stream: Codable {
     }
 }
 
+
+struct QualityUrls: Codable {
+    let quality160p: String?
+    let quality360p: String?
+    let quality480p: String?
+    let quality720p: String?
+    let quality720p60: String?
+    let quality1080p60: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case quality160p = "160p"
+        case quality360p = "360p"
+        case quality480p = "480p"
+        case quality720p = "720p"
+        case quality720p60 = "720p60"
+        case quality1080p60 = "1080p60"
+    }
+}
+
+struct PwnResponse: Codable {
+    let urls: QualityUrls
+}
+
 struct ReceivedData<T:Codable>: Codable {
     var dataArray: [T]
     
