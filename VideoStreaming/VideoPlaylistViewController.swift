@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 class VideoPlaylistViewController: UIViewController {
     
@@ -14,9 +15,23 @@ class VideoPlaylistViewController: UIViewController {
     
     private let networkManager = GameStreamsAPI()
     private var streams: [Stream?] = []
-    private var gameId: String?
     private var gameName: String?
+    private var gameId: String?
 
+    static var nibName: String {
+        return String(describing: self)
+    }
+    
+    init(with game: Game) {
+        super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
+        gameName = game.name
+        gameId = game.id
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,20 +42,12 @@ class VideoPlaylistViewController: UIViewController {
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.tintColor = .white
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
-        networkManager.fetchGameStreams(ofGame: gameId ?? "",
-                                        completion: fetchCompletionHandler(result:))
-    }
 
-    func setGameIdAndName(gameId: String, gameName: String) {
-        self.gameId = gameId
-        self.gameName = gameName
+        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
     
     @objc private func refreshData(_ sender: Any) {
@@ -48,7 +55,7 @@ class VideoPlaylistViewController: UIViewController {
         networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
     
-    func fetchCompletionHandler(result: Result<[Stream],APIError>) {
+    func fetchCompletionHandler(result: Result<[Stream], APIError>) {
         dismissHUD()
         switch result {
         case .success(let gameStreams):
@@ -60,7 +67,6 @@ class VideoPlaylistViewController: UIViewController {
             present(alert, animated: true)
         }
     }
-    
 }
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
@@ -89,4 +95,17 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
+        
+        let streamUrl = URL(fileURLWithPath: filePath)
+        
+        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: streamUrl)
+        
+        present(streamPlayerViewController, animated: true) {
+            streamPlayerViewController.play()
+        }
+    }
 }
+
+
