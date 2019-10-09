@@ -98,7 +98,7 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let streamUserName = streams[indexPath.row]?.userName else { return }
-        
+
         let pwnServiceAPI = PwnServiceAPI(forUser: streamUserName)
     
         pwnServiceAPI?.fetchStreamingM3U8Urls { [weak self] (result) in
