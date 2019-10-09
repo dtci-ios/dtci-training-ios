@@ -50,13 +50,6 @@ class VideoPlaylistViewController: UIViewController {
 
         networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
-
-    /*
-    func setGameIdAndName(gameId: String, gameName: String) {
-        self.gameId = gameId
-        self.gameName = gameName
-    }
-    */
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
