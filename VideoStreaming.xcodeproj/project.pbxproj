@@ -16,6 +16,7 @@
 		5C206257233C186C00A3859E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
 		5C24B7AE233C09F100DE2123 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C6EB7233A830700829078 /* MainViewController.swift */; };
+		5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */; };
 		5CE97CE723317662008CF451 /* VideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CE97CE623317662008CF451 /* VideoView.xib */; };
 		5CE97CE92331786F008CF451 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CE82331786F008CF451 /* VideoView.swift */; };
 		5CE97CEB2331793D008CF451 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CEA2331793D008CF451 /* Video.swift */; };
@@ -73,6 +74,7 @@
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
 		5C24B7AD233C09F100DE2123 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		5CE97CE623317662008CF451 /* VideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoView.xib; sourceTree = "<group>"; };
 		5CE97CE82331786F008CF451 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		5CE97CEA2331793D008CF451 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */,
 				265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */,
 				5C5C6EB7233A830700829078 /* MainViewController.swift */,
+				5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */,
 			);
 			path = VideoStreaming;
 			sourceTree = "<group>";
@@ -451,7 +454,7 @@
 			files = (
 				265C74E5233A4FEF0033C139 /* TopGamesCollectionViewController.swift in Sources */,
 				265C74EB233A5B320033C139 /* GameCollectionViewCell.swift in Sources */,
-				A7A5BF3B23394683001D2C96 /* SomeTableViewCells.swift in Sources */,
+				5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */,
 				A7518BF2233D09650050D8D5 /* Models.swift in Sources */,
 				A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */,
 				A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */,

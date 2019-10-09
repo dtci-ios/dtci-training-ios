@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
  
-class VideoView: UIView {
+class VideoView: UIView, NibLoadable {
     @IBOutlet private weak var videoImageView: UIImageView!
     @IBOutlet private weak var videoStack: UIStackView!
     @IBOutlet private weak var videoTitle: UILabel!
@@ -48,12 +48,5 @@ class VideoView: UIView {
         videoTitle.text = nil
         videoDurationAndDate.text = nil
     }
-
-    private func nibSetup() {
-        guard let view = Bundle.main.loadNibNamed(Constants.nibName, owner: self, options: nil)?.first as? UIView else {
-            return
-        }
-        
-        addSubview(view)
-    }
+    
 }
