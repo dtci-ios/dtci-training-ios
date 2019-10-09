@@ -97,7 +97,7 @@ struct ColumsLayout {
         floor(itemWidth * CGFloat(cellAspectRatio.heightRatioFactor))
     }
 
-    var padingWidth : CGFloat {
+    var paddingWidth : CGFloat {
        floor(fullDisponibleWidthForPaddings / CGFloat(ColumsLayoutHelper.columnsForTraitCollection() + 1))
     }
 
@@ -192,14 +192,14 @@ extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: columsLayout.padingWidth, left: columsLayout.padingWidth, bottom: columsLayout.padingWidth, right: columsLayout.padingWidth)
+        return UIEdgeInsets(top: columsLayout.paddingWidth, left: columsLayout.paddingWidth, bottom: columsLayout.paddingWidth, right: columsLayout.paddingWidth)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return columsLayout.padingWidth
+        return columsLayout.paddingWidth
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return columsLayout.padingWidth
+        return columsLayout.paddingWidth
     }
 }
