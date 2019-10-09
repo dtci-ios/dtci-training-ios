@@ -13,6 +13,7 @@
 		265C74EB233A5B320033C139 /* GameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */; };
 		265C74ED233A65B00033C139 /* GameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */; };
 		2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */; };
+		26A310FC234E5A0B008021EF /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A310FB234E5A0B008021EF /* MockURLProtocol.swift */; };
 		5C206257233C186C00A3859E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
 		5C24B7AE233C09F100DE2123 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C6EB7233A830700829078 /* MainViewController.swift */; };
@@ -72,6 +73,7 @@
 		265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewCell.swift; sourceTree = "<group>"; };
 		265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameCollectionViewCell.xib; sourceTree = "<group>"; };
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
+		26A310FB234E5A0B008021EF /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		5C24B7AD233C09F100DE2123 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
@@ -130,6 +132,14 @@
 				A72C3A4D233565BF00723C01 /* Alamofire.framework */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		26A310FA234E59DF008021EF /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				26A310FB234E5A0B008021EF /* MockURLProtocol.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		4F911E12C06233FA6283BEFF /* Pods */ = {
@@ -229,6 +239,7 @@
 		9C04F3E6233045CC005FBE8E /* VideoStreamingTests */ = {
 			isa = PBXGroup;
 			children = (
+				26A310FA234E59DF008021EF /* Mocks */,
 				9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */,
 				9C04F3E9233045CC005FBE8E /* Info.plist */,
 			);
@@ -476,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */,
+				26A310FC234E5A0B008021EF /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,7 +37,7 @@ enum APIError: Error {
 protocol NetworkManager {
     typealias QueryString = [String:Any]
     var request: String { get }
-//  var manager: SessionManager { get set }
+    var manager: SessionManager { get set }
 }
 
 extension NetworkManager {
@@ -49,7 +49,7 @@ extension NetworkManager {
                                 parameters: QueryString = [:],
                                 completion: @escaping ((Swift.Result<[T],APIError>)->Void)) {
         
-        Alamofire.request(request, parameters: parameters, headers: Self.headers)
+        manager.request(request, parameters: parameters, headers: Self.headers)
             .validate(statusCode: 200 ..< 300)
             .responseJSON { (response) in
                 switch response.result {
