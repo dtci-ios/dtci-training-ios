@@ -99,47 +99,28 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let streamUserName = streams[indexPath.row]?.userName else { return }
         
-        let urlWithUserName = "https://twitch.tv/" + streamUserName
-        
-        guard let endpoint = URL(string: "https://pwn.sh/tools/streamapi.py?url=" + urlWithUserName) else { return }
-        
-        Alamofire.request(endpoint, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
+        let pwnServiceAPI = PwnServiceAPI(forUser: streamUserName)
+    
+        pwnServiceAPI.fetchStreamingM3U8Urls { (urls) in
+            let urlsMirror = Mirror(reflecting: urls)
             
-            guard let dataResponse = response.data else { return }
+            var urlsValues: [String] = []
             
-            let decoder = JSONDecoder()
-            
-            do {
-                
-                let pwnResponse = try decoder.decode(PwnResponse.self, from: dataResponse)
-                let urlsMirror = Mirror(reflecting: pwnResponse.urls)
-                
-                var urlsValues: [String] = []
-                
-                urlsMirror.children.forEach { (urlsProperty) in
-                    if let urlValue = urlsProperty.value as? String {
-                        urlsValues.append(urlValue)
-                    }
+            urlsMirror.children.forEach { (urlsProperty) in
+                if let urlValue = urlsProperty.value as? String {
+                    urlsValues.append(urlValue)
                 }
-                
-                guard let lastStreamingUrl = urlsValues.last, let url = URL(string: lastStreamingUrl) else { return }
-                
-                let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
-                    
-                self.present(streamPlayerViewController, animated: true)
-                    
-                streamPlayerViewController.play()
-                
-            } catch let error {
-                
-                print("Error when decode JSON \(error.localizedDescription)")
-                
             }
             
+            guard let lastStreamingUrl = urlsValues.last, let url = URL(string: lastStreamingUrl) else { return }
+            
+            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
+                
+            self.present(streamPlayerViewController, animated: true)
+                
+            streamPlayerViewController.play()
         }
-    
     }
-    
 }
 
 
