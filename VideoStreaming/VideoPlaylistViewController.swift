@@ -142,26 +142,5 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     
 }
 
-extension VideoPlaylistViewController {
-    private func registerCellAndSetTableViewDelegates(completion: (() -> Void)?) {
-        tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
-                           forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        completion?()
-    }
-    
-    private func composeStreamUrl(with userName: String) -> URL? {
-        var urlComponents = URLComponents()
-        
-        urlComponents.scheme = "https"
-        urlComponents.host = "twitch.tv"
-        urlComponents.path = userName
-
-        return urlComponents.url
-    }
-}
 
 
