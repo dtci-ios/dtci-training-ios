@@ -58,6 +58,7 @@ class PwnServiceAPI {
         Alamofire.request(requestURL, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
             switch response.result {
             case .success:
+                
                 guard let dataResponse = response.data else { return }
                 
                 let decoder = JSONDecoder()
@@ -68,11 +69,15 @@ class PwnServiceAPI {
                 } catch let error {
                     completion(.failure(.jsonError(error)))
                 }
+                
             case .failure(let error):
+                
                 if let error = error as? AFError {
                     completion(.failure(.alamofireError(error)))
+                    
                 } else if let error = error as? URLError {
                     completion(.failure(.urlError(error)))
+                    
                 } else {
                     completion(.failure(.unknownError(error)))
                 }
