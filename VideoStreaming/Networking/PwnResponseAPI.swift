@@ -9,6 +9,22 @@
 import Foundation
 import Alamofire
 
+enum PwnServiceAPIError: Error {
+    case jsonError(Error)
+    case alamofireError(Error)
+    case urlError(Error)
+    case unknownError(Error)
+    
+    var localizedDescription: String {
+        switch self {
+            case .jsonError(let jsonError): return jsonError.localizedDescription
+            case .alamofireError(let afError): return afError.localizedDescription
+            case .urlError(let urlError): return urlError.localizedDescription
+            case .unknownError(let unknownError): return unknownError.localizedDescription
+        }
+    }
+}
+
 class PwnServiceAPI {
     var requestURL: String
     var streamer: String
