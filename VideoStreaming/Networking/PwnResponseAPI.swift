@@ -54,7 +54,7 @@ class PwnServiceAPI {
         requestURL = componentsForServiceURL?.url?.absoluteString ?? ""
     }
     
-    func fetchStreamingM3U8Urls(completion: @escaping (PwnResponse.QualityUrls) -> Void) {
+    func fetchStreamingM3U8Urls(completion: @escaping (Swift.Result<PwnResponse.QualityUrls, PwnServiceAPIError>) -> Void) {
         Alamofire.request(requestURL, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
             guard let dataResponse = response.data else { return }
             
@@ -62,9 +62,9 @@ class PwnServiceAPI {
             
             do {
                 let pwnResponse = try decoder.decode(PwnResponse.self, from: dataResponse)
-                completion(pwnResponse.urls)
+                completion(.success(pwnResponse.urls))
             } catch let error {
-                print("Error when decode JSON \(error.localizedDescription)")
+                completion(.failure(.jsonError(error)))
             }
         }
     }
