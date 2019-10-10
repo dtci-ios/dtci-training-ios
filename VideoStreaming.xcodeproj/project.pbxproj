@@ -20,7 +20,7 @@
 		5C61ADC0234664CC00342FC7 /* lol.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADBF234664CC00342FC7 /* lol.mp4 */; };
 		5C61ADC22346661300342FC7 /* StreamPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */; };
 		5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */; };
-		5CBAFB91234E603E00C70400 /* PwnRenameAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAFB90234E603E00C70400 /* PwnRenameAPI.swift */; };
+		5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */; };
 		5CE97CE723317662008CF451 /* VideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CE97CE623317662008CF451 /* VideoView.xib */; };
 		5CE97CE92331786F008CF451 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CE82331786F008CF451 /* VideoView.swift */; };
 		5CE97CEB2331793D008CF451 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CEA2331793D008CF451 /* Video.swift */; };
@@ -82,7 +82,7 @@
 		5C61ADBF234664CC00342FC7 /* lol.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lol.mp4; sourceTree = "<group>"; };
 		5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
 		5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
-		5CBAFB90234E603E00C70400 /* PwnRenameAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PwnRenameAPI.swift; sourceTree = "<group>"; };
+		5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PwnResponseAPI.swift; sourceTree = "<group>"; };
 		5CE97CE623317662008CF451 /* VideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoView.xib; sourceTree = "<group>"; };
 		5CE97CE82331786F008CF451 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		5CE97CEA2331793D008CF451 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 				A7518BED233D09570050D8D5 /* GameStreamsAPI.swift */,
 				A7518BEB233D09570050D8D5 /* NetworkManager.swift */,
 				A7518BEC233D09570050D8D5 /* TopGamesAPI.swift */,
-				5CBAFB90234E603E00C70400 /* PwnRenameAPI.swift */,
+				5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -474,7 +474,7 @@
 				A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */,
 				5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */,
 				5CE97CE92331786F008CF451 /* VideoView.swift in Sources */,
-				5CBAFB91234E603E00C70400 /* PwnRenameAPI.swift in Sources */,
+				5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */,
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
 				A7518BF0233D09570050D8D5 /* GameStreamsAPI.swift in Sources */,
 				5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */,
