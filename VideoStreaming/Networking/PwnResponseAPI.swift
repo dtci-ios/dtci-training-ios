@@ -9,22 +9,6 @@
 import Foundation
 import Alamofire
 
-enum PwnServiceAPIError: Error {
-    case jsonError(Error)
-    case alamofireError(Error)
-    case urlError(Error)
-    case unknownError(Error)
-    
-    var localizedDescription: String {
-        switch self {
-            case .jsonError(let jsonError): return jsonError.localizedDescription
-            case .alamofireError(let afError): return afError.localizedDescription
-            case .urlError(let urlError): return urlError.localizedDescription
-            case .unknownError(let unknownError): return unknownError.localizedDescription
-        }
-    }
-}
-
 class PwnServiceAPI {
     var requestURL: String
     var streamer: String
@@ -41,7 +25,7 @@ class PwnServiceAPI {
         
         var componentsForTwitchURL = URLComponents(url: twitchURL, resolvingAgainstBaseURL: false)
         
-        componentsForTwitchURL?.percentEncodedPath = "/\(streamer.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")"
+        componentsForTwitchURL?.path = "/\(streamer.utf16)"
         
         guard let serviceURL = URL(string: Constants.serviceURL) else { return nil }
 
@@ -54,7 +38,7 @@ class PwnServiceAPI {
         requestURL = componentsForServiceURL?.url?.absoluteString ?? ""
     }
     
-    func fetchStreamingM3U8Urls(completion: @escaping (Swift.Result<PwnResponse.QualityUrls, PwnServiceAPIError>) -> Void) {
+    func fetchStreamingM3U8Urls(completion: @escaping (Swift.Result<PwnResponse.QualityUrls, APIError>) -> Void) {
         Alamofire.request(requestURL, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
             switch response.result {
             case .success:
