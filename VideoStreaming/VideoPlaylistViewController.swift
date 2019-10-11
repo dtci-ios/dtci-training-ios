@@ -104,13 +104,22 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         pwnServiceAPI?.fetchStreamingM3U8Urls { [weak self] (result) in
             switch result {
             case .success(let urls):
-                guard let lastStreamingUrl = urls[urls.keys.first ?? ""], let url = URL(string: lastStreamingUrl) else { return }
+                let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
+                
+                for key in urls.keys {
+                    alert.addAction(UIAlertAction(title: key, style: .default, handler: { (action) in
+                        if let stringURL = urls[key], let m3u8URL = URL(string: stringURL) {
+                            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL)
+                                           
+                            self?.present(streamPlayerViewController, animated: true)
+                                           
+                            streamPlayerViewController.play()
+                        }
+                    }))
+                }
                            
-                let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
-                               
-                self?.present(streamPlayerViewController, animated: true)
-                               
-                streamPlayerViewController.play()
+                self?.present(alert, animated: true)
+                
             case .failure(let error):
                 let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
