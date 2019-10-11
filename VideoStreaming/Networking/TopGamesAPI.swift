@@ -14,12 +14,7 @@ protocol TopGamesAPIProtocol {
 }
 
 class TopGamesAPI: NetworkManager, TopGamesAPIProtocol {
-//    var sessionManager: SessionManager
     var request = "https://api.twitch.tv/helix/games/top"
-    
-//    init(sessionManager: SessionManager = SessionManager.default) {
-//        self.sessionManager = sessionManager
-//    }
  
     func fetchTopGames(completion:  @escaping (Swift.Result<[Game],APIError>) -> Void) {
         fetchData(request: request, completion: completion)

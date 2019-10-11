@@ -13,21 +13,21 @@ class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-//    private let networkManager = GameStreamsAPI()
-//    private var streams: [Stream?] = []
     private var gameName: String?
     private var gameId: String?
     private var dataSource: VideoPlaylistDataSource!
+    private var apiError: APIError?
 
     static var nibName: String {
         return String(describing: self)
     }
     
     init(with game: Game) {
-        super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
         gameName = game.name
         gameId = game.id
-        self.dataSource = VideoPlaylistDataSource(apiManager: GameStreamsAPI(), gameId: game.id ?? "")
+        dataSource = VideoPlaylistDataSource(apiManager: GameStreamsAPI(), gameId: game.id ?? "")
+        
+        super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -41,7 +41,7 @@ class VideoPlaylistViewController: UIViewController {
         
         showHUD()
         
-        tableView.dataSource = self.dataSource
+        dataSource.load(completionForView: errorCompletionHandler(error:))
         
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
@@ -50,28 +50,25 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.tintColor = .white
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
-
-//        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
-//        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
+        dataSource.load(completionForView: errorCompletionHandler(error:))
     }
     
-//    func fetchCompletionHandler(result: Result<[Stream], APIError>) {
-//        dismissHUD()
-//        switch result {
-//        case .success(let gameStreams):
-//            streams = gameStreams
-//            tableView.reloadData()
-//        case .failure(let error):
-//            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            present(alert, animated: true)
-//        }
-//    }
+    func errorCompletionHandler(error: APIError?) {
+        dismissHUD()
+        tableView.dataSource = self.dataSource
+        if let error = error {
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
+        }
+    }
 }
+
+// MARK: TableViewDelegate
 
 extension VideoPlaylistViewController: UITableViewDelegate {
     

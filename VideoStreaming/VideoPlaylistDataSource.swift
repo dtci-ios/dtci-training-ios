@@ -10,10 +10,9 @@ import UIKit
 
 class VideoPlaylistDataSource: NSObject, UITableViewDataSource {
     
-    var streams: [Stream?] = []
-    var gameId: String
-    let apiManager: GameStreamsAPIProtocol!
-    var error: APIError?
+    private var streams: [Stream?] = []
+    private var gameId: String
+    private let apiManager: GameStreamsAPIProtocol!
     
     init(apiManager: GameStreamsAPIProtocol, gameId: String) {
         self.apiManager = apiManager
@@ -36,18 +35,26 @@ class VideoPlaylistDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
-//    func load(completion: (Result<[Stream], APIError>) -> Void) {
-//        apiManager.fetchGameStreams(ofGame: gameId, completion: completion)
-//    }
-    
-    func fetchCompletionHandler(result: Result<[Stream], APIError>) {
-        switch result {
-        case .success(let gameStreams):
-            streams = gameStreams
-        case .failure(let error):
-            self.error = error
+    func load(completionForView: @escaping (APIError?) -> Void) {
+        apiManager.fetchGameStreams(ofGame: gameId) { result in
+            switch result {
+            case .success(let gameStreams):
+                self.streams = gameStreams
+                completionForView(nil)
+            case .failure(let error):
+                completionForView(error)
+            }
         }
     }
+    
+//    func fetchCompletionHandler(result: Result<[Stream], APIError>) {
+//        switch result {
+//        case .success(let gameStreams):
+//            streams = gameStreams
+//        case .failure(let error):
+//            apiError = error
+//        }
+//    }
     
     
     
