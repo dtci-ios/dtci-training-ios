@@ -21,7 +21,7 @@ class StreamPlayerViewController: UIViewController {
     private var streamUrl: URL
     private var userId: String
     private var relatedVideos: [Video] = [Video]()
-    
+
     static var nibName: String {
         return String(describing: self)
     }
@@ -57,9 +57,7 @@ class StreamPlayerViewController: UIViewController {
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         relatedVideosTableView.refreshControl = UIRefreshControl()
         relatedVideosTableView.refreshControl?.tintColor = .white
-    }
-    
-    override func viewWillLayoutSubviews() {
+        
         videoPlayerView.addSubview(playerViewController.view)
         
         playerViewController.view.frame = videoPlayerView.bounds
@@ -83,6 +81,11 @@ class StreamPlayerViewController: UIViewController {
             videoPlayerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             videoPlayerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
             videoPlayerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        } else {
+            videoPlayerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = false
+            videoPlayerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = false
+            videoPlayerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = false
+            videoPlayerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = false
         }
     }
     
@@ -121,5 +124,14 @@ extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource
         
         playerViewController.player = player
         playerViewController.player?.play()
+    }
+}
+
+extension StreamPlayerViewController {
+    private func reloadVideoPlayerConstraints(isActivate: Bool) {
+        videoPlayerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = isActivate
+        videoPlayerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = isActivate
+        videoPlayerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = isActivate
+        videoPlayerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = isActivate
     }
 }
