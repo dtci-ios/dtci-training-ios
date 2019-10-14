@@ -12,7 +12,7 @@ class TopGamesCollectionViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    private var columsLayout = ColumsLayout(itemsWidthPercentage: 0.88, cellAspectRatio: CellAspectRatio(width: 3, height: 4))
+    private var columnsLayout = ColumnsLayout(itemsWidthPercentage: 0.88, cellAspectRatio: CellAspectRatio(width: 3, height: 4))
     private var dataSource: TopGamesDataSource!
 
     static var nibName: String {
@@ -77,18 +77,18 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate {
 
 extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return columsLayout.itemSize()
+        return columnsLayout.itemSize()
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: columsLayout.paddingWidth, left: columsLayout.paddingWidth, bottom: columsLayout.paddingWidth, right: columsLayout.paddingWidth)
+        return UIEdgeInsets(top: columnsLayout.paddingWidth, left: columnsLayout.paddingWidth, bottom: columnsLayout.paddingWidth, right: columnsLayout.paddingWidth)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return columsLayout.paddingWidth
+        return columnsLayout.paddingWidth
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return columsLayout.paddingWidth
+        return columnsLayout.paddingWidth
     }
 }
