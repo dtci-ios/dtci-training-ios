@@ -106,9 +106,7 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
             case .success(let urls):
                 let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
                 
-                let sortedKeys = Array(urls.keys).sorted(by: <)
-                
-                for key in sortedKeys {
+                for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
                     alert.addAction(UIAlertAction(title: key, style: .default, handler: { (action) in
                         if let stringURL = urls[key], let m3u8URL = URL(string: stringURL) {
                             let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL)
