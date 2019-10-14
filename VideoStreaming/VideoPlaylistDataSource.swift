@@ -20,17 +20,21 @@ class VideoPlaylistDataSource: NSObject, UITableViewDataSource {
         super.init()
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return streams.count
+        return section == 0 ? streams.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier,
                                                        for: indexPath) as? VideoTableViewCell else { return VideoTableViewCell() }
         
-        guard let video = streams[indexPath.row] else { return VideoTableViewCell() }
+        guard let stream = streams[indexPath.row] else { return VideoTableViewCell() }
         
-        cell.configure(with: video)
+        cell.configure(with: stream)
         
         return cell
     }
@@ -47,15 +51,9 @@ class VideoPlaylistDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-//    func fetchCompletionHandler(result: Result<[Stream], APIError>) {
-//        switch result {
-//        case .success(let gameStreams):
-//            streams = gameStreams
-//        case .failure(let error):
-//            apiError = error
-//        }
-//    }
-    
-    
+    func clean() {
+        streams.removeAll()
+        gameId = ""
+    }
     
 }

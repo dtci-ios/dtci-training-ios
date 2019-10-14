@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import Alamofire
 
 protocol GameStreamsAPIProtocol {
-    func fetchGameStreams(ofGame gameId: String, completion: @escaping (Swift.Result<[Stream],APIError>) -> Void)
+    func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void)
 }
 
 class GameStreamsAPI: NetworkManager, GameStreamsAPIProtocol {
@@ -18,7 +17,7 @@ class GameStreamsAPI: NetworkManager, GameStreamsAPIProtocol {
 //    //to force error alert:
 //    var request = "https://api.twitch.tv/helix/sarasaaa"
     
-    func fetchGameStreams(ofGame gameId: String, completion: @escaping (Swift.Result<[Stream],APIError>) -> Void) {
+    func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void) {
         let params: [String:Any] = ["game_id":gameId]
         fetchData(request: request, parameters: params, completion: completion)
     }

@@ -41,6 +41,7 @@ class VideoPlaylistViewController: UIViewController {
         
         showHUD()
         
+        tableView.dataSource = dataSource
         dataSource.load(completionForView: errorCompletionHandler(error:))
         
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
@@ -59,7 +60,7 @@ class VideoPlaylistViewController: UIViewController {
     
     func errorCompletionHandler(error: APIError?) {
         dismissHUD()
-        tableView.dataSource = self.dataSource
+        tableView.reloadData()
         if let error = error {
             let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -78,15 +79,16 @@ extension VideoPlaylistViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
-        
+
         let streamUrl = URL(fileURLWithPath: filePath)
-        
+
         let streamPlayerViewController = StreamPlayerViewController(streamingUrl: streamUrl)
-        
+
         present(streamPlayerViewController, animated: true) {
             streamPlayerViewController.play()
         }
     }
+    
 }
 
 

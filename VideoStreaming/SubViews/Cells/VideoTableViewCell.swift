@@ -27,4 +27,8 @@ import UIKit
         isSelected = false 
         videoView.reset()
     }
+    
+    func getVideoView() -> VideoView {
+        return self.videoView
+    }
 }

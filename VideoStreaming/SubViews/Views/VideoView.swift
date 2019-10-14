@@ -16,6 +16,8 @@ class VideoView: UIView, NibLoadable {
     @IBOutlet private weak var videoDurationAndDate: UILabel!
     @IBOutlet private weak var liveLabel: UILabel!
     
+    private var stream: Stream?
+    
     private enum Constants {
         static let nibName = String(describing: VideoView.self)
         static let placeholderImageName = "noImage"
@@ -32,6 +34,7 @@ class VideoView: UIView, NibLoadable {
     }
     
     func configure(with stream: Stream) {
+        self.stream = stream
         videoImageView.sd_setImage(with: stream.imageURL, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
         videoDurationAndDate.text = stream.durationAndDate
         if stream.type == "live" { liveLabel.isHidden = false }
@@ -52,4 +55,7 @@ class VideoView: UIView, NibLoadable {
         liveLabel.isHidden = true
     }
     
+    func getStream() -> Stream {
+        return stream!
+    }
 }
