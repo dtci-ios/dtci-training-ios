@@ -6,17 +6,12 @@
 //  Copyright © 2019 ESPN. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class TopGamesDataSource: NSObject, UICollectionViewDataSource {
 
     private var topGamesAPI: TopGamesAPIProtocol
     private var games: [Game] = []
-
-    func getGames() -> [Game] {
-        return games
-    }
 
     init(topGamesAPI: TopGamesAPIProtocol){
         self.topGamesAPI = topGamesAPI
@@ -47,7 +42,7 @@ class TopGamesDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return games.count
+        return section == 0 ? games.count : 0
     }
 }
 
