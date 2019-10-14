@@ -62,7 +62,6 @@ class TopGamesCollectionViewController: UIViewController {
 }
 
 extension TopGamesCollectionViewController: UICollectionViewDelegate {
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = self.collectionView.cellForItem(at: indexPath) as! GameCollectionViewCell
 
@@ -72,7 +71,6 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate {
 
         navigationController?.pushViewController(videoPlaylistVC, animated: true)
     }
-
 }
 
 extension TopGamesCollectionViewController: UICollectionViewDelegateFlowLayout {
