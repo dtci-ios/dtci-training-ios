@@ -102,9 +102,7 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         
         let streamPlayerViewController = StreamPlayerViewController(streamingUrl: streamUrl)
         
-        present(streamPlayerViewController, animated: true) {
-            streamPlayerViewController.play()
-        }
+        navigationController?.pushViewController(streamPlayerViewController, animated: true)
     }
 }
 
