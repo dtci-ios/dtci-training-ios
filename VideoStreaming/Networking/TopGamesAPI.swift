@@ -16,11 +16,11 @@ protocol TopGamesAPIProtocol {
 class TopGamesAPI: NetworkManager, TopGamesAPIProtocol {
 
     var manager: SessionManager
-    
+
     init(manager: SessionManager = SessionManager.default) {
         self.manager = manager
     }
-    
+
     var request = "https://api.twitch.tv/helix/games/top"
  
     func fetchTopGames(completion:  @escaping (Swift.Result<[Game],APIError>) -> Void) {
