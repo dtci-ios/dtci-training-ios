@@ -47,17 +47,20 @@ struct Stream: Codable {
     var durationAndDate: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
         guard let startedAtDate = dateFormatter.date(from: startedAt ?? "") else {
             return "- • --"
         }
+        
         dateFormatter.dateFormat = "HH:mm • E, MM/dd"
         let startedAtFormatted = dateFormatter.string(from: startedAtDate)
+        
         return startedAtFormatted
     }
 
     var imageURL: URL? {
         let thumbnailUrlWithWidthAndHeight = thumbnailUrl?.replacingOccurrences(of: "{width}", with: "")
-                                                         .replacingOccurrences(of: "{height}", with: "")
+                                                          .replacingOccurrences(of: "{height}", with: "")
         let url = URL(string: thumbnailUrlWithWidthAndHeight ?? "")
         return url
     }
@@ -75,6 +78,29 @@ struct Stream: Codable {
         case thumbnailUrl = "thumbnail_url"
         case tagIds = "tag_ids"
     }
+}
+
+
+struct QualityUrls: Codable {
+    let quality160p: String?
+    let quality360p: String?
+    let quality480p: String?
+    let quality720p: String?
+    let quality720p60: String?
+    let quality1080p60: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case quality160p = "160p"
+        case quality360p = "360p"
+        case quality480p = "480p"
+        case quality720p = "720p"
+        case quality720p60 = "720p60"
+        case quality1080p60 = "1080p60"
+    }
+}
+
+struct PwnResponse: Codable {
+    let urls: QualityUrls
 }
 
 struct ReceivedData<T:Codable>: Codable {

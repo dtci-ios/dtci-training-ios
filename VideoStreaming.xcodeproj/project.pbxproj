@@ -14,9 +14,12 @@
 		265C74ED233A65B00033C139 /* GameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */; };
 		2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */; };
 		26A310FC234E5A0B008021EF /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A310FB234E5A0B008021EF /* MockURLProtocol.swift */; };
+		5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */; };
 		5C206257233C186C00A3859E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
 		5C24B7AE233C09F100DE2123 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C6EB7233A830700829078 /* MainViewController.swift */; };
+		5C61ADC0234664CC00342FC7 /* lol.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADBF234664CC00342FC7 /* lol.mp4 */; };
+		5C61ADC22346661300342FC7 /* StreamPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */; };
 		5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */; };
 		5CE97CE723317662008CF451 /* VideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CE97CE623317662008CF451 /* VideoView.xib */; };
 		5CE97CE92331786F008CF451 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CE82331786F008CF451 /* VideoView.swift */; };
@@ -74,8 +77,11 @@
 		265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameCollectionViewCell.xib; sourceTree = "<group>"; };
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
 		26A310FB234E5A0B008021EF /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerViewController.swift; sourceTree = "<group>"; };
 		5C24B7AD233C09F100DE2123 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		5C61ADBF234664CC00342FC7 /* lol.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lol.mp4; sourceTree = "<group>"; };
+		5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
 		5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		5CE97CE623317662008CF451 /* VideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoView.xib; sourceTree = "<group>"; };
 		5CE97CE82331786F008CF451 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
@@ -218,19 +224,22 @@
 				A79B1D62233C07DD003D4099 /* Networking */,
 				9C04F3D0233045CA005FBE8E /* AppDelegate.swift */,
 				9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */,
+				263E8573233CF331003D3DC9 /* Main.storyboard */,
+				9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */,
+				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
 				2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */,
 				5CFB597B233CDF87009C1220 /* VideosAPI.swift */,
 				A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */,
-				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
 				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
-				263E8573233CF331003D3DC9 /* Main.storyboard */,
-				9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */,
 				9C04F3DE233045CC005FBE8E /* Info.plist */,
+				5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */,
+				5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */,
 				265C74E2233A4E150033C139 /* TopGamesCollectionViewController.xib */,
 				265C74E4233A4FEF0033C139 /* TopGamesCollectionViewController.swift */,
 				265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */,
 				265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */,
 				5C5C6EB7233A830700829078 /* MainViewController.swift */,
+				5C61ADBF234664CC00342FC7 /* lol.mp4 */,
 				5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */,
 			);
 			path = VideoStreaming;
@@ -356,11 +365,13 @@
 				5CE97CE723317662008CF451 /* VideoView.xib in Resources */,
 				9C04F3DD233045CC005FBE8E /* LaunchScreen.storyboard in Resources */,
 				265C74ED233A65B00033C139 /* GameCollectionViewCell.xib in Resources */,
+				5C61ADC22346661300342FC7 /* StreamPlayerViewController.xib in Resources */,
 				9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */,
 				265C74E3233A4E150033C139 /* TopGamesCollectionViewController.xib in Resources */,
 				9C04F3D8233045CA005FBE8E /* (null) in Resources */,
 				A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */,
 				9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */,
+				5C61ADC0234664CC00342FC7 /* lol.mp4 in Resources */,
 				5CFFC5442332A3A400D78035 /* VideoTableViewCell.xib in Resources */,
 				9C04F3D8233045CA005FBE8E /* (null) in Resources */,
 			);
@@ -473,6 +484,7 @@
 				5CE97CE92331786F008CF451 /* VideoView.swift in Sources */,
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
 				A7518BF0233D09570050D8D5 /* GameStreamsAPI.swift in Sources */,
+				5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */,
 				5CE97CEB2331793D008CF451 /* Video.swift in Sources */,
 				9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */,
 				A7518BEF233D09570050D8D5 /* TopGamesAPI.swift in Sources */,

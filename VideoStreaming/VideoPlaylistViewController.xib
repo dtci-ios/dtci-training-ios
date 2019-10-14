@@ -18,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="videoPlaylistViewController" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vgg-ik-bmT">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="videoPlaylistViewController" alwaysBounceVertical="YES" indicatorStyle="white" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vgg-ik-bmT">
                     <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                     <color key="backgroundColor" red="0.086263842880725861" green="0.086280323565006256" blue="0.086260102689266205" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>

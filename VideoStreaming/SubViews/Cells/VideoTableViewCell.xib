@@ -23,6 +23,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="4D7-2a-y4u" secondAttribute="trailing" id="42j-Mn-9NM"/>
+                    <constraint firstAttribute="width" secondItem="4D7-2a-y4u" secondAttribute="width" id="ZyB-xq-6IL"/>
                     <constraint firstAttribute="bottom" secondItem="4D7-2a-y4u" secondAttribute="bottom" id="dUE-KZ-bHH"/>
                     <constraint firstItem="4D7-2a-y4u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ugh-zK-hqM"/>
                     <constraint firstItem="4D7-2a-y4u" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yHc-jG-W4Y"/>
