@@ -75,6 +75,17 @@ class StreamPlayerViewController: UIViewController {
         playerViewController.player?.play()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft {
+            videoPlayerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            videoPlayerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            videoPlayerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            videoPlayerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
+    }
+    
     private func setupPlayerViewController() {
         playerViewController = AVPlayerViewController()
         addChild(playerViewController)
@@ -99,5 +110,16 @@ extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource
         cell.configure(with: relatedVideos[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let videoURLString = relatedVideos[indexPath.row].url
+        
+        guard let videoURL = URL(string: videoURLString) else { return }
+        
+        player = AVPlayer(url: videoURL)
+        
+        playerViewController.player = player
+        playerViewController.player?.play()
     }
 }

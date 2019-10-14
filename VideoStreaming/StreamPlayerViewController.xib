@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qzX-hx-gFB">
-                    <rect key="frame" x="0.0" y="360" width="414" height="502"/>
+                    <rect key="frame" x="0.0" y="360" width="414" height="536"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="utn-e8-U8X"/>
@@ -49,7 +49,9 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dk0-sR-pyi">
                                     <rect key="frame" x="352.5" y="0.0" width="46" height="30"/>
-                                    <state key="normal" title="Button"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
                                 </button>
                             </subviews>
                         </stackView>
@@ -74,9 +76,9 @@
                 <constraint firstItem="qzX-hx-gFB" firstAttribute="top" secondItem="5w4-1b-K0B" secondAttribute="bottom" id="ObN-Oa-uTA"/>
                 <constraint firstItem="qzX-hx-gFB" firstAttribute="top" secondItem="5w4-1b-K0B" secondAttribute="bottom" id="PKj-MR-hIk"/>
                 <constraint firstItem="5w4-1b-K0B" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="TKW-CA-JbI"/>
-                <constraint firstItem="qzX-hx-gFB" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Vzp-um-C1C"/>
                 <constraint firstItem="qzX-hx-gFB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="W16-cJ-1IA"/>
                 <constraint firstItem="Q6h-cM-4nk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="a60-84-V9N"/>
+                <constraint firstAttribute="bottom" secondItem="qzX-hx-gFB" secondAttribute="bottom" id="fyC-aJ-xQT"/>
                 <constraint firstItem="5w4-1b-K0B" firstAttribute="top" secondItem="Q6h-cM-4nk" secondAttribute="bottom" id="hgg-l9-qoX"/>
                 <constraint firstItem="Q6h-cM-4nk" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="lbj-kI-995"/>
                 <constraint firstItem="5w4-1b-K0B" firstAttribute="top" secondItem="Q6h-cM-4nk" secondAttribute="bottom" id="pgc-gu-g7n"/>
