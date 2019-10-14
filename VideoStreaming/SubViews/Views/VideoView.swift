@@ -45,6 +45,20 @@ class VideoView: UIView, NibLoadable {
         videoImageView.layer.cornerRadius = 10
     }
     
+    func configure(with video: Video) {
+        videoImageView.sd_setImage(with: video.imageUrl, placeholderImage: UIImage(named: Constants.placeholderImageName), options: .continueInBackground, context: nil)
+        videoDurationAndDate.text = video.durationAndDate
+        if video.type == "live" { liveLabel.isHidden = false }
+        videoTitle.text = video.title
+        videoTitle.numberOfLines = 2
+        videoTitle.translatesAutoresizingMaskIntoConstraints = false
+        videoStack.alignment = .leading
+        videoStack.translatesAutoresizingMaskIntoConstraints = false
+        videoImageView.translatesAutoresizingMaskIntoConstraints = true
+        videoImageView.layer.masksToBounds = true
+        videoImageView.layer.cornerRadius = 10
+    }
+    
     func reset() {
         videoImageView.image = UIImage(named: Constants.placeholderImageName)
         videoTitle.text = nil

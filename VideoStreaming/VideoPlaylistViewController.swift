@@ -97,7 +97,9 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let streamUserName = streams[indexPath.row]?.userName else { return }
+        guard let streamUserName = streams[indexPath.row]?.userName, let streamUserId = streams[indexPath.row]?.userId else {
+            return
+        }
 
         let pwnServiceAPI = PwnServiceAPI(forUser: streamUserName)
     
@@ -109,11 +111,9 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
                 for key in urls.keys {
                     alert.addAction(UIAlertAction(title: key, style: .default, handler: { (action) in
                         if let stringURL = urls[key], let m3u8URL = URL(string: stringURL) {
-                            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL)
+                            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL, userId: streamUserId)
                                            
                             self?.present(streamPlayerViewController, animated: true)
-                                           
-                            streamPlayerViewController.play()
                         }
                     }))
                 }
