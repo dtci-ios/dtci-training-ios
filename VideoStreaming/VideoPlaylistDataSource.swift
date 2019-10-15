@@ -51,9 +51,20 @@ class VideoPlaylistDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    func clean() {
+    func clean() -> (Int, String) {
         streams.removeAll()
         gameId = ""
+        
+        return (streams.count, gameId)
     }
+    
+    func addStream(_ stream: Stream?) -> Int {
+        if let stream = stream {
+            streams.append(stream)
+        }
+        return streams.count
+    }
+    
+    
     
 }

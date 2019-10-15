@@ -66,6 +66,17 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         XCTAssertEqual(cell.videoId, apiManager.streams[i].id)
     }
     
+    func testDataSourceClean() {
+        let tuple = dataSource?.clean()
+        XCTAssertEqual(tuple?.0, 0)
+        XCTAssertEqual(tuple?.1, "")
+    }
     
-
+    func testDataSourceAdd() {
+        let previousCount = dataSource?.addStream(nil) ?? 0
+        XCTAssertEqual(dataSource?.addStream(VideoStreaming.Stream(id: "333", userId: "ccc", userName: "CCC", gameId: "g333",
+                                                                  type: "", title: "saraasas", viewerCount: 5, startedAt: "",
+                                                                  language: "en", thumbnailUrl: "", tagIds: nil)), (previousCount+1))
+    }
+    
 }
