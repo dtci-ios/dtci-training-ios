@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Game: Codable {
+struct Game: Codable, Equatable {
     var id: String?
     var name: String?
     var boxArtUrl: String?
