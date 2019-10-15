@@ -10,22 +10,31 @@ import Foundation
 import Alamofire
 
 class PwnServiceAPI {
-    var requestURL: String
-    var streamer: String
+    private var streamerId: String
     
-    private enum Constants {
-        static let twitchURL = "https://twitch.tv"
-        static let serviceURL = "https://pwn.sh/tools/streamapi.py"
+    private var streamerName: String? {
+        let userAPI = UsersAPI()
+        var loginName: String?
+        
+        userAPI.fetchUsers(userId: streamerId) { (result) in
+            switch result {
+            case .success(let user):
+                loginName = user.first?.login
+            case .failure(let error):
+                loginName = nil
+                print(error.localizedDescription)
+            }
+        }
+        
+        return loginName
     }
     
-    init?(forUser user: String) {
-        streamer = user
-        
+    private var requestURL: String? {
         guard let twitchURL = URL(string: Constants.twitchURL) else { return nil }
         
         var componentsForTwitchURL = URLComponents(url: twitchURL, resolvingAgainstBaseURL: false)
         
-        componentsForTwitchURL?.path = "/\(streamer.utf16)"
+        componentsForTwitchURL?.path = "/\(streamerName ?? "")"
         
         guard let serviceURL = URL(string: Constants.serviceURL) else { return nil }
 
@@ -35,11 +44,20 @@ class PwnServiceAPI {
             URLQueryItem(name: "url", value: componentsForTwitchURL?.url?.absoluteString ?? "")
         ]
         
-        requestURL = componentsForServiceURL?.url?.absoluteString ?? ""
+        return componentsForServiceURL?.url?.absoluteString
+    }
+    
+    private enum Constants {
+        static let twitchURL = "https://twitch.tv"
+        static let serviceURL = "https://pwn.sh/tools/streamapi.py"
+    }
+    
+    init(withUserId id: String) {
+        streamerId = id
     }
     
     func fetchStreamingM3U8Urls(completion: @escaping (Swift.Result<PwnResponse.QualityUrls, APIError>) -> Void) {
-        Alamofire.request(requestURL, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
+        Alamofire.request(requestURL ?? "", parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
             switch response.result {
             case .success:
                 
