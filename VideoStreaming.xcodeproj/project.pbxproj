@@ -42,7 +42,7 @@
 		A7518BF2233D09650050D8D5 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7518BF1233D09650050D8D5 /* Models.swift */; };
 		A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */; };
 		A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */; };
-		A7CBE5D82354BAB0000750E8 /* VideoPlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CBE5D72354BAB0000750E8 /* VideoPlaylistTests.swift */; };
+		A7CBE5D82354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CBE5D72354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,7 +109,7 @@
 		A7518BF1233D09650050D8D5 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlaylistViewController.xib; sourceTree = "<group>"; };
 		A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlaylistViewController.swift; sourceTree = "<group>"; };
-		A7CBE5D72354BAB0000750E8 /* VideoPlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaylistTests.swift; sourceTree = "<group>"; };
+		A7CBE5D72354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaylistDataSourceTests.swift; sourceTree = "<group>"; };
 		D2EFEC0284DAB6E93FF6ACEB /* Pods-VideoStreamingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreamingTests.debug.xcconfig"; path = "Target Support Files/Pods-VideoStreamingTests/Pods-VideoStreamingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E98740DF5946522F98B6926B /* Pods_VideoStreamingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoStreamingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA6398922C61190E70F2DEB /* Pods_VideoStreaming.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoStreaming.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,7 +248,7 @@
 				A7132DD3234E516400DB2A36 /* Mocks */,
 				9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */,
 				9C04F3E9233045CC005FBE8E /* Info.plist */,
-				A7CBE5D72354BAB0000750E8 /* VideoPlaylistTests.swift */,
+				A7CBE5D72354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift */,
 			);
 			path = VideoStreamingTests;
 			sourceTree = "<group>";
@@ -504,7 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7CBE5D82354BAB0000750E8 /* VideoPlaylistTests.swift in Sources */,
+				A7CBE5D82354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift in Sources */,
 				9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

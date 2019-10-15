@@ -10,7 +10,7 @@ import XCTest
 @testable import VideoStreaming
 
 class MockGameStreamsAPI: GameStreamsAPIProtocol {
-    let streams = [VideoStreaming.Stream(id: "111", userId: "aaa", userName: "AAA", gameId: "g111", type: "", title: "ajgfei",
+    var streams = [VideoStreaming.Stream(id: "111", userId: "aaa", userName: "AAA", gameId: "g111", type: "", title: "ajgfei",
                                          viewerCount: 2, startedAt: "", language: "en", thumbnailUrl: "", tagIds: nil),
                    VideoStreaming.Stream(id: "222", userId: "bbb", userName: "BBB", gameId: "g222", type: "live", title: "lalala",
                                          viewerCount: 6, startedAt: "", language: "en", thumbnailUrl: "", tagIds: nil),
@@ -22,13 +22,14 @@ class MockGameStreamsAPI: GameStreamsAPIProtocol {
     }
 }
 
-class VideoPlaylistTests: XCTestCase {
+class VideoPlaylistDataSourceTests: XCTestCase {
     
+    let apiManager = MockGameStreamsAPI()
     var dataSource: VideoPlaylistDataSource?
     var tableView: UITableView!
 
     override func setUp() {
-        dataSource = VideoPlaylistDataSource(apiManager: MockGameStreamsAPI(), gameId: "")
+        dataSource = VideoPlaylistDataSource(apiManager: apiManager, gameId: "")
         tableView = UITableView()
         
         tableView.dataSource = dataSource
@@ -48,19 +49,23 @@ class VideoPlaylistTests: XCTestCase {
     }
 
     func testDataSourceNumbreOfRows() {
-        XCTAssertEqual(dataSource?.tableView(tableView, numberOfRowsInSection: 0), 3)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 3)
     }
     
-    func testDataSourceCellForRowAt() {
-        let cell = dataSource?.tableView(tableView, cellForRowAt: IndexPath(row: 1, section: 0))
+    func testDataSourceTypeOfCell() {
+        let i = Int.random(in: 0..<3)
+        let cell = dataSource?.tableView(tableView, cellForRowAt: IndexPath(row: i, section: 0))
 
         XCTAssert(cell is VideoTableViewCell)
-        
-        let videoCell = cell as! VideoTableViewCell
-        let stream = videoCell.getVideoView().getStream()
-        
-        XCTAssertEqual(stream.id, "222")
-        XCTAssertEqual(stream.type, "live")
     }
+    
+    func testDataSourceCellContent() {
+        let i = Int.random(in: 0..<3)
+        let cell = dataSource?.tableView(tableView, cellForRowAt: IndexPath(row: i, section: 0)) as! VideoTableViewCell
+        
+        XCTAssertEqual(cell.videoId, apiManager.streams[i].id)
+    }
+    
+    
 
 }

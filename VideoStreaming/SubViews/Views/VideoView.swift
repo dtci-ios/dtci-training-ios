@@ -55,8 +55,4 @@ class VideoView: UIView, NibLoadable {
         videoDurationAndDate.text = nil
         liveLabel.isHidden = true
     }
-    
-    func getStream() -> Stream {
-        return stream!
-    }
 }
