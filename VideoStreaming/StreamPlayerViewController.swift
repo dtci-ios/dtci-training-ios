@@ -13,6 +13,7 @@ import AVFoundation
 class StreamPlayerViewController: UIViewController {
     @IBOutlet private weak var videoPlayerView: UIView!
     @IBOutlet private weak var descriptionView: UIView!
+    @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var relatedVideosTableView: UITableView!
     
     private var playerViewController: AVPlayerViewController!
@@ -20,15 +21,17 @@ class StreamPlayerViewController: UIViewController {
     private var videosAPI = VideosAPI() 
     private var streamUrl: URL
     private var userId: String
+    private var titleText: String
     private var relatedVideos: [Video] = [Video]()
 
     static var nibName: String {
         return String(describing: self)
     }
     
-    init(streamingUrl url: URL, userId id: String) {
+    init(streamingUrl url: URL, userId id: String, title: String?) {
         streamUrl = url
         userId = id
+        titleText = title ?? ""
         super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
         
         videosAPI.fetchVideoList(byUserId: userId) { [weak self] (result) in
@@ -49,6 +52,7 @@ class StreamPlayerViewController: UIViewController {
     required init?(coder: NSCoder) {
         streamUrl = URL(fileURLWithPath: "")
         userId = ""
+        titleText = ""
         super.init(coder: coder)
     }
     
@@ -57,6 +61,10 @@ class StreamPlayerViewController: UIViewController {
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         relatedVideosTableView.refreshControl = UIRefreshControl()
         relatedVideosTableView.refreshControl?.tintColor = .white
+        
+        descriptionLabel.lineBreakMode = .byWordWrapping
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.text = titleText
         
         videoPlayerView.addSubview(playerViewController.view)
         
