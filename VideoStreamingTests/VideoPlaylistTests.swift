@@ -10,15 +10,12 @@ import XCTest
 @testable import VideoStreaming
 
 class MockGameStreamsAPI: GameStreamsAPIProtocol {
-    let streams: [VideoStreaming.Stream] = [VideoStreaming.Stream(id: "111", userId: "aaa", userName: "AAA", gameId: "g111",
-                                                                  type: "", title: "ajgfei", viewerCount: 2, startedAt: "",
-                                                                  language: "en", thumbnailUrl: "", tagIds: nil),
-                                            VideoStreaming.Stream(id: "222", userId: "bbb", userName: "BBB", gameId: "g222",
-                                                                  type: "live", title: "lalala", viewerCount: 6, startedAt: "",
-                                                                  language: "en", thumbnailUrl: "", tagIds: nil),
-                                            VideoStreaming.Stream(id: "333", userId: "ccc", userName: "CCC", gameId: "g333",
-                                                                  type: "", title: "saraasas", viewerCount: 5, startedAt: "",
-                                                                  language: "en", thumbnailUrl: "", tagIds: nil)]
+    let streams = [VideoStreaming.Stream(id: "111", userId: "aaa", userName: "AAA", gameId: "g111", type: "", title: "ajgfei",
+                                         viewerCount: 2, startedAt: "", language: "en", thumbnailUrl: "", tagIds: nil),
+                   VideoStreaming.Stream(id: "222", userId: "bbb", userName: "BBB", gameId: "g222", type: "live", title: "lalala",
+                                         viewerCount: 6, startedAt: "", language: "en", thumbnailUrl: "", tagIds: nil),
+                   VideoStreaming.Stream(id: "333", userId: "ccc", userName: "CCC", gameId: "g333", type: "", title: "saraasas",
+                                         viewerCount: 5, startedAt: "", language: "en", thumbnailUrl: "", tagIds: nil)]
     
     func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[VideoStreaming.Stream], APIError>) -> Void) {
         completion(.success(streams))
