@@ -11,7 +11,6 @@ import Alamofire
 
 class PwnServiceAPI {
     var requestURL: String
-    var streamer: String?
     
     private enum Constants {
         static let twitchURL = "https://twitch.tv"
@@ -19,13 +18,11 @@ class PwnServiceAPI {
     }
     
     init?(forUser user: String) {
-        streamer = user
-        
         guard let twitchURL = URL(string: Constants.twitchURL) else { return nil }
         
         var componentsForTwitchURL = URLComponents(url: twitchURL, resolvingAgainstBaseURL: false)
         
-        componentsForTwitchURL?.path = "/\(streamer ?? "")"
+        componentsForTwitchURL?.path = "/\(user)"
         
         guard let serviceURL = URL(string: Constants.serviceURL) else { return nil }
 
