@@ -11,7 +11,7 @@ import Alamofire
 
 class PwnServiceAPI {
     var requestURL: String
-    var streamer: String
+    var streamer: String?
     
     private enum Constants {
         static let twitchURL = "https://twitch.tv"
@@ -25,7 +25,7 @@ class PwnServiceAPI {
         
         var componentsForTwitchURL = URLComponents(url: twitchURL, resolvingAgainstBaseURL: false)
         
-        componentsForTwitchURL?.path = "/\(streamer.utf16)"
+        componentsForTwitchURL?.path = "/\(streamer ?? "")"
         
         guard let serviceURL = URL(string: Constants.serviceURL) else { return nil }
 
@@ -37,6 +37,25 @@ class PwnServiceAPI {
         
         requestURL = componentsForServiceURL?.url?.absoluteString ?? ""
     }
+    
+    init?(with videoId: String) {
+        guard let twitchURL = URL(string: Constants.twitchURL) else { return nil }
+        
+        var componentsForTwitchURL = URLComponents(url: twitchURL, resolvingAgainstBaseURL: false)
+        
+        componentsForTwitchURL?.path = "/videos/\(videoId)"
+        
+        guard let serviceURL = URL(string: Constants.serviceURL) else { return nil }
+
+        var componentsForServiceURL = URLComponents(url: serviceURL, resolvingAgainstBaseURL: false)
+        
+        componentsForServiceURL?.queryItems = [
+            URLQueryItem(name: "url", value: componentsForTwitchURL?.url?.absoluteString ?? "")
+        ]
+        
+        requestURL = componentsForServiceURL?.url?.absoluteString ?? ""
+    }
+    
     
     func fetchStreamingM3U8Urls(completion: @escaping (Swift.Result<PwnResponse.QualityUrls, APIError>) -> Void) {
         Alamofire.request(requestURL, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in

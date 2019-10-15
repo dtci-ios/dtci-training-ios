@@ -124,14 +124,35 @@ extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let videoURLString = relatedVideos[indexPath.row].url
+        let videoId = relatedVideos[indexPath.row].id
         
-        guard let videoURL = URL(string: videoURLString) else { return }
+        let pwnServiceAPI = PwnServiceAPI(with: videoId)
         
-        player = AVPlayer(url: videoURL)
-        
-        playerViewController.player = player
-        playerViewController.player?.play()
+        pwnServiceAPI?.fetchStreamingM3U8Urls { [weak self] (result) in
+            switch result {
+            case .success(let urls):
+                let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
+                    
+                for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
+                    alert.addAction(UIAlertAction(title: key, style: .default, handler: { (action) in
+                        if let stringURL = urls[key], let m3u8URL = URL(string: stringURL) {
+                            self?.player = AVPlayer(url: m3u8URL)
+                            self?.playerViewController.player = self?.player
+                            self?.playerViewController.player?.play()
+                        }
+                    }))
+                }
+                    
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                               
+                self?.present(alert, animated: true)
+                    
+            case .failure(let error):
+                let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alert, animated: true)
+            }
+        }
     }
 }
 
