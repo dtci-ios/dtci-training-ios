@@ -260,9 +260,9 @@
 		9C04F3E6233045CC005FBE8E /* VideoStreamingTests */ = {
 			isa = PBXGroup;
 			children = (
-				2629401B2354EC0A00C0C557 /* TopGamesDataSourceTests.swift */,
 				26A310FA234E59DF008021EF /* Mocks */,
 				9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */,
+				2629401B2354EC0A00C0C557 /* TopGamesDataSourceTests.swift */,
 				9C04F3E9233045CC005FBE8E /* Info.plist */,
 			);
 			path = VideoStreamingTests;
