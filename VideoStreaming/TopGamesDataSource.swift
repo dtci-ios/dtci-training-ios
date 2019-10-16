@@ -17,15 +17,77 @@ class TopGamesDataSource: NSObject, UICollectionViewDataSource {
         self.topGamesAPI = topGamesAPI
     }
 
-    func fetchDataSource(completionForView: @escaping (APIError?) -> Void) {
+    func hasAnyGame() -> Bool {
+        !self.games.isEmpty
+    }
+
+    func isGamesEmpty() -> Bool {
+        self.games.isEmpty
+    }
+
+    func getGamesCount() -> Int {
+        return games.count
+    }
+
+    func getGameAt(_ position: Int) -> Game? {
+        return (0 <= position && position <= games.count - 1) ? self.games[position] : nil
+    }
+
+    func getFirstGame() -> Game? {
+        return self.games.first
+    }
+
+    func getLastGame() -> Game? {
+        return self.games.last
+    }
+
+    func clearGames() {
+        self.games.removeAll()
+    }
+
+    func addFirstGame(_ game: Game) {
+        self.games.insert(game, at: 0)
+    }
+
+    func addLastGame(_ game: Game) {
+        self.games.append(game)
+    }
+
+    func addGameAt(_ game: Game, position: Int) {
+        self.games.insert(game, at: position)
+    }
+
+    func removeFirstGame() {
+        self.games.removeFirst()
+    }
+
+    func removeLastGame() {
+        self.games.removeLast()
+    }
+
+    func removeGameAt(_ position: Int) {
+        self.games.remove(at: position)
+    }
+
+    func removeGame(_ toRemove: Game) {
+        if let indexToRemove = self.games.firstIndex(of: toRemove) {
+            self.games.remove(at: indexToRemove)
+        }
+    }
+
+    func containsGame(_ game: Game) -> Bool {
+        return self.games.contains(game)
+    }
+
+    func fetchDataSource(completion: @escaping (APIError?) -> Void) {
         topGamesAPI.fetchTopGames { result in
             switch result {
             case .success(let topGames):
                 self.games = topGames
-                completionForView(nil)
+                completion(nil)
             case .failure(let error):
                 self.games = []
-                completionForView(error)
+                completion(error)
             }
         }
     }
@@ -36,13 +98,13 @@ class TopGamesDataSource: NSObject, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
-        viewCell.game = games[indexPath.row]
+        viewCell.game = getGameAt(indexPath.row)
 
         return viewCell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? games.count : 0
+        return section == 0 ? getGamesCount() : 0
     }
 }
 
