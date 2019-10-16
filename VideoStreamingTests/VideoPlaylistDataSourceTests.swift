@@ -67,16 +67,30 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     }
     
     func testDataSourceClean() {
-        let tuple = dataSource?.clean()
-        XCTAssertEqual(tuple?.0, 0)
-        XCTAssertEqual(tuple?.1, "")
+        XCTAssert((dataSource?.clean())!)
+    }
+    
+    func testDataSourceContains() {
+        XCTAssertEqual(dataSource?.containsStream(withId: "notValidId"), nil)
+        XCTAssertEqual(dataSource?.containsStream(withId: "222"), 1)
     }
     
     func testDataSourceAdd() {
-        let previousCount = dataSource?.addStream(nil) ?? 0
-        XCTAssertEqual(dataSource?.addStream(VideoStreaming.Stream(id: "333", userId: "ccc", userName: "CCC", gameId: "g333",
-                                                                  type: "", title: "saraasas", viewerCount: 5, startedAt: "",
-                                                                  language: "en", thumbnailUrl: "", tagIds: nil)), (previousCount+1))
+        let countBeforeAdd = dataSource?.getStreamCount()
+        let countAfterAdd = dataSource?.add(stream: VideoStreaming.Stream(id: "444", userId: "ddd", userName: "DDD", gameId: "g444",
+                                                                   type: "", title: "asdads", viewerCount: 7, startedAt: "",
+                                                                   language: "sp", thumbnailUrl: "", tagIds: nil))
+        
+        XCTAssertEqual(countAfterAdd, countBeforeAdd! + 1)
+        XCTAssertEqual(dataSource?.getStreamCount(), dataSource?.add(stream: nil))
+    }
+    
+    func testDataSourceRemove() {
+        let countBeforeRemove = dataSource?.getStreamCount()
+        let countAfterRemove = dataSource?.removeStream(withId: "333")
+
+        XCTAssertEqual(countAfterRemove, countBeforeRemove! - 1)
+        XCTAssertEqual(dataSource?.getStreamCount(), dataSource?.removeStream(withId: "notValidId"))
     }
     
 }

@@ -14,8 +14,6 @@ protocol GameStreamsAPIProtocol {
 
 class GameStreamsAPI: NetworkManager, GameStreamsAPIProtocol {
     var request = "https://api.twitch.tv/helix/streams"
-//    //to force error alert:
-//    var request = "https://api.twitch.tv/helix/sarasaaa"
     
     func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void) {
         let params: [String:Any] = ["game_id":gameId]
