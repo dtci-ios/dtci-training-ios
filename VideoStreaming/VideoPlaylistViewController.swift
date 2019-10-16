@@ -68,6 +68,16 @@ class VideoPlaylistViewController: UIViewController {
             present(alert, animated: true)
         }
     }
+    
+    private func playVideo(with streamingURL: String?) {
+        if let url = streamingURL, let m3u8URL = URL(string: url) {
+            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL)
+                           
+            present(streamPlayerViewController, animated: true)
+                           
+            streamPlayerViewController.play()
+        }
+    }
 }
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
@@ -107,14 +117,8 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
                 let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
                 
                 for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
-                    alert.addAction(UIAlertAction(title: key, style: .default, handler: { (action) in
-                        if let stringURL = urls[key], let m3u8URL = URL(string: stringURL) {
-                            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL)
-                                           
-                            self?.present(streamPlayerViewController, animated: true)
-                                           
-                            streamPlayerViewController.play()
-                        }
+                    alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
+                        self?.playVideo(with: urls[key])
                     }))
                 }
                 
