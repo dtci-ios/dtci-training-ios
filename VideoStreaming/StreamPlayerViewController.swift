@@ -139,6 +139,7 @@ extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource
                             self?.player = AVPlayer(url: m3u8URL)
                             self?.playerViewController.player = self?.player
                             self?.playerViewController.player?.play()
+                            self?.descriptionLabel.text = self?.relatedVideos[indexPath.row].title
                         }
                     }))
                 }
