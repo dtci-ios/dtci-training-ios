@@ -102,6 +102,15 @@ class StreamPlayerViewController: UIViewController {
         addChild(playerViewController)
         playerViewController.didMove(toParent: self)
     }
+    
+    private func playVideo(with videoURL: String?, andNewTitle newTitle: String) {
+        if let url = videoURL, let m3u8URL = URL(string: url) {
+            player = AVPlayer(url: m3u8URL)
+            playerViewController.player = player
+            playerViewController.player?.play()
+            descriptionLabel.text = newTitle
+        }
+    }
 }
 
 extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource {
@@ -128,19 +137,14 @@ extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource
         
         let pwnServiceAPI = PwnServiceAPI(with: videoId)
         
-        pwnServiceAPI?.fetchStreamingM3U8Urls { [weak self] (result) in
+        pwnServiceAPI?.fetchM3U8Urls { [weak self] (result) in
             switch result {
             case .success(let urls):
                 let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
                     
                 for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
                     alert.addAction(UIAlertAction(title: key, style: .default, handler: { (action) in
-                        if let stringURL = urls[key], let m3u8URL = URL(string: stringURL) {
-                            self?.player = AVPlayer(url: m3u8URL)
-                            self?.playerViewController.player = self?.player
-                            self?.playerViewController.player?.play()
-                            self?.descriptionLabel.text = self?.relatedVideos[indexPath.row].title
-                        }
+                        self?.playVideo(with: urls[key], andNewTitle: self?.relatedVideos[indexPath.row].title ?? "NO TITLE")
                     }))
                 }
                     

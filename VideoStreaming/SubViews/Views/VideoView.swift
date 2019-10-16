@@ -16,11 +16,6 @@ class VideoView: UIView, NibLoadable {
     @IBOutlet private weak var videoDurationAndDate: UILabel!
     @IBOutlet private weak var liveLabel: UILabel!
     
-    private enum Constants {
-        static let nibName = String(describing: VideoView.self)
-        static let placeholderImageName = "noImage"
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         nibSetup()
