@@ -38,7 +38,7 @@ class TopGamesCollectionViewController: UIViewController {
         collectionView.register(UINib(nibName: GameCollectionViewCell.Constants.nibName, bundle: nil), forCellWithReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier)
         
         collectionView.delegate = self
-        collectionView.dataSource = dataSource
+        collectionView.dataSource = self
         
         dataSource.fetchDataSource(completion: errorCompletionHandler(error:))
     }
@@ -61,7 +61,7 @@ class TopGamesCollectionViewController: UIViewController {
     }
 }
 
-extension TopGamesCollectionViewController: UICollectionViewDelegate {
+extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = self.collectionView.cellForItem(at: indexPath) as! GameCollectionViewCell
 
@@ -70,6 +70,21 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate {
         let videoPlaylistVC = VideoPlaylistViewController(with: game)
 
         navigationController?.pushViewController(videoPlaylistVC, animated: true)
+    }
+
+    //UICollectionViewDataSource
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let viewCell = collectionView.dequeueReusableCell(withReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier, for: indexPath) as? GameCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+
+        viewCell.game = self.dataSource.getGameAt(indexPath.row)
+
+        return viewCell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return section == 0 ? self.dataSource.getGamesCount() : 0
     }
 }
 

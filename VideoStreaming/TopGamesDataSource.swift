@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopGamesDataSource: NSObject, UICollectionViewDataSource {
+class TopGamesDataSource: NSObject {
 
     private var topGamesAPI: TopGamesAPIProtocol
     private var games: [Game] = []
@@ -90,21 +90,6 @@ class TopGamesDataSource: NSObject, UICollectionViewDataSource {
                 completion(error)
             }
         }
-    }
-    
-    //UICollectionViewDataSource
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let viewCell = collectionView.dequeueReusableCell(withReuseIdentifier: GameCollectionViewCell.Constants.reuseIdentifier, for: indexPath) as? GameCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-
-        viewCell.game = getGameAt(indexPath.row)
-
-        return viewCell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? getGamesCount() : 0
     }
 }
 
