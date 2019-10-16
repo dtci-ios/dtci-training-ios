@@ -97,24 +97,38 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let streamUserId = streams[indexPath.row]?.userId else { return }
+        guard let streamUserId = streams[indexPath.row]?.userId, let streamer = streams[indexPath.row]?.userName else { return }
         
-        let pwnServiceAPI = PwnServiceAPI(withUserId: streamUserId)
+        let usersAPI = UsersAPI()
+        var loginName: String?
+        
+        usersAPI.fetchUsers(userId: streamUserId) { (result) in
+            switch result {
+            case .success(let users):
+                loginName = users.first?.login ?? ""
+            case .failure(let error):
+                let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true)
+            }
+        }
+        
+        let pwnServiceAPI = PwnServiceAPI(userName: loginName ?? streamer)
     
-        pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
+        pwnServiceAPI.fetchStreamingM3U8Urls { (result) in
             switch result {
             case .success(let urls):
                 guard let lastStreamingUrl = urls[urls.keys.first ?? ""], let url = URL(string: lastStreamingUrl) else { return }
-                           
+                               
                 let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
-                               
-                self?.present(streamPlayerViewController, animated: true)
-                               
+                                   
+                self.present(streamPlayerViewController, animated: true)
+                                   
                 streamPlayerViewController.play()
             case .failure(let error):
                 let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self?.present(alert, animated: true)
+                self.present(alert, animated: true)
             }
         }
     }
