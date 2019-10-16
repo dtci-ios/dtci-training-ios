@@ -40,7 +40,7 @@ class TopGamesCollectionViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = dataSource
         
-        dataSource.fetchDataSource(completionForView: errorCompletionHandler(error:))
+        dataSource.fetchDataSource(completion: errorCompletionHandler(error:))
     }
 
     func errorCompletionHandler(error: APIError?) {
