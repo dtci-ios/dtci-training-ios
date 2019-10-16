@@ -59,8 +59,8 @@ class StreamPlayerViewController: UIViewController {
     override func viewDidLoad() {
         relatedVideosTableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
-        relatedVideosTableView.refreshControl = UIRefreshControl()
-        relatedVideosTableView.refreshControl?.tintColor = .white
+        
+        relatedVideosTableView.backgroundColor = .black
         
         descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
