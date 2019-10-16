@@ -107,11 +107,12 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let streamUserName = streams[indexPath.row]?.userName else { return }
 
-        let pwnServiceAPI = PwnServiceAPI(forUser: streamUserName)
+        guard let streamUserId = streams[indexPath.row]?.userId else { return }
+        
+        let pwnServiceAPI = PwnServiceAPI(withUserId: streamUserId)
     
-        pwnServiceAPI?.fetchStreamingM3U8Urls { [weak self] (result) in
+        pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
             switch result {
             case .success(let urls):
                 let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
