@@ -10,12 +10,15 @@ import XCTest
 @testable import VideoStreaming
 
 class MockGameStreamsAPI: GameStreamsAPIProtocol {
-    var streams = [VideoStreaming.Stream(id: "111", userId: "aaa", userName: "AAA", gameId: "g111", type: "", title: "ajgfei",
-                                         viewerCount: 2, startedAt: "", language: "en", thumbnailUrl: "", tagIds: nil),
-                   VideoStreaming.Stream(id: "222", userId: "bbb", userName: "BBB", gameId: "g222", type: "live", title: "lalala",
-                                         viewerCount: 6, startedAt: "", language: "en", thumbnailUrl: "", tagIds: nil),
-                   VideoStreaming.Stream(id: "333", userId: "ccc", userName: "CCC", gameId: "g333", type: "", title: "saraasas",
-                                         viewerCount: 5, startedAt: "", language: "en", thumbnailUrl: "", tagIds: nil)]
+    var streams = [VideoStreaming.Stream(id: "111", userId: "aaa", userName: "AAA", gameId: "g111", type: "",
+                                         title: "ajgfei", viewerCount: 2, startedAt: "", language: "en", thumbnailUrl: "",
+                                         tagIds: nil),
+                   VideoStreaming.Stream(id: "222", userId: "bbb", userName: "BBB", gameId: "g222", type: "live",
+                                         title: "lalala", viewerCount: 6, startedAt: "", language: "en", thumbnailUrl: "",
+                                         tagIds: nil),
+                   VideoStreaming.Stream(id: "333", userId: "ccc", userName: "CCC", gameId: "g333", type: "",
+                                         title: "saraasas", viewerCount: 5, startedAt: "", language: "en", thumbnailUrl: "",
+                                         tagIds: nil)]
     
     func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[VideoStreaming.Stream], APIError>) -> Void) {
         completion(.success(streams))
@@ -77,9 +80,12 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     
     func testDataSourceAdd() {
         let countBeforeAdd = dataSource?.getStreamCount()
-        let countAfterAdd = dataSource?.add(stream: VideoStreaming.Stream(id: "444", userId: "ddd", userName: "DDD", gameId: "g444",
-                                                                   type: "", title: "asdads", viewerCount: 7, startedAt: "",
-                                                                   language: "sp", thumbnailUrl: "", tagIds: nil))
+        let countAfterAdd = dataSource?.add(stream: VideoStreaming.Stream(id: "444", userId: "ddd",
+                                                                          userName: "DDD", gameId: "g444",
+                                                                          type: "", title: "asdads",
+                                                                          viewerCount: 7, startedAt: "",
+                                                                          language: "sp", thumbnailUrl: "",
+                                                                          tagIds: nil))
         
         XCTAssertEqual(countAfterAdd, countBeforeAdd! + 1)
         XCTAssertEqual(dataSource?.getStreamCount(), dataSource?.add(stream: nil))
