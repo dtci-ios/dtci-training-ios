@@ -17,66 +17,12 @@ class TopGamesDataSource: NSObject {
         self.topGamesAPI = topGamesAPI
     }
 
-    func hasAnyGame() -> Bool {
-        !self.games.isEmpty
-    }
-
-    func isGamesEmpty() -> Bool {
-        self.games.isEmpty
-    }
-
     func getGamesCount() -> Int {
         return games.count
     }
 
     func getGameAt(_ position: Int) -> Game? {
         return (0 <= position && position <= games.count - 1) ? self.games[position] : nil
-    }
-
-    func getFirstGame() -> Game? {
-        return self.games.first
-    }
-
-    func getLastGame() -> Game? {
-        return self.games.last
-    }
-
-    func clearGames() {
-        self.games.removeAll()
-    }
-
-    func addFirstGame(_ game: Game) {
-        self.games.insert(game, at: 0)
-    }
-
-    func addLastGame(_ game: Game) {
-        self.games.append(game)
-    }
-
-    func addGameAt(_ game: Game, position: Int) {
-        self.games.insert(game, at: position)
-    }
-
-    func removeFirstGame() {
-        self.games.removeFirst()
-    }
-
-    func removeLastGame() {
-        self.games.removeLast()
-    }
-
-    func removeGameAt(_ position: Int) {
-        self.games.remove(at: position)
-    }
-
-    func removeGame(_ toRemove: Game) {
-        if let indexToRemove = self.games.firstIndex(of: toRemove) {
-            self.games.remove(at: indexToRemove)
-        }
-    }
-
-    func containsGame(_ game: Game) -> Bool {
-        return self.games.contains(game)
     }
 
     func fetchDataSource(completion: @escaping (APIError?) -> Void) {
