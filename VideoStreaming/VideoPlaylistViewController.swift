@@ -41,7 +41,6 @@ class VideoPlaylistViewController: UIViewController {
         
         showHUD()
         
-        tableView.dataSource = dataSource
         dataSource.load(completionForView: errorCompletionHandler(error:))
         
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
@@ -69,9 +68,9 @@ class VideoPlaylistViewController: UIViewController {
     }
 }
 
-// MARK: TableViewDelegate
+// MARK: TableViewDelegate & TableViewDataSource
 
-extension VideoPlaylistViewController: UITableViewDelegate {
+extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
@@ -87,6 +86,25 @@ extension VideoPlaylistViewController: UITableViewDelegate {
         present(streamPlayerViewController, animated: true) {
             streamPlayerViewController.play()
         }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? dataSource.getStreamCount() : 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier,
+                                                       for: indexPath) as? VideoTableViewCell else { return VideoTableViewCell() }
+        
+        guard let stream = dataSource.getStream(withRow: indexPath.row) else { return VideoTableViewCell() }
+        
+        cell.configure(with: stream)
+        
+        return cell
     }
     
 }

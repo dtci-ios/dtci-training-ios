@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VideoPlaylistDataSource: NSObject, UITableViewDataSource {
+class VideoPlaylistDataSource {
     
     private var streams: [Stream] = []
     private var gameId: String?
@@ -17,7 +17,6 @@ class VideoPlaylistDataSource: NSObject, UITableViewDataSource {
     init(apiManager: GameStreamsAPIProtocol, gameId: String) {
         self.apiManager = apiManager
         self.gameId = gameId
-        super.init()
     }
     
     func load(completionForView: @escaping (APIError?) -> Void) {
@@ -37,27 +36,6 @@ class VideoPlaylistDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    // MARK: DataSourceProtocol functions
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? streams.count : 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier,
-                                                       for: indexPath) as? VideoTableViewCell else { return VideoTableViewCell() }
-        
-        cell.configure(with: streams[indexPath.row])
-        
-        return cell
-    }
-    
-    // MARK: CRUD functions
-    
     func clean() -> Bool {
         streams.removeAll()
         gameId = nil
@@ -69,25 +47,18 @@ class VideoPlaylistDataSource: NSObject, UITableViewDataSource {
         return streams.count
     }
     
-    func add(stream: Stream?) -> Int {
-        if let stream = stream {
-            guard let _ = containsStream(withId: stream.id) else {
-                streams.append(stream)
-                return getStreamCount()
-            }
-        }
-        return getStreamCount()
+    func getStream(withId streamId: String) -> Stream? {
+        if let i = containsStream(withId: streamId) {
+            return streams[i]
+        } else { return nil }
+    }
+    
+    func getStream(withRow indexRow: Int) -> Stream? {
+        return indexRow < streams.count ? streams[indexRow] : nil
     }
     
     func containsStream(withId streamId: String?) -> Int? {
         return streams.firstIndex { $0.id == streamId }
-    }
-    
-    func removeStream(withId streamId: String?) -> Int {
-        if let i = containsStream(withId: streamId) {
-            streams.remove(at: i)
-        }
-        return getStreamCount()
     }
     
 }
