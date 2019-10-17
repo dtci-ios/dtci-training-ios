@@ -6,7 +6,7 @@
 //  Copyright © 2019 ESPN. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class VideoPlaylistDataSource {
     
@@ -14,7 +14,7 @@ class VideoPlaylistDataSource {
     private var gameId: String?
     private let apiManager: GameStreamsAPIProtocol
     
-    init(apiManager: GameStreamsAPIProtocol, gameId: String) {
+    init(apiManager: GameStreamsAPIProtocol, gameId: String?) {
         self.apiManager = apiManager
         self.gameId = gameId
     }

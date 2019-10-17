@@ -35,6 +35,44 @@ class VideoPlaylistDataSourceTests: XCTestCase {
                           type: "", title: "saraasas", viewerCount: 5, startedAt: "", language: "en",
                           thumbnailUrl: "", tagIds: nil)]
     
+    func testDataSourceDidLoad() {
+        // given
+        apiManager = MockGameStreamsAPI(streams: streams)
+        dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
+        
+        // where
+        let expectation = self.expectation(description: "Loading Data")
+        var completionError: APIError?
+        dataSource?.load { error in
+            completionError = error
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        // then
+        XCTAssertEqual(dataSource?.getStreamCount(), streams.count)
+        XCTAssertNil(completionError)
+    }
+    
+    func testDataSourceDidNotLoad() {
+        // given
+        apiManager = MockGameStreamsAPI(streams: [])
+        dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: nil)
+        
+        // where
+        let expectation = self.expectation(description: "Loading Data")
+        var completionError: APIError?
+        dataSource?.load { error in
+            completionError = error
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        // then
+        XCTAssertNotEqual(dataSource?.getStreamCount(), streams.count)
+        XCTAssertNotNil(completionError)
+    }
+    
     func testDataSourceGetStreamCount() {
         // given
         apiManager = MockGameStreamsAPI(streams: streams)
