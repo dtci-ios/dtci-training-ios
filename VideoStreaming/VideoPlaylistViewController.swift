@@ -92,7 +92,8 @@ class VideoPlaylistViewController: UIViewController {
         }
     }
     
-    private func getUserLoginNameFrom(_ result: Swift.Result<[User],APIError>, _ userLoginName: inout String) {
+    private func getUserLoginNameFrom(_ result: Swift.Result<[User],APIError>) -> String {
+        var userLoginName = ""
         switch result {
         case .success(let users):
             userLoginName = users.first?.login ?? ""
@@ -101,6 +102,7 @@ class VideoPlaylistViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
+        return userLoginName
     }
     
     private func getURLsFrom(_ result: Swift.Result<PwnResponse.QualityUrls,APIError>) {
@@ -156,26 +158,16 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let streamUserId = streams[indexPath.row]?.userId else { return }
         
-        var loginName: String = ""
-        let semaphore = DispatchSemaphore(value: 0)
-        let dispatchQueue = DispatchQueue.global(qos: .background)
-        
-        dispatchQueue.async {
-            let usersAPI = UsersAPI()
+        let usersAPI = UsersAPI()
             
-            usersAPI.fetchUsers(userId: streamUserId) { [weak self] (result) in
-                self?.getUserLoginNameFrom(result, &loginName)
-                semaphore.signal()
-            }
-            semaphore.wait()
+        usersAPI.fetchUsers(userId: streamUserId) { [weak self] (result) in
+            guard let userLoginName = self?.getUserLoginNameFrom(result) else { return }
             
-            let pwnServiceAPI = PwnServiceAPI(userName: loginName)
-            
+            let pwnServiceAPI = PwnServiceAPI(userName: userLoginName)
+                
             pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
                 self?.getURLsFrom(result)
-                semaphore.signal()
             }
-            semaphore.wait()
         }
     }
 }
