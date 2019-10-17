@@ -19,9 +19,9 @@ class VideoPlaylistDataSource {
         self.gameId = gameId
     }
     
-    func load(completionForView: @escaping (APIError?) -> Void) {
+    func load(completion: @escaping (APIError?) -> Void) {
         guard let gameId = gameId else {
-            completionForView(.responseDataNil)
+            completion(.responseDataNil)
             return
         }
         
@@ -29,9 +29,9 @@ class VideoPlaylistDataSource {
             switch result {
             case .success(let gameStreams):
                 self.streams = gameStreams
-                completionForView(nil)
+                completion(nil)
             case .failure(let error):
-                completionForView(error)
+                completion(error)
             }
         }
     }

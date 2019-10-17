@@ -40,7 +40,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         apiManager = MockGameStreamsAPI(streams: streams)
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
-        // where
+        // when
         let expectation = self.expectation(description: "Loading Data")
         var completionError: APIError?
         dataSource?.load { error in
@@ -59,7 +59,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         apiManager = MockGameStreamsAPI(streams: streams)
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: nil)
         
-        // where
+        // when
         let expectation = self.expectation(description: "Loading Data")
         var completionError: APIError?
         dataSource?.load { error in
@@ -80,7 +80,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         apiManager = MockGameStreamsAPI(streams: [])
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
-        // where
+        // when
         let expectation = self.expectation(description: "Loading Data")
         var completionError: APIError?
         dataSource?.load { error in
@@ -102,7 +102,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         dataSource?.load { _ in }
         
-        // where
+        // when
         let firstCount = dataSource?.getStreamCount()
         
         // and given
@@ -110,7 +110,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         dataSource?.load { _ in }
         
-        // where
+        // when
         let secondCount = dataSource?.getStreamCount()
         
         // then
@@ -124,7 +124,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         apiManager = MockGameStreamsAPI(streams: streams)
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
-        // where
+        // when
         dataSource?.load { _ in }
         guard let isEmpty = dataSource?.clean() else { return XCTFail() }
         
@@ -138,7 +138,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         apiManager = MockGameStreamsAPI(streams: streams)
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
-        // where
+        // when
         dataSource?.load { _ in }
         let nilStreamIndex = dataSource?.containsStream(withId: "notValidId")
         let validStreamIndex = dataSource?.containsStream(withId: "222")
@@ -154,7 +154,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         apiManager = MockGameStreamsAPI(streams: streams)
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
-        // where
+        // when
         dataSource?.load { _ in }
         let nilStream = dataSource?.getStream(withId: "notValidId")
         let validStream = dataSource?.getStream(withId: "333")
@@ -171,7 +171,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         apiManager = MockGameStreamsAPI(streams: streams)
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
-        // where
+        // when
         dataSource?.load { _ in }
         let nilStream = dataSource?.getStream(withRow: 4)
         let validStream = dataSource?.getStream(withRow: 0)

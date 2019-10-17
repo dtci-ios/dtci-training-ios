@@ -41,7 +41,7 @@ class VideoPlaylistViewController: UIViewController {
         
         showHUD()
         
-        dataSource.load(completionForView: errorCompletionHandler(error:))
+        dataSource.load(completion: errorCompletionHandler(error:))
         
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
@@ -54,7 +54,7 @@ class VideoPlaylistViewController: UIViewController {
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
-        dataSource.load(completionForView: errorCompletionHandler(error:))
+        dataSource.load(completion: errorCompletionHandler(error:))
     }
     
     func errorCompletionHandler(error: APIError?) {

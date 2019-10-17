@@ -43,7 +43,6 @@ enum APIError: Error, Equatable {
 protocol NetworkManager {
     typealias QueryString = [String:Any]
     var request: String { get }
-//    var sessionManager: SessionManager { get set }
 }
 
 extension NetworkManager {
