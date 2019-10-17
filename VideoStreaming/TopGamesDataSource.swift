@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopGamesDataSource: NSObject {
+class TopGamesDataSource {
 
     private var topGamesAPI: TopGamesAPIProtocol
     private var games: [Game] = []
