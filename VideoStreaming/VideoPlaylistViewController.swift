@@ -10,19 +10,6 @@ import UIKit
 import AVKit
 import Alamofire
 
-class ExecutionOperation: Operation {
-    typealias ExecutionBlock = (() -> Void)
-    let executableBlock: ExecutionBlock
-    
-    init(block: @escaping ExecutionBlock) {
-        executableBlock = block
-    }
-    
-    override func main() {
-        executableBlock()
-    }
-}
-
 class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
