@@ -111,6 +111,28 @@ class StreamPlayerViewController: UIViewController {
             descriptionLabel.text = newTitle
         }
     }
+    
+    private func createVideoCell(_ result: Result<PwnResponse.QualityUrls, APIError>, indexPath: IndexPath) {
+        switch result {
+        case .success(let urls):
+            let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
+                
+            for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
+                alert.addAction(UIAlertAction(title: key, style: .default, handler: { (action) in
+                    self.playVideo(with: urls[key], andNewTitle: self.relatedVideos[indexPath.row].title)
+                }))
+            }
+                
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                           
+            self.present(alert, animated: true)
+                
+        case .failure(let error):
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
 }
 
 extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource {
@@ -137,35 +159,12 @@ extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource
         
         let pwnServiceAPI = PwnServiceAPI(with: videoId)
         
+        showHUD()
+        
         pwnServiceAPI?.fetchM3U8Urls { [weak self] (result) in
-            switch result {
-            case .success(let urls):
-                let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
-                    
-                for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
-                    alert.addAction(UIAlertAction(title: key, style: .default, handler: { (action) in
-                        self?.playVideo(with: urls[key], andNewTitle: self?.relatedVideos[indexPath.row].title ?? "NO TITLE")
-                    }))
-                }
-                    
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                               
-                self?.present(alert, animated: true)
-                    
-            case .failure(let error):
-                let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self?.present(alert, animated: true)
-            }
+            self?.createVideoCell(result, indexPath: indexPath)
+            self?.dismissHUD()
         }
     }
 }
 
-extension StreamPlayerViewController {
-    private func reloadVideoPlayerConstraints(isActivate: Bool) {
-        videoPlayerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = isActivate
-        videoPlayerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = isActivate
-        videoPlayerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = isActivate
-        videoPlayerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = isActivate
-    }
-}

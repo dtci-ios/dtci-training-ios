@@ -143,7 +143,9 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         guard let streamUserId = streams[indexPath.row]?.userId else { return }
         
         let usersAPI = UsersAPI()
-            
+        
+        showHUD()
+        
         usersAPI.fetchUsers(userId: streamUserId) { [weak self] (result) in
             guard let userLoginName = self?.getUserLoginNameFrom(result) else { return }
             
@@ -151,6 +153,7 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
                 
             pwnServiceAPI?.fetchM3U8Urls { [weak self] (result) in
                 self?.createCells(result, userId: streamUserId, indexPath: indexPath)
+                self?.dismissHUD()
             }
         }
     }
