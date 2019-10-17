@@ -157,11 +157,12 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         guard let streamUserId = streams[indexPath.row]?.userId else { return }
         
         var loginName: String = ""
-        let usersAPI = UsersAPI()
         let semaphore = DispatchSemaphore(value: 0)
-        let dispatchQueue = DispatchQueue.global(qos: .background) // qos: Quality of Services
+        let dispatchQueue = DispatchQueue.global(qos: .background)
         
         dispatchQueue.async {
+            let usersAPI = UsersAPI()
+            
             usersAPI.fetchUsers(userId: streamUserId) { [weak self] (result) in
                 self?.getUserLoginNameFrom(&loginName, result)
                 semaphore.signal()
