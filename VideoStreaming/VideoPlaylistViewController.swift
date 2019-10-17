@@ -91,7 +91,41 @@ class VideoPlaylistViewController: UIViewController {
             streamPlayerViewController.play()
         }
     }
+    
+    private func getUserLoginNameFrom(_ userLoginName: inout String, _ result: Swift.Result<[User],APIError>) {
+        switch result {
+        case .success(let users):
+            userLoginName = users.first?.login ?? ""
+        case .failure(let error):
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
+    
+    private func getURLsFrom(_ result: Swift.Result<PwnResponse.QualityUrls,APIError>) {
+        switch result {
+        case .success(let urls):
+            let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
+            
+            for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
+                alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
+                    self.playVideo(with: urls[key])
+                }))
+            }
+                
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                           
+            self.present(alert, animated: true)
+        case .failure(let error):
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
 }
+
+
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -122,49 +156,22 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let streamUserId = streams[indexPath.row]?.userId else { return }
         
-        var loginName: String?
-        
+        var loginName: String = ""
         let usersAPI = UsersAPI()
-        
         let semaphore = DispatchSemaphore(value: 0)
-        
         let dispatchQueue = DispatchQueue.global(qos: .background) // qos: Quality of Services
         
         dispatchQueue.async {
             usersAPI.fetchUsers(userId: streamUserId) { [weak self] (result) in
-                switch result {
-                case .success(let users):
-                    loginName = users.first?.login ?? ""
-                case .failure(let error):
-                    let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true)
-                }
+                self?.getUserLoginNameFrom(&loginName, result)
                 semaphore.signal()
             }
             semaphore.wait()
             
-            let pwnServiceAPI = PwnServiceAPI(userName: loginName ?? "")
+            let pwnServiceAPI = PwnServiceAPI(userName: loginName)
             
             pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
-                switch result {
-                case .success(let urls):
-                    let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
-                    
-                    for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
-                        alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
-                            self?.playVideo(with: urls[key])
-                        }))
-                    }
-                        
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                                   
-                    self?.present(alert, animated: true)
-                case .failure(let error):
-                    let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true)
-                }
+                self?.getURLsFrom(result)
                 semaphore.signal()
             }
             semaphore.wait()
