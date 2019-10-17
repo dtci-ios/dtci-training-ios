@@ -68,7 +68,50 @@ class VideoPlaylistViewController: UIViewController {
             present(alert, animated: true)
         }
     }
+    
+    private func playVideo(with streamingURL: String?, userId: String, title: String) {
+        if let url = streamingURL, let m3u8URL = URL(string: url) {
+            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL, userId: userId, title: title)
+            present(streamPlayerViewController, animated: true)
+        }
+    }
+    
+    private func getUserLoginNameFrom(_ result: Swift.Result<[User],APIError>) -> String {
+        var userLoginName = ""
+        switch result {
+        case .success(let users):
+            userLoginName = users.first?.login ?? ""
+        case .failure(let error):
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+        return userLoginName
+    }
+    
+    private func createCells(_ result: Swift.Result<PwnResponse.QualityUrls,APIError>, userId: String, indexPath: IndexPath) {
+        switch result {
+        case .success(let urls):
+            let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
+            
+            for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
+                alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
+                    self.playVideo(with: urls[key], userId: userId, title: self.streams[indexPath.row]?.title ?? "")
+                }))
+            }
+                
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                           
+            self.present(alert, animated: true)
+        case .failure(let error):
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
 }
+
+
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -97,35 +140,17 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let streamUserName = streams[indexPath.row]?.userName, let streamUserId = streams[indexPath.row]?.userId else {
-            return
-        }
-
-        let pwnServiceAPI = PwnServiceAPI(forUser: streamUserName)
-    
-        pwnServiceAPI?.fetchM3U8Urls { [weak self] (result) in
-            switch result {
-            case .success(let urls):
-                let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
+        guard let streamUserId = streams[indexPath.row]?.userId else { return }
+        
+        let usersAPI = UsersAPI()
+            
+        usersAPI.fetchUsers(userId: streamUserId) { [weak self] (result) in
+            guard let userLoginName = self?.getUserLoginNameFrom(result) else { return }
+            
+            let pwnServiceAPI = PwnServiceAPI(forUser: userLoginName)
                 
-                for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
-                    alert.addAction(UIAlertAction(title: key, style: .default, handler: { (action) in
-                        if let stringURL = urls[key], let m3u8URL = URL(string: stringURL) {
-                            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL, userId: streamUserId, title: self?.streams[indexPath.row]?.title)
-                                           
-                            self?.present(streamPlayerViewController, animated: true)
-                        }
-                    }))
-                }
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                           
-                self?.present(alert, animated: true)
-                
-            case .failure(let error):
-                let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self?.present(alert, animated: true)
+            pwnServiceAPI?.fetchM3U8Urls { [weak self] (result) in
+                self?.createCells(result, userId: streamUserId, indexPath: indexPath)
             }
         }
     }

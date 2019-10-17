@@ -80,9 +80,20 @@ struct Stream: Codable {
     }
 }
 
-struct PwnResponse: Codable {
-    typealias QualityUrls = [String:String]
-    let urls: QualityUrls
+struct User: Codable {
+    let id: String
+    let login: String
+    let displayName: String
+    let type: String
+    let description: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case login
+        case displayName = "display_name"
+        case type
+        case description
+    }
 }
 
 struct ReceivedData<T:Codable>: Codable {
@@ -91,4 +102,9 @@ struct ReceivedData<T:Codable>: Codable {
     enum CodingKeys: String, CodingKey {
         case dataArray = "data"
     }
+}
+
+struct PwnResponse: Codable {
+    typealias QualityUrls = [String:String]
+    let urls: QualityUrls
 }
