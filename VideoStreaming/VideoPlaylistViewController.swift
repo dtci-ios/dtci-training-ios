@@ -92,7 +92,7 @@ class VideoPlaylistViewController: UIViewController {
         }
     }
     
-    private func getUserLoginNameFrom(_ userLoginName: inout String, _ result: Swift.Result<[User],APIError>) {
+    private func getUserLoginNameFrom(_ result: Swift.Result<[User],APIError>, _ userLoginName: inout String) {
         switch result {
         case .success(let users):
             userLoginName = users.first?.login ?? ""
@@ -164,7 +164,7 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
             let usersAPI = UsersAPI()
             
             usersAPI.fetchUsers(userId: streamUserId) { [weak self] (result) in
-                self?.getUserLoginNameFrom(&loginName, result)
+                self?.getUserLoginNameFrom(result, &loginName)
                 semaphore.signal()
             }
             semaphore.wait()
