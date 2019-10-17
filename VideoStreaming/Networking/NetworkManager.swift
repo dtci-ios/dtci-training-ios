@@ -14,7 +14,7 @@ import Alamofire
 //    - https://api.twitch.tv/helix/streams?game_id=21779
 //    - https://api.twitch.tv/helix/videos?user_id=67955580
 
-enum APIError: Error {
+enum APIError: Error, Equatable {
     case responseDataNil
     case emptyDataArray
     case wrongAPI
@@ -33,6 +33,10 @@ enum APIError: Error {
             case .urlError(let urlError): return urlError.localizedDescription
             case .unknownError(let unknownError): return unknownError.localizedDescription
         }
+    }
+    
+    static func == (lhs: APIError, rhs: APIError) -> Bool {
+        return lhs.localizedDescription == rhs.localizedDescription
     }
 }
 

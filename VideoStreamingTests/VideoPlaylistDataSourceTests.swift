@@ -17,7 +17,7 @@ class MockGameStreamsAPI: GameStreamsAPIProtocol {
     }
     
     func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[VideoStreaming.Stream], APIError>) -> Void) {
-        completion(.success(streams))
+        streams.isEmpty ? completion(.failure(.emptyDataArray)) : completion(.success(streams))
     }
 }
 
@@ -54,9 +54,9 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         XCTAssertNil(completionError)
     }
     
-    func testDataSourceDidNotLoad() {
+    func testDataSourceDidNotLoadNilDataError() {
         // given
-        apiManager = MockGameStreamsAPI(streams: [])
+        apiManager = MockGameStreamsAPI(streams: streams)
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: nil)
         
         // where
@@ -71,6 +71,29 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         // then
         XCTAssertNotEqual(dataSource?.getStreamCount(), streams.count)
         XCTAssertNotNil(completionError)
+        XCTAssert(completionError == APIError.responseDataNil)
+        XCTAssert(completionError != APIError.emptyDataArray)
+    }
+    
+    func testDataSourceDidNotLoadEmptyArrayError() {
+        // given
+        apiManager = MockGameStreamsAPI(streams: [])
+        dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
+        
+        // where
+        let expectation = self.expectation(description: "Loading Data")
+        var completionError: APIError?
+        dataSource?.load { error in
+            completionError = error
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        // then
+        XCTAssertNotEqual(dataSource?.getStreamCount(), streams.count)
+        XCTAssertNotNil(completionError)
+        XCTAssert(completionError == APIError.emptyDataArray)
+        XCTAssert(completionError != APIError.wrongAPI)
     }
     
     func testDataSourceGetStreamCount() {
@@ -123,6 +146,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         // then
         XCTAssertNil(nilStreamIndex)
         XCTAssertEqual(validStreamIndex, 1)
+        XCTAssertNotEqual(validStreamIndex, 0)
     }
     
     func testDataSourceGetStreamWithId() {
