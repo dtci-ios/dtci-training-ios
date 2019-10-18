@@ -10,14 +10,14 @@ import XCTest
 @testable import VideoStreaming
 
 class MockGameStreamsAPI: GameStreamsAPIProtocol {
-    var streams: [VideoStreaming.Stream]
+    var fetchCompletionResult: Swift.Result<[VideoStreaming.Stream],APIError>
     
-    init(streams: [VideoStreaming.Stream]) {
-        self.streams = streams
+    init(result: Swift.Result<[VideoStreaming.Stream],APIError>) {
+        self.fetchCompletionResult = result
     }
     
     func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[VideoStreaming.Stream], APIError>) -> Void) {
-        streams.isEmpty ? completion(.failure(.emptyDataArray)) : completion(.success(streams))
+        completion(fetchCompletionResult)
     }
 }
 
@@ -37,7 +37,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     
     func testDataSourceDidLoad() {
         // given
-        apiManager = MockGameStreamsAPI(streams: streams)
+        apiManager = MockGameStreamsAPI(result: .success(streams))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
@@ -56,7 +56,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     
     func testDataSourceDidNotLoadNilDataError() {
         // given
-        apiManager = MockGameStreamsAPI(streams: streams)
+        apiManager = MockGameStreamsAPI(result: .success(streams))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: nil)
         
         // when
@@ -77,7 +77,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     
     func testDataSourceDidNotLoadEmptyArrayError() {
         // given
-        apiManager = MockGameStreamsAPI(streams: [])
+        apiManager = MockGameStreamsAPI(result: .failure(.emptyDataArray))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
@@ -98,7 +98,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     
     func testDataSourceGetStreamCount() {
         // given
-        apiManager = MockGameStreamsAPI(streams: streams)
+        apiManager = MockGameStreamsAPI(result: .success(streams))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         dataSource?.load { _ in }
         
@@ -106,7 +106,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         let firstCount = dataSource?.getStreamCount()
         
         // and given
-        apiManager = MockGameStreamsAPI(streams: [streams[1]])
+        apiManager = MockGameStreamsAPI(result: .success([streams[1]]))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         dataSource?.load { _ in }
         
@@ -121,7 +121,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     
     func testDataSourceClean() {
         // given
-        apiManager = MockGameStreamsAPI(streams: streams)
+        apiManager = MockGameStreamsAPI(result: .success(streams))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
@@ -135,7 +135,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     
     func testDataSourceContains() {
         // given
-        apiManager = MockGameStreamsAPI(streams: streams)
+        apiManager = MockGameStreamsAPI(result: .success(streams))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
@@ -151,7 +151,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     
     func testDataSourceGetStreamWithId() {
         // given
-        apiManager = MockGameStreamsAPI(streams: streams)
+        apiManager = MockGameStreamsAPI(result: .success(streams))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
@@ -168,7 +168,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     
     func testDataSourceGetStreamWithRow() {
         // given
-        apiManager = MockGameStreamsAPI(streams: streams)
+        apiManager = MockGameStreamsAPI(result: .success(streams))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
