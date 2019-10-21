@@ -34,7 +34,9 @@ class PwnServiceAPI {
             URLQueryItem(name: "url", value: componentsForTwitchURL?.url?.absoluteString ?? "")
         ]
         
-        requestURL = componentsForServiceURL?.url?.absoluteString ?? ""
+        guard let url = componentsForServiceURL?.url?.absoluteString else { return nil }
+        
+        requestURL = url
     }
     
     init?(with videoId: String) {
@@ -52,7 +54,9 @@ class PwnServiceAPI {
             URLQueryItem(name: "url", value: componentsForTwitchURL?.url?.absoluteString ?? "")
         ]
         
-        requestURL = componentsForServiceURL?.url?.absoluteString ?? ""
+        guard let url = componentsForServiceURL?.url?.absoluteString else { return nil }
+        
+        requestURL = url
     }
     
     

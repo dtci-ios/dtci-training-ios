@@ -63,51 +63,41 @@ class VideoPlaylistViewController: UIViewController {
             streams = gameStreams
             tableView.reloadData()
         case .failure(let error):
-            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true)
+            popUpAlert(for: error)
         }
     }
     
-    private func playVideo(with streamingURL: String?, userId: String, title: String) {
+    private func createPlayer(with streamingURL: String?, title: String, andRelatedVideosFor userId: String) {
         if let url = streamingURL, let m3u8URL = URL(string: url) {
-            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL, userId: userId, title: title)
+            let streamPlayerViewController = StreamPlayerViewController(with: m3u8URL, title: title,
+                                                                        andRelatedVideosFor: userId)
             present(streamPlayerViewController, animated: true)
         }
     }
-    
-    private func getUserLoginNameFrom(_ result: Swift.Result<[User],APIError>) -> String {
-        var userLoginName = ""
-        switch result {
-        case .success(let users):
-            userLoginName = users.first?.login ?? ""
-        case .failure(let error):
-            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
-        }
+
+    private func takeUserLoginName(from users: [User]) -> String {
+        guard let userLoginName = users.first?.login else { return "" }
         return userLoginName
     }
     
-    private func createCells(_ result: Swift.Result<PwnResponse.QualityUrls,APIError>, userId: String, indexPath: IndexPath) {
-        switch result {
-        case .success(let urls):
-            let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
-            
-            for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
-                alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
-                    self.playVideo(with: urls[key], userId: userId, title: self.streams[indexPath.row]?.title ?? "")
-                }))
-            }
-                
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                           
-            self.present(alert, animated: true)
-        case .failure(let error):
-            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
+    private func createOptionsForPlayer(with urls: PwnResponse.QualityUrls, title: String, andRelatedVideosFor userId: String) {
+        let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
+        
+        for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
+            alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
+                self.createPlayer(with: urls[key], title: title, andRelatedVideosFor: userId)
+            }))
         }
+            
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                       
+        present(alert, animated: true)
+    }
+    
+    private func popUpAlert(for error: APIError) {
+        let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
     }
 }
 
@@ -140,20 +130,33 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let streamUserId = streams[indexPath.row]?.userId else { return }
+        guard let userId = streams[indexPath.row]?.userId else { return }
         
         let usersAPI = UsersAPI()
         
         showHUD()
         
-        usersAPI.fetchUsers(userId: streamUserId) { [weak self] (result) in
-            guard let userLoginName = self?.getUserLoginNameFrom(result) else { return }
+        usersAPI.fetchUsers(userId: userId) { (result) in
             
-            let pwnServiceAPI = PwnServiceAPI(forUser: userLoginName)
+            switch result {
+            case .success(let users):
+                let pwnServiceAPI = PwnServiceAPI(forUser: self.takeUserLoginName(from: users))
+                    
+                pwnServiceAPI?.fetchM3U8Urls { [weak self] (result) in
+                    
+                    switch result {
+                    case .success(let urls):
+                        self?.createOptionsForPlayer(with: urls, title: self?.streams[indexPath.row]?.title ?? "NO TITLE",
+                                                     andRelatedVideosFor: userId)
+                    case .failure(let error):
+                        self?.popUpAlert(for: error)
+                    }
+                    
+                    self?.dismissHUD()
+                }
                 
-            pwnServiceAPI?.fetchM3U8Urls { [weak self] (result) in
-                self?.createCells(result, userId: streamUserId, indexPath: indexPath)
-                self?.dismissHUD()
+            case .failure(let error):
+                self.popUpAlert(for: error)
             }
         }
     }
