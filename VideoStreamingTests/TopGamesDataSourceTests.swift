@@ -89,14 +89,14 @@ class TopGamesDataSourceTests: XCTestCase {
     }
 
     func testFetchDataSourceSuccess() {
-        // given
+        // 1. given
         gamesMock = [Game(id: "123", name: "456", boxArtUrl: "www.Aanypic.com"),
                      Game(id: "789", name: "012", boxArtUrl: "www.Banypic.com"),
                      Game(id: "345", name: "678", boxArtUrl: "www.Canypic.com")]
         fetchDataResultOfCompletionMock = .success(gamesMock)
         sut = TopGamesDataSource(topGamesAPI: TopGamesAPIMock(fetchDataResultOfCompletionMock))
 
-        // where
+        // 2. when
         let expectation = self.expectation(description: "Loading Data")
         var completionError: APIError?
         sut.fetchDataSource{ error in
@@ -105,18 +105,18 @@ class TopGamesDataSourceTests: XCTestCase {
         }
         waitForExpectations(timeout: 5, handler: nil)
 
-        // then
+        // 3. then
         XCTAssertEqual(sut.topGamesCount, gamesMock.count)
         XCTAssertNil(completionError)
     }
 
     func testFetchDataSourceFail() {
-        // given
+        // 1. given
         gamesMock = []
         fetchDataResultOfCompletionMock = .failure(APIError.emptyDataArray)
         sut = TopGamesDataSource(topGamesAPI: TopGamesAPIMock(fetchDataResultOfCompletionMock))
 
-        // where
+        // 2. when
         let expectation = self.expectation(description: "Fails Load Data")
         var completionError: APIError?
         sut.fetchDataSource{ error in
@@ -125,7 +125,7 @@ class TopGamesDataSourceTests: XCTestCase {
         }
         waitForExpectations(timeout: 5, handler: nil)
 
-        // then
+        // 3. then
         XCTAssertEqual(sut.topGamesCount, 0)
         XCTAssertEqual(completionError, APIError.emptyDataArray)
     }
