@@ -101,6 +101,19 @@ class VideoPlaylistViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true)
     }
+    
+    private func createServicesToRetriveURLs(searchingURLsFor loginName: String) {
+        let pwnServiceAPI = PwnServiceAPI(userName: loginName)
+        
+        pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
+            switch result {
+            case .success(let urls):
+                self?.createOptions(for: urls)
+            case .failure(let error):
+                self?.popUpAlert(for: error)
+            }
+        }
+    }
 }
 
 
@@ -135,39 +148,23 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         guard let streamUserId = streams[indexPath.row]?.userId else { return }
         
         let usersAPI = UsersAPI()
-        
-        showHUD()
             
         usersAPI.fetchUsers(userId: streamUserId) { (result) in
 
             switch result {
             case .success(let users):
                 let loginName = self.takeUserLoginName(from: users)
-                
                 if loginName != "" {
-                    
-                    let pwnServiceAPI = PwnServiceAPI(userName: loginName)
-                    
-                    pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
-                        switch result {
-                        case .success(let urls):
-                            self?.createOptions(for: urls)
-                        case .failure(let error):
-                            self?.popUpAlert(for: error)
-                        }
-                        self?.dismissHUD()
-                    }
+                    self.createServicesToRetriveURLs(searchingURLsFor: loginName)
+                    self.dismissHUD()
                 } else {
-                    let alert = UIAlertController(title: "ERROR", message: "Cannot create API for retrieve urls without user's login name", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "ERROR", message: "Cannot create API to retrieve urls without user's login name", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true)
-                    self.dismissHUD()
                 }
-                
             case .failure(let error):
                 self.popUpAlert(for: error)
             }
-            
         }
     }
 }
