@@ -19,6 +19,7 @@
 		5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C6EB7233A830700829078 /* MainViewController.swift */; };
 		5C61ADC22346661300342FC7 /* StreamPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */; };
 		5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */; };
+		5C6C8754235E4F9C0013DE5E /* StreamPlayerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C8753235E4F9C0013DE5E /* StreamPlayerDataSource.swift */; };
 		5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */; };
 		5CE97CE723317662008CF451 /* VideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CE97CE623317662008CF451 /* VideoView.xib */; };
 		5CE97CE92331786F008CF451 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CE82331786F008CF451 /* VideoView.swift */; };
@@ -81,6 +82,7 @@
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
 		5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		5C6C8753235E4F9C0013DE5E /* StreamPlayerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerDataSource.swift; sourceTree = "<group>"; };
 		5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PwnResponseAPI.swift; sourceTree = "<group>"; };
 		5CE97CE623317662008CF451 /* VideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoView.xib; sourceTree = "<group>"; };
 		5CE97CE82331786F008CF451 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5C6C8752235E4F570013DE5E /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				5C6C8753235E4F9C0013DE5E /* StreamPlayerDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
 		5CE97E4F2331854F00D844CB /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +221,7 @@
 		9C04F3CF233045CA005FBE8E /* VideoStreaming */ = {
 			isa = PBXGroup;
 			children = (
+				5C6C8752235E4F570013DE5E /* DataSources */,
 				5CE97E512331857900D844CB /* Models */,
 				5CE97E4F2331854F00D844CB /* SubViews */,
 				A79B1D62233C07DD003D4099 /* Networking */,
@@ -480,6 +491,7 @@
 				5CE97CEB2331793D008CF451 /* Video.swift in Sources */,
 				9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */,
 				A7518BEF233D09570050D8D5 /* TopGamesAPI.swift in Sources */,
+				5C6C8754235E4F9C0013DE5E /* StreamPlayerDataSource.swift in Sources */,
 				5CFC76B3235611BF00B58CE1 /* UsersAPI.swift in Sources */,
 				2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */,
 				5CFFC5432332A3A400D78035 /* VideoTableViewCell.swift in Sources */,
