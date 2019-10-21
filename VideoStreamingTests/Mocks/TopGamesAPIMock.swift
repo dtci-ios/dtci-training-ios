@@ -20,6 +20,8 @@ class TopGamesAPIMock: NetworkManager, TopGamesAPIProtocol {
     }
 
     func fetchTopGames(completion: @escaping (Result<[Game],APIError>) -> Void) {
-        completion(fetchDataResultOfCompletion)
+        DispatchQueue.main.async {
+            completion(self.fetchDataResultOfCompletion)
+        }
     }
 }
