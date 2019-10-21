@@ -79,38 +79,29 @@ class VideoPlaylistViewController: UIViewController {
         }
     }
     
-    private func getUserLoginNameFrom(_ result: Swift.Result<[User],APIError>) -> String {
-        var userLoginName = ""
-        switch result {
-        case .success(let users):
-            userLoginName = users.first?.login ?? ""
-        case .failure(let error):
-            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
-        }
+    private func takeUserLoginName(from users: [User]) -> String {
+        guard let userLoginName = users.first?.login else { return "" }
         return userLoginName
     }
     
-    private func getURLsFrom(_ result: Swift.Result<PwnResponse.QualityUrls,APIError>) {
-        switch result {
-        case .success(let urls):
-            let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
-            
-            for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
-                alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
-                    self.playVideo(with: urls[key])
-                }))
-            }
-                
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                           
-            self.present(alert, animated: true)
-        case .failure(let error):
-            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
+    private func createOptions(for urls: PwnResponse.QualityUrls) {
+        let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
+        
+        for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
+            alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
+                self.playVideo(with: urls[key])
+            }))
         }
+            
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                       
+        present(alert, animated: true)
+    }
+    
+    private func popUpAlert(for error: APIError) {
+        let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
     }
 }
 
@@ -147,14 +138,26 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         
         let usersAPI = UsersAPI()
             
-        usersAPI.fetchUsers(userId: streamUserId) { [weak self] (result) in
-            guard let userLoginName = self?.getUserLoginNameFrom(result) else { return }
-            
-            let pwnServiceAPI = PwnServiceAPI(userName: userLoginName)
+        usersAPI.fetchUsers(userId: streamUserId) { (result) in
+
+            switch result {
+            case .success(let users):
                 
-            pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
-                self?.getURLsFrom(result)
+                let pwnServiceAPI = PwnServiceAPI(userName: self.takeUserLoginName(from: users))
+                
+                pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
+                    switch result {
+                    case .success(let urls):
+                        self?.createOptions(for: urls)
+                    case .failure(let error):
+                        self?.popUpAlert(for: error)
+                    }
+                }
+                
+            case .failure(let error):
+                self.popUpAlert(for: error)
             }
+            
         }
     }
 }

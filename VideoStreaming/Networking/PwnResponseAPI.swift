@@ -37,9 +37,9 @@ class PwnServiceAPI {
             URLQueryItem(name: "url", value: componentsForTwitchURL?.url?.absoluteString ?? "")
         ]
         
-        requestURL = componentsForServiceURL?.url?.absoluteString ?? ""
+        guard let requestURL = componentsForServiceURL?.url?.absoluteString else { return }
         
-        Alamofire.request(requestURL ?? "", parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
+        Alamofire.request(requestURL, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
             switch response.result {
             case .success:
                 
