@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import Alamofire
 
 class VideoPlaylistViewController: UIViewController {
     
@@ -76,18 +77,6 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         return 100
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
-
-        let streamUrl = URL(fileURLWithPath: filePath)
-
-        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: streamUrl)
-
-        present(streamPlayerViewController, animated: true) {
-            streamPlayerViewController.play()
-        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -107,6 +96,29 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let streamUserId = dataSource.getStream(withRow: indexPath.row)?.userId else { return }
+        
+        let pwnServiceAPI = PwnServiceAPI(withUserId: streamUserId)
+    
+        pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
+            switch result {
+            case .success(let urls):
+                guard let lastStreamingUrl = urls[urls.keys.first ?? ""], let url = URL(string: lastStreamingUrl) else { return }
+                           
+                let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
+                               
+                self?.present(streamPlayerViewController, animated: true)
+                               
+                streamPlayerViewController.play()
+            case .failure(let error):
+                let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alert, animated: true)
+            }
+        }
+    }
 }
+
 
 
