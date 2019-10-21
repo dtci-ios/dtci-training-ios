@@ -17,7 +17,7 @@ class TopGamesDataSource {
         self.topGamesAPI = topGamesAPI
     }
 
-    func getGamesCount() -> Int {
+    var topGamesCount: Int {
         return games.count
     }
 

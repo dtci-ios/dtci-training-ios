@@ -84,7 +84,7 @@ extension TopGamesCollectionViewController: UICollectionViewDelegate, UICollecti
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? self.dataSource.getGamesCount() : 0
+        return section == 0 ? self.dataSource.topGamesCount : 0
     }
 }
 

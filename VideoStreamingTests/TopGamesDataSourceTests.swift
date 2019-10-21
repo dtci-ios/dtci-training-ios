@@ -39,7 +39,7 @@ class TopGamesDataSourceTests: XCTestCase {
         sut.fetchDataSource{ error in return }
 
         // 3. then
-        XCTAssertEqual(sut.getGamesCount(), 0)
+        XCTAssertEqual(sut.topGamesCount, 0)
     }
 
     func testGetGamesCountNotEqualCero() {
@@ -54,7 +54,7 @@ class TopGamesDataSourceTests: XCTestCase {
         sut.fetchDataSource{ error in return }
 
         // 3. then
-        XCTAssertEqual(sut.getGamesCount(), 3)
+        XCTAssertEqual(sut.topGamesCount, 3)
     }
 
     func testGetGameAtReturnsNil() {
@@ -106,7 +106,7 @@ class TopGamesDataSourceTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
 
         // then
-        XCTAssertEqual(sut.getGamesCount(), gamesMock.count)
+        XCTAssertEqual(sut.topGamesCount, gamesMock.count)
         XCTAssertNil(completionError)
     }
 
@@ -126,7 +126,7 @@ class TopGamesDataSourceTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
 
         // then
-        XCTAssertEqual(sut.getGamesCount(), 0)
+        XCTAssertEqual(sut.topGamesCount, 0)
         XCTAssertEqual(completionError, APIError.emptyDataArray)
     }
 }
