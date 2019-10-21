@@ -17,14 +17,16 @@ class MockGameStreamsAPI: GameStreamsAPIProtocol {
     }
     
     func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[VideoStreaming.Stream], APIError>) -> Void) {
-        completion(fetchCompletionResult)
+        DispatchQueue.main.async {
+            completion(self.fetchCompletionResult)
+        }
     }
 }
 
 class VideoPlaylistDataSourceTests: XCTestCase {
     
-    var apiManager: MockGameStreamsAPI?
-    var dataSource: VideoPlaylistDataSource?
+    var apiManager: MockGameStreamsAPI!
+    var dataSource: VideoPlaylistDataSource!
     var streams = [VideoStreaming.Stream(id: "111", userId: "aaa", userName: "AAA", gameId: "g111",
                           type: "", title: "ajgfei", viewerCount: 2, startedAt: "", language: "en",
                           thumbnailUrl: "", tagIds: nil),
@@ -38,7 +40,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
     func testDataSourceDidLoad() {
         // given
         apiManager = MockGameStreamsAPI(result: .success(streams))
-        dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
+        dataSource = VideoPlaylistDataSource(apiManager: apiManager, gameId: "")
         
         // when
         let expectation = self.expectation(description: "Loading Data")
@@ -50,7 +52,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         
         // then
-        XCTAssertEqual(dataSource?.getStreamCount(), streams.count)
+        XCTAssertEqual(dataSource?.streamCount, streams.count)
         XCTAssertNil(completionError)
     }
     
@@ -69,7 +71,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         
         // then
-        XCTAssertNotEqual(dataSource?.getStreamCount(), streams.count)
+        XCTAssertNotEqual(dataSource?.streamCount, streams.count)
         XCTAssertNotNil(completionError)
         XCTAssert(completionError == APIError.responseDataNil)
         XCTAssert(completionError != APIError.emptyDataArray)
@@ -90,7 +92,7 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         
         // then
-        XCTAssertNotEqual(dataSource?.getStreamCount(), streams.count)
+        XCTAssertNotEqual(dataSource?.streamCount, streams.count)
         XCTAssertNotNil(completionError)
         XCTAssert(completionError == APIError.emptyDataArray)
         XCTAssert(completionError != APIError.wrongAPI)
@@ -100,18 +102,27 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         // given
         apiManager = MockGameStreamsAPI(result: .success(streams))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
-        dataSource?.load { _ in }
+        let firstExpectation = self.expectation(description: "Loading Data")
+        dataSource?.load { _ in
+            firstExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
         
         // when
-        let firstCount = dataSource?.getStreamCount()
+        let firstCount = dataSource?.streamCount
         
         // and given
         apiManager = MockGameStreamsAPI(result: .success([streams[1]]))
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
-        dataSource?.load { _ in }
+        
+        let secondExpectation = self.expectation(description: "Loading Data")
+        dataSource?.load { _ in
+            secondExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
         
         // when
-        let secondCount = dataSource?.getStreamCount()
+        let secondCount = dataSource?.streamCount
         
         // then
         XCTAssertNotEqual(firstCount, secondCount)
@@ -125,12 +136,16 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
-        dataSource?.load { _ in }
+        let expectation = self.expectation(description: "Loading Data")
+        dataSource?.load { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
         guard let isEmpty = dataSource?.clean() else { return XCTFail() }
         
         // then
         XCTAssert(isEmpty)
-        XCTAssertEqual(dataSource?.getStreamCount(), 0)
+        XCTAssertEqual(dataSource?.streamCount, 0)
     }
     
     func testDataSourceContains() {
@@ -139,7 +154,11 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
-        dataSource?.load { _ in }
+        let expectation = self.expectation(description: "Loading Data")
+        dataSource?.load { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
         let nilStreamIndex = dataSource?.containsStream(withId: "notValidId")
         let validStreamIndex = dataSource?.containsStream(withId: "222")
         
@@ -155,7 +174,11 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
-        dataSource?.load { _ in }
+        let expectation = self.expectation(description: "Loading Data")
+        dataSource?.load { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
         let nilStream = dataSource?.getStream(withId: "notValidId")
         let validStream = dataSource?.getStream(withId: "333")
         
@@ -172,7 +195,11 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
         
         // when
-        dataSource?.load { _ in }
+        let expectation = self.expectation(description: "Loading Data")
+        dataSource?.load { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
         let nilStream = dataSource?.getStream(withRow: 4)
         let validStream = dataSource?.getStream(withRow: 0)
         

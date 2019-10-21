@@ -14,6 +14,10 @@ class VideoPlaylistDataSource {
     private var gameId: String?
     private let apiManager: GameStreamsAPIProtocol
     
+    var streamCount: Int {
+        return streams.count
+    }
+    
     init(apiManager: GameStreamsAPIProtocol, gameId: String?) {
         self.apiManager = apiManager
         self.gameId = gameId
@@ -40,11 +44,7 @@ class VideoPlaylistDataSource {
         streams.removeAll()
         gameId = nil
         
-        return (getStreamCount() == 0 && gameId == nil) ? true : false
-    }
-    
-    func getStreamCount() -> Int {
-        return streams.count
+        return (streamCount == 0 && gameId == nil) ? true : false
     }
     
     func getStream(withId streamId: String) -> Stream? {

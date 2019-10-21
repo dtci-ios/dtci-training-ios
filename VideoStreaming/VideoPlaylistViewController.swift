@@ -17,7 +17,6 @@ class VideoPlaylistViewController: UIViewController {
     private var gameName: String?
     private var gameId: String?
     private var dataSource: VideoPlaylistDataSource!
-    private var apiError: APIError?
 
     static var nibName: String {
         return String(describing: self)
@@ -82,7 +81,7 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? dataSource.getStreamCount() : 0
+        return section == 0 ? dataSource.streamCount : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

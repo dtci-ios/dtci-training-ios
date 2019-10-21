@@ -11,8 +11,6 @@ import UIKit
 @IBDesignable class VideoTableViewCell: UITableViewCell {
     @IBOutlet private weak var videoView: VideoView!
     
-    var videoId: String?
-    
     enum Constants {
         static let nibName = "VideoTableViewCell"
         static let reuseIdentifier = "videoCell"
@@ -20,7 +18,6 @@ import UIKit
     }
     
     func configure(with video: Stream) {
-        videoId = video.id
         videoView.configure(with: video)
         videoView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
     }
