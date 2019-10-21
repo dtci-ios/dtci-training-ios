@@ -63,9 +63,7 @@ class VideoPlaylistViewController: UIViewController {
             streams = gameStreams
             tableView.reloadData()
         case .failure(let error):
-            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true)
+            popUpAlert(for: error)
         }
     }
     
