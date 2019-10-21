@@ -80,27 +80,22 @@ struct Stream: Codable {
     }
 }
 
-
-struct QualityUrls: Codable {
-    let quality160p: String?
-    let quality360p: String?
-    let quality480p: String?
-    let quality720p: String?
-    let quality720p60: String?
-    let quality1080p60: String?
+struct User: Codable {
+    let id: String
+    let login: String
+    let displayName: String
+    let type: String
+    let description: String
+    let email: String
     
     enum CodingKeys: String, CodingKey {
-        case quality160p = "160p"
-        case quality360p = "360p"
-        case quality480p = "480p"
-        case quality720p = "720p"
-        case quality720p60 = "720p60"
-        case quality1080p60 = "1080p60"
+        case id
+        case login
+        case displayName = "display_name"
+        case type
+        case description
+        case email
     }
-}
-
-struct PwnResponse: Codable {
-    let urls: QualityUrls
 }
 
 struct ReceivedData<T:Codable>: Codable {
@@ -109,4 +104,9 @@ struct ReceivedData<T:Codable>: Codable {
     enum CodingKeys: String, CodingKey {
         case dataArray = "data"
     }
+}
+
+struct PwnResponse: Codable {
+    typealias QualityUrls = [String:String]
+    let urls: QualityUrls
 }

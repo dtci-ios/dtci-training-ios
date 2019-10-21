@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import Alamofire
 
 class VideoPlaylistViewController: UIViewController {
     
@@ -55,7 +56,7 @@ class VideoPlaylistViewController: UIViewController {
         networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
     
-    func fetchCompletionHandler(result: Result<[Stream], APIError>) {
+    func fetchCompletionHandler(result: Swift.Result<[Stream], APIError>) {
         dismissHUD()
         switch result {
         case .success(let gameStreams):
@@ -96,16 +97,28 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let filePath = Bundle.main.path(forResource: "lol", ofType: ".mp4") else { return }
+        guard let streamUserId = streams[indexPath.row]?.userId else { return }
         
-        let streamUrl = URL(fileURLWithPath: filePath)
-        
-        let streamPlayerViewController = StreamPlayerViewController(streamingUrl: streamUrl)
-        
-        present(streamPlayerViewController, animated: true) {
-            streamPlayerViewController.play()
+        let pwnServiceAPI = PwnServiceAPI(withUserId: streamUserId)
+    
+        pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
+            switch result {
+            case .success(let urls):
+                guard let lastStreamingUrl = urls[urls.keys.first ?? ""], let url = URL(string: lastStreamingUrl) else { return }
+                           
+                let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
+                               
+                self?.present(streamPlayerViewController, animated: true)
+                               
+                streamPlayerViewController.play()
+            case .failure(let error):
+                let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alert, animated: true)
+            }
         }
     }
 }
+
 
 

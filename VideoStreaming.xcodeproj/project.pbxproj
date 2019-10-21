@@ -20,10 +20,12 @@
 		5C61ADC0234664CC00342FC7 /* lol.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADBF234664CC00342FC7 /* lol.mp4 */; };
 		5C61ADC22346661300342FC7 /* StreamPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */; };
 		5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */; };
+		5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */; };
 		5CE97CE723317662008CF451 /* VideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CE97CE623317662008CF451 /* VideoView.xib */; };
 		5CE97CE92331786F008CF451 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CE82331786F008CF451 /* VideoView.swift */; };
 		5CE97CEB2331793D008CF451 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CEA2331793D008CF451 /* Video.swift */; };
 		5CFB597C233CDF87009C1220 /* VideosAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFB597B233CDF87009C1220 /* VideosAPI.swift */; };
+		5CFC76B3235611BF00B58CE1 /* UsersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFC76B2235611BF00B58CE1 /* UsersAPI.swift */; };
 		5CFFC5432332A3A400D78035 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFFC5412332A3A400D78035 /* VideoTableViewCell.swift */; };
 		5CFFC5442332A3A400D78035 /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CFFC5422332A3A400D78035 /* VideoTableViewCell.xib */; };
 		9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3D0233045CA005FBE8E /* AppDelegate.swift */; };
@@ -81,10 +83,12 @@
 		5C61ADBF234664CC00342FC7 /* lol.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lol.mp4; sourceTree = "<group>"; };
 		5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
 		5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PwnResponseAPI.swift; sourceTree = "<group>"; };
 		5CE97CE623317662008CF451 /* VideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoView.xib; sourceTree = "<group>"; };
 		5CE97CE82331786F008CF451 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		5CE97CEA2331793D008CF451 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		5CFB597B233CDF87009C1220 /* VideosAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosAPI.swift; sourceTree = "<group>"; };
+		5CFC76B2235611BF00B58CE1 /* UsersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAPI.swift; sourceTree = "<group>"; };
 		5CFFC5412332A3A400D78035 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		5CFFC5422332A3A400D78035 /* VideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
 		7A3E7F65AD54E7A4B68B33F3 /* Pods-VideoStreamingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreamingTests.release.xcconfig"; path = "Target Support Files/Pods-VideoStreamingTests/Pods-VideoStreamingTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 				A7518BED233D09570050D8D5 /* GameStreamsAPI.swift */,
 				A7518BEB233D09570050D8D5 /* NetworkManager.swift */,
 				A7518BEC233D09570050D8D5 /* TopGamesAPI.swift */,
+				5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */,
+				5CFC76B2235611BF00B58CE1 /* UsersAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -471,12 +477,14 @@
 				A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */,
 				5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */,
 				5CE97CE92331786F008CF451 /* VideoView.swift in Sources */,
+				5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */,
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
 				A7518BF0233D09570050D8D5 /* GameStreamsAPI.swift in Sources */,
 				5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */,
 				5CE97CEB2331793D008CF451 /* Video.swift in Sources */,
 				9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */,
 				A7518BEF233D09570050D8D5 /* TopGamesAPI.swift in Sources */,
+				5CFC76B3235611BF00B58CE1 /* UsersAPI.swift in Sources */,
 				2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */,
 				5CFFC5432332A3A400D78035 /* VideoTableViewCell.swift in Sources */,
 				5CFB597C233CDF87009C1220 /* VideosAPI.swift in Sources */,
