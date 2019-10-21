@@ -112,6 +112,7 @@ class VideoPlaylistViewController: UIViewController {
             case .failure(let error):
                 self?.popUpAlert(for: error)
             }
+            self?.dismissHUD()
         }
     }
 }
@@ -149,6 +150,8 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         
         let usersAPI = UsersAPI()
             
+        showHUD()
+        
         usersAPI.fetchUsers(userId: streamUserId) { (result) in
 
             switch result {
@@ -156,7 +159,6 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
                 let loginName = self.takeUserLoginName(from: users)
                 if loginName != "" {
                     self.createServicesToRetriveURLs(searchingURLsFor: loginName)
-                    self.dismissHUD()
                 } else {
                     let alert = UIAlertController(title: "ERROR", message: "Cannot create API to retrieve urls without user's login name", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
