@@ -23,7 +23,7 @@ class TopGamesDataSourceTests: XCTestCase {
         sut = TopGamesDataSource(topGamesAPI: TopGamesAPIMock(fetchDataResultOfCompletionMock))
 
         // 2. when
-        sut.fetchDataSource{ error in return }
+        sut.fetchDataSource { _ in return }
 
         // 3. then
         XCTAssertNotNil(sut)
@@ -36,7 +36,7 @@ class TopGamesDataSourceTests: XCTestCase {
         sut = TopGamesDataSource(topGamesAPI: TopGamesAPIMock(fetchDataResultOfCompletionMock))
 
         // 2. when
-        sut.fetchDataSource{ error in return }
+        sut.fetchDataSource { _ in return }
 
         // 3. then
         XCTAssertEqual(sut.topGamesCount, 0)
@@ -51,7 +51,11 @@ class TopGamesDataSourceTests: XCTestCase {
         sut = TopGamesDataSource(topGamesAPI: TopGamesAPIMock(fetchDataResultOfCompletionMock))
 
         // 2. when
-        sut.fetchDataSource{ error in return }
+        let expectation = self.expectation(description: "Fetch")
+        sut.fetchDataSource { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
 
         // 3. then
         XCTAssertEqual(sut.topGamesCount, 3)
@@ -64,7 +68,7 @@ class TopGamesDataSourceTests: XCTestCase {
         sut = TopGamesDataSource(topGamesAPI: TopGamesAPIMock(fetchDataResultOfCompletionMock))
 
         // 2. when
-        sut.fetchDataSource{ error in return }
+        sut.fetchDataSource { _ in return }
 
         // 3. then
         XCTAssertNil(sut.getGameAt(999))
@@ -79,7 +83,12 @@ class TopGamesDataSourceTests: XCTestCase {
         sut = TopGamesDataSource(topGamesAPI: TopGamesAPIMock(fetchDataResultOfCompletionMock))
 
         // 2. when
-        sut.fetchDataSource{ error in return }
+        let expectation = self.expectation(description: "Fetch")
+        sut.fetchDataSource { _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+
         let secondGame = sut.getGameAt(1)
 
         // 3. then
@@ -99,7 +108,7 @@ class TopGamesDataSourceTests: XCTestCase {
         // 2. when
         let expectation = self.expectation(description: "Loading Data")
         var completionError: APIError?
-        sut.fetchDataSource{ error in
+        sut.fetchDataSource { error in
             completionError = error
             expectation.fulfill()
         }
@@ -119,7 +128,7 @@ class TopGamesDataSourceTests: XCTestCase {
         // 2. when
         let expectation = self.expectation(description: "Fails Load Data")
         var completionError: APIError?
-        sut.fetchDataSource{ error in
+        sut.fetchDataSource { error in
             completionError = error
             expectation.fulfill()
         }
