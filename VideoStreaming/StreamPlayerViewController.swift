@@ -18,6 +18,7 @@ class StreamPlayerViewController: UIViewController {
     
     private var playerViewController: AVPlayerViewController!
     private var player: AVPlayer!
+    private var landscapeVideoView: UIView!
     private var videosAPI = VideosAPI() 
     private var url: URL
     private var userId: String
@@ -79,16 +80,20 @@ class StreamPlayerViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        if UIDevice.current.orientation == .landscapeRight || UIDevice.current.orientation == .landscapeLeft {
-            videoPlayerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            videoPlayerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            videoPlayerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            videoPlayerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        // let playerLayer = AVPlayerLayer(player: player)
+        
+        if landscapeVideoView == nil {
+            landscapeVideoView  = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.height, height: view.frame.width))
+            view.addSubview(landscapeVideoView)
+            playerViewController.view.frame = landscapeVideoView.bounds
+            landscapeVideoView.addSubview(playerViewController.view)
+            landscapeVideoView.willMove(toSuperview: view)
         } else {
-            videoPlayerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = false
-            videoPlayerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = false
-            videoPlayerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = false
-            videoPlayerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = false
+            playerViewController.view.removeFromSuperview()
+            landscapeVideoView.removeFromSuperview()
+            videoPlayerView.addSubview(playerViewController.view)
+            playerViewController.view.frame = videoPlayerView.bounds
+            landscapeVideoView = nil
         }
     }
     
