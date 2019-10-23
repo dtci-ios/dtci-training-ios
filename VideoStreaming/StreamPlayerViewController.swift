@@ -66,12 +66,6 @@ class StreamPlayerViewController: UIViewController {
         
         playerViewController.view.frame = videoPlayerView.bounds
         
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = videoPlayerView.bounds
-        playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        
-        videoPlayerView.layer.addSublayer(playerLayer)
-        
         player = AVPlayer(url: url)
         playerViewController.player = player
         playerViewController.player?.play()
