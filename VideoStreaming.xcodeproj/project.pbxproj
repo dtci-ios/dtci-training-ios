@@ -15,6 +15,7 @@
 		2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */; };
 		5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */; };
 		5C206257233C186C00A3859E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
+		5C21BBD22360A8020057C37B /* StreamPlayerDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C21BBD12360A8020057C37B /* StreamPlayerDataSourceTests.swift */; };
 		5C24B7AE233C09F100DE2123 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C6EB7233A830700829078 /* MainViewController.swift */; };
 		5C61ADC22346661300342FC7 /* StreamPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */; };
@@ -78,6 +79,7 @@
 		265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameCollectionViewCell.xib; sourceTree = "<group>"; };
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
 		5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerViewController.swift; sourceTree = "<group>"; };
+		5C21BBD12360A8020057C37B /* StreamPlayerDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerDataSourceTests.swift; sourceTree = "<group>"; };
 		5C24B7AD233C09F100DE2123 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */,
 				9C04F3E9233045CC005FBE8E /* Info.plist */,
+				5C21BBD12360A8020057C37B /* StreamPlayerDataSourceTests.swift */,
 			);
 			path = VideoStreamingTests;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */,
+				5C21BBD22360A8020057C37B /* StreamPlayerDataSourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,9 +14,10 @@ import Alamofire
 //    - https://api.twitch.tv/helix/streams?game_id=21779
 //    - https://api.twitch.tv/helix/videos?user_id=67955580
 
-enum APIError: Error {
+enum APIError: Error, Equatable {
     case responseDataNil
     case emptyDataArray
+    case wrongAPI
     case jsonError(Error)
     case alamofireError(Error)
     case urlError(Error)
@@ -26,11 +27,16 @@ enum APIError: Error {
         switch self {
             case .responseDataNil: return "Data is nil"
             case .emptyDataArray: return "Data Array is empty"
+            case .wrongAPI: return "Wrong API"
             case .jsonError(let jsonError): return jsonError.localizedDescription
             case .alamofireError(let afError): return afError.localizedDescription
             case .urlError(let urlError): return urlError.localizedDescription
             case .unknownError(let unknownError): return unknownError.localizedDescription
         }
+    }
+    
+    static func == (lhs: APIError, rhs: APIError) -> Bool {
+        return lhs.localizedDescription == rhs.localizedDescription 
     }
 }
 

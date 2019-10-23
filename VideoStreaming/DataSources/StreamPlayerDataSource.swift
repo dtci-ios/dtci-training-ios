@@ -12,8 +12,8 @@ import Foundation
 
 class StreamPlayerDataSource {
     private var relatedVideos: [Video] = [Video]()
-    private var apiManager: VideosAPI
-    private var userId: String
+    private var apiManager: VideosAPIProtocol
+    private var userId: String?
     
     var url: URL
     var videoTitle: String
@@ -22,7 +22,7 @@ class StreamPlayerDataSource {
         return relatedVideos.count
     }
 
-    init(apiManager: VideosAPI, url: URL, videoTitle: String, userId: String) {
+    init(apiManager: VideosAPIProtocol, url: URL, videoTitle: String, userId: String?) {
         self.apiManager = apiManager
         self.url = url
         self.userId = userId
@@ -30,6 +30,10 @@ class StreamPlayerDataSource {
     }
 
     func loadData(completion: @escaping (APIError?) -> Void) {
+        guard let userId = userId else {
+            completion(nil)
+            return
+        }
         
         apiManager.fetchVideoList(byUserId: userId) { result in
             switch result {
@@ -48,8 +52,8 @@ class StreamPlayerDataSource {
         return relatedVideos.count == 0 ? true : false
     }
 
-    func containsVideo(with videoId: String) -> Int? {
-        return relatedVideos.firstIndex { $0.id == videoId }
+    func containsVideo(withId id: String) -> Bool {
+        return relatedVideos.contains { $0.id == id }
     }
 
     func getVideo(at indexRow: Int) -> Video? {
