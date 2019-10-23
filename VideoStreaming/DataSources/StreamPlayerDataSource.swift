@@ -11,54 +11,48 @@ import Foundation
 import Foundation
 
 class StreamPlayerDataSource {
-    private var relatedVideos: [Video] = []
+    private var relatedVideos: [Video] = [Video]()
     private var apiManager: VideosAPI
-    private var videoTitle: String
-    private var userId: String?
+    private var userId: String
+    
+    var url: URL
+    var videoTitle: String
 
     var relatedVideosCount: Int {
         return relatedVideos.count
     }
 
-    init(apiManager: VideosAPI, videoTitle: String, userId: String) {
+    init(apiManager: VideosAPI, url: URL, videoTitle: String, userId: String) {
         self.apiManager = apiManager
-        self.videoTitle = videoTitle
+        self.url = url
         self.userId = userId
+        self.videoTitle = videoTitle
     }
 
     func loadData(completion: @escaping (APIError?) -> Void) {
-        guard let userId = userId else {
-            completion(.responseDataNil)
-            return
-        }
-
-        apiManager.fetchVideos(by: userId) { result in
+        
+        apiManager.fetchVideoList(byUserId: userId) { result in
             switch result {
-            case .success(let retrievedVideos):
-                relatedVideos = retrievedVideos
+            case .success(let relatedVideos):
+                self.relatedVideos = relatedVideos
                 completion(nil)
             case .failure(let error):
                 completion(error)
             }
         }
+        
     }
 
     func release() -> Bool {
         relatedVideos.removeAll()
-        userId = nil
-        return (relatedVideos.count == 0 && userId == nil) ? true : false
-    }
-
-    func getVideo(with videoId: String) -> Video? {
-        let indexRow = containsVideo(with: videoId) ?? -1
-        return getVideo(with: indexRow)
+        return relatedVideos.count == 0 ? true : false
     }
 
     func containsVideo(with videoId: String) -> Int? {
         return relatedVideos.firstIndex { $0.id == videoId }
     }
 
-    private func getVideo(with indexRow: Int) -> Video? {
+    func getVideo(at indexRow: Int) -> Video? {
         return indexRow >= 0 && indexRow < relatedVideos.count ? relatedVideos[indexRow] : nil
     }
 }

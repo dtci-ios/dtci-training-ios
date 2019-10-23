@@ -69,8 +69,7 @@ class VideoPlaylistViewController: UIViewController {
     
     private func createPlayer(with streamingURL: String?, title: String, andRelatedVideosFor userId: String) {
         if let url = streamingURL, let m3u8URL = URL(string: url) {
-            let streamPlayerViewController = StreamPlayerViewController(with: m3u8URL, title: title,
-                                                                        andRelatedVideosFor: userId)
+            let streamPlayerViewController = StreamPlayerViewController(with: StreamPlayerDataSource(apiManager: VideosAPI(), url: m3u8URL, videoTitle: title, userId: userId))
             present(streamPlayerViewController, animated: true)
         }
     }
