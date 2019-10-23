@@ -58,8 +58,6 @@ class StreamPlayerViewController: UIViewController {
         player = AVPlayer(url: dataSource.url)
         playerViewController.player = player
         playerViewController.player?.play()
-        
-//        relatedVideosTableView.reloadData()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
