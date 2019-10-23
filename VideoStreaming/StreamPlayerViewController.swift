@@ -30,8 +30,6 @@ class StreamPlayerViewController: UIViewController {
         
         super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
         
-        dataSource.loadData(completion: errorCompletionHandler(error:))
-        
         setupPlayerViewController()
     }
     
@@ -40,6 +38,10 @@ class StreamPlayerViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        dataSource.loadData(completion: errorCompletionHandler(error:))
+        
         relatedVideosTableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
             forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         
@@ -57,7 +59,7 @@ class StreamPlayerViewController: UIViewController {
         playerViewController.player = player
         playerViewController.player?.play()
         
-        relatedVideosTableView.reloadData()
+//        relatedVideosTableView.reloadData()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -108,6 +110,7 @@ class StreamPlayerViewController: UIViewController {
     }
     
     private func errorCompletionHandler(error: APIError?) {
+        relatedVideosTableView.reloadData()
         if let error = error {
             let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -117,13 +120,6 @@ class StreamPlayerViewController: UIViewController {
 }
 
 extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.relatedVideosCount
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell") as? VideoTableViewCell else {
@@ -135,6 +131,14 @@ extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource
         cell.configure(with: video)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.relatedVideosCount
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
