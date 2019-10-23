@@ -15,7 +15,6 @@ class VideoPlaylistViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     
     private var gameName: String?
-    private var gameId: String?
     private var dataSource: VideoPlaylistDataSource!
 
     static var nibName: String {
@@ -24,8 +23,7 @@ class VideoPlaylistViewController: UIViewController {
     
     init(with game: Game) {
         gameName = game.name
-        gameId = game.id
-        dataSource = VideoPlaylistDataSource(apiManager: GameStreamsAPI(), gameId: gameId)
+        dataSource = VideoPlaylistDataSource(apiManager: GameStreamsAPI(), gameId: game.id)
         
         super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
     }

@@ -159,8 +159,8 @@ class VideoPlaylistDataSourceTests: XCTestCase {
             expectation.fulfill()
         }
         waitForExpectations(timeout: 5, handler: nil)
-        let nilStreamIndex = dataSource?.containsStream(withId: "notValidId")
-        let validStreamIndex = dataSource?.containsStream(withId: "222")
+        let nilStreamIndex = dataSource?.indexOfStream(withId: "notValidId")
+        let validStreamIndex = dataSource?.indexOfStream(withId: "222")
         
         // then
         XCTAssertNil(nilStreamIndex)

@@ -44,12 +44,12 @@ class VideoPlaylistDataSource {
         streams.removeAll()
         gameId = nil
         
-        return (streamCount == 0 && gameId == nil) ? true : false
+        return streamCount == 0 && gameId == nil
     }
     
     func getStream(withId streamId: String) -> Stream? {
-        if let i = containsStream(withId: streamId) {
-            return streams[i]
+        if let index = indexOfStream(withId: streamId) {
+            return streams[index]
         } else { return nil }
     }
     
@@ -57,7 +57,7 @@ class VideoPlaylistDataSource {
         return indexRow < streams.count ? streams[indexRow] : nil
     }
     
-    func containsStream(withId streamId: String?) -> Int? {
+    func indexOfStream(withId streamId: String?) -> Int? {
         return streams.firstIndex { $0.id == streamId }
     }
     
