@@ -63,6 +63,27 @@ class StreamPlayerDataSourceTests: XCTestCase {
         XCTAssertNil(completionError)
     }
     
+    func testDataSourceVideoTitle() {
+        // given
+        apiManager = MockVideosAPI(fetchedResult: .success(videos))
+        
+        guard let dummyURL = URL(string: "http://dummy.com") else { return }
+        
+        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: dummyURL, videoTitle: "Streaming Title", userId: "")
+        
+        // when
+        let expectation = self.expectation(description: "Loading Data")
+        
+        dataSource?.loadData { _ in
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        // then
+        XCTAssertEqual(dataSource.videoTitle, "Streaming Title")
+    }
+    
     func testDataSourceDidNotLoadNilDataError() {
         // given
         apiManager = MockVideosAPI(fetchedResult: .success(videos))

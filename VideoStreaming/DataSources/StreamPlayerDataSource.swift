@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 class StreamPlayerDataSource {
     private var relatedVideos: [Video] = [Video]()
     private var apiManager: VideosAPIProtocol
