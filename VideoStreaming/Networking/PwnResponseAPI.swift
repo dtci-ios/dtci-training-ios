@@ -53,7 +53,7 @@ class PwnServiceAPI {
         componentsForServiceURL?.queryItems = [
             URLQueryItem(name: "url", value: componentsForTwitchURL?.url?.absoluteString ?? "")
         ]
-        
+
         guard let url = componentsForServiceURL?.url?.absoluteString else { return nil }
         
         requestURL = url

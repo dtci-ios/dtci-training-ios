@@ -14,6 +14,7 @@
 		265C74ED233A65B00033C139 /* GameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */; };
 		2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */; };
 		5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */; };
+		5C1A527023622FE7007062D2 /* VideoPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A526F23622FE7007062D2 /* VideoPlaylistViewController.swift */; };
 		5C206257233C186C00A3859E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
 		5C24B7AE233C09F100DE2123 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C6EB7233A830700829078 /* MainViewController.swift */; };
@@ -40,7 +41,6 @@
 		A7518BF0233D09570050D8D5 /* GameStreamsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7518BED233D09570050D8D5 /* GameStreamsAPI.swift */; };
 		A7518BF2233D09650050D8D5 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7518BF1233D09650050D8D5 /* Models.swift */; };
 		A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */; };
-		A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +77,7 @@
 		265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameCollectionViewCell.xib; sourceTree = "<group>"; };
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
 		5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerViewController.swift; sourceTree = "<group>"; };
+		5C1A526F23622FE7007062D2 /* VideoPlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlaylistViewController.swift; sourceTree = "<group>"; };
 		5C24B7AD233C09F100DE2123 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
@@ -106,7 +107,6 @@
 		A7518BED233D09570050D8D5 /* GameStreamsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStreamsAPI.swift; sourceTree = "<group>"; };
 		A7518BF1233D09650050D8D5 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlaylistViewController.xib; sourceTree = "<group>"; };
-		A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlaylistViewController.swift; sourceTree = "<group>"; };
 		D2EFEC0284DAB6E93FF6ACEB /* Pods-VideoStreamingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreamingTests.debug.xcconfig"; path = "Target Support Files/Pods-VideoStreamingTests/Pods-VideoStreamingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E98740DF5946522F98B6926B /* Pods_VideoStreamingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoStreamingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA6398922C61190E70F2DEB /* Pods_VideoStreaming.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoStreaming.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,10 +218,10 @@
 				9C04F3D2233045CA005FBE8E /* SceneDelegate.swift */,
 				263E8573233CF331003D3DC9 /* Main.storyboard */,
 				9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */,
+				5C1A526F23622FE7007062D2 /* VideoPlaylistViewController.swift */,
 				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
 				2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */,
 				5CFB597B233CDF87009C1220 /* VideosAPI.swift */,
-				A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */,
 				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
 				9C04F3DE233045CC005FBE8E /* Info.plist */,
 				5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */,
@@ -469,8 +469,8 @@
 				265C74EB233A5B320033C139 /* GameCollectionViewCell.swift in Sources */,
 				5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */,
 				A7518BF2233D09650050D8D5 /* Models.swift in Sources */,
-				A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */,
 				A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */,
+				5C1A527023622FE7007062D2 /* VideoPlaylistViewController.swift in Sources */,
 				5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */,
 				5CE97CE92331786F008CF451 /* VideoView.swift in Sources */,
 				5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */,

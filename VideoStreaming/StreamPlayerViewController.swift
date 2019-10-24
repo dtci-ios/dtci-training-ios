@@ -53,6 +53,8 @@ class StreamPlayerViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         relatedVideosTableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         
@@ -79,7 +81,6 @@ class StreamPlayerViewController: UIViewController {
             view.addSubview(landscapeVideoView)
             playerViewController.view.frame = landscapeVideoView.bounds
             landscapeVideoView.addSubview(playerViewController.view)
-            landscapeVideoView.willMove(toSuperview: view)
         } else {
             playerViewController.view.removeFromSuperview()
             landscapeVideoView.removeFromSuperview()

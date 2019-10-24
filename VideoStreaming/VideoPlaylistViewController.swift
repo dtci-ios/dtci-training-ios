@@ -74,13 +74,15 @@ class VideoPlaylistViewController: UIViewController {
             present(streamPlayerViewController, animated: true)
         }
     }
-
+    
     private func takeUserLoginName(from users: [User]) -> String {
         guard let userLoginName = users.first?.login else { return "" }
         return userLoginName
     }
     
+
     private func createOptionsForPlayer(with urls: PwnResponse.QualityUrls, title: String, andRelatedVideosFor userId: String) {
+
         let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
         
         for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
@@ -154,10 +156,11 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
                     
                     self?.dismissHUD()
                 }
-                
+    
             case .failure(let error):
                 self.popUpAlert(for: error)
             }
+    
         }
     }
 }
