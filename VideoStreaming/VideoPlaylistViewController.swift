@@ -63,12 +63,61 @@ class VideoPlaylistViewController: UIViewController {
             streams = gameStreams
             tableView.reloadData()
         case .failure(let error):
-            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true)
+            popUpAlert(for: error)
+        }
+    }
+    
+    private func playVideo(with streamingURL: String?) {
+        if let url = streamingURL, let m3u8URL = URL(string: url) {
+            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL)
+                           
+            present(streamPlayerViewController, animated: true)
+                           
+            streamPlayerViewController.play()
+        }
+    }
+    
+    private func takeUserLoginName(from users: [User]) -> String {
+        guard let userLoginName = users.first?.login else { return "" }
+        return userLoginName
+    }
+    
+    private func createOptions(for urls: PwnResponse.QualityUrls) {
+        let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
+        
+        for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
+            alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
+                self.playVideo(with: urls[key])
+            }))
+        }
+            
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                       
+        present(alert, animated: true)
+    }
+    
+    private func popUpAlert(for error: APIError) {
+        let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    
+    private func createServicesToRetriveURLs(searchingURLsFor loginName: String) {
+        let pwnServiceAPI = PwnServiceAPI(userName: loginName)
+        
+        pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
+            switch result {
+            case .success(let urls):
+                self?.createOptions(for: urls)
+            case .failure(let error):
+                self?.popUpAlert(for: error)
+            }
+            self?.dismissHUD()
         }
     }
 }
+
+
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -99,22 +148,24 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let streamUserId = streams[indexPath.row]?.userId else { return }
         
-        let pwnServiceAPI = PwnServiceAPI(withUserId: streamUserId)
-    
-        pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
+        let usersAPI = UsersAPI()
+            
+        showHUD()
+        
+        usersAPI.fetchUsers(userId: streamUserId) { (result) in
+
             switch result {
-            case .success(let urls):
-                guard let lastStreamingUrl = urls[urls.keys.first ?? ""], let url = URL(string: lastStreamingUrl) else { return }
-                           
-                let streamPlayerViewController = StreamPlayerViewController(streamingUrl: url)
-                               
-                self?.present(streamPlayerViewController, animated: true)
-                               
-                streamPlayerViewController.play()
+            case .success(let users):
+                let loginName = self.takeUserLoginName(from: users)
+                if !loginName.isEmpty {
+                    self.createServicesToRetriveURLs(searchingURLsFor: loginName)
+                } else {
+                    let alert = UIAlertController(title: "ERROR", message: "Cannot create API to retrieve urls without user's login name", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true)
+                }
             case .failure(let error):
-                let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self?.present(alert, animated: true)
+                self.popUpAlert(for: error)
             }
         }
     }

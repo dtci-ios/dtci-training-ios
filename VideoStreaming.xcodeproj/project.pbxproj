@@ -17,7 +17,6 @@
 		5C206257233C186C00A3859E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
 		5C24B7AE233C09F100DE2123 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C6EB7233A830700829078 /* MainViewController.swift */; };
-		5C61ADC0234664CC00342FC7 /* lol.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADBF234664CC00342FC7 /* lol.mp4 */; };
 		5C61ADC22346661300342FC7 /* StreamPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */; };
 		5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */; };
 		5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */; };
@@ -80,7 +79,6 @@
 		5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerViewController.swift; sourceTree = "<group>"; };
 		5C24B7AD233C09F100DE2123 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		5C61ADBF234664CC00342FC7 /* lol.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = lol.mp4; sourceTree = "<group>"; };
 		5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
 		5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PwnResponseAPI.swift; sourceTree = "<group>"; };
@@ -233,7 +231,6 @@
 				265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */,
 				265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */,
 				5C5C6EB7233A830700829078 /* MainViewController.swift */,
-				5C61ADBF234664CC00342FC7 /* lol.mp4 */,
 				5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */,
 			);
 			path = VideoStreaming;
@@ -366,7 +363,6 @@
 				9C04F3D8233045CA005FBE8E /* (null) in Resources */,
 				A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */,
 				9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */,
-				5C61ADC0234664CC00342FC7 /* lol.mp4 in Resources */,
 				5CFFC5442332A3A400D78035 /* VideoTableViewCell.xib in Resources */,
 				9C04F3D8233045CA005FBE8E /* (null) in Resources */,
 			);
