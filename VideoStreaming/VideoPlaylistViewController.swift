@@ -157,7 +157,7 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
             switch result {
             case .success(let users):
                 let loginName = self.takeUserLoginName(from: users)
-                if loginName != "" {
+                if !loginName.isEmpty {
                     self.createServicesToRetriveURLs(searchingURLsFor: loginName)
                 } else {
                     let alert = UIAlertController(title: "ERROR", message: "Cannot create API to retrieve urls without user's login name", preferredStyle: .alert)
