@@ -168,27 +168,6 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         XCTAssertNotEqual(validStreamIndex, 0)
     }
     
-    func testDataSourceGetStreamWithId() {
-        // given
-        apiManager = MockGameStreamsAPI(result: .success(streams))
-        dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
-        
-        // when
-        let expectation = self.expectation(description: "Loading Data")
-        dataSource?.load { _ in
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: 5, handler: nil)
-        let nilStream = dataSource?.getStream(withId: "notValidId")
-        let validStream = dataSource?.getStream(withId: "333")
-        
-        //then
-        XCTAssertNil(nilStream)
-        XCTAssertEqual(validStream?.id, "333")
-        XCTAssertEqual(validStream?.userId, "ccc")
-        XCTAssertNotEqual(validStream?.language, "sp")
-    }
-    
     func testDataSourceGetStreamWithRow() {
         // given
         apiManager = MockGameStreamsAPI(result: .success(streams))

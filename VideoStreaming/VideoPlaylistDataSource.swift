@@ -47,12 +47,6 @@ class VideoPlaylistDataSource {
         return streamCount == 0 && gameId == nil
     }
     
-    func getStream(withId streamId: String) -> Stream? {
-        if let index = indexOfStream(withId: streamId) {
-            return streams[index]
-        } else { return nil }
-    }
-    
     func getStream(withRow indexRow: Int) -> Stream? {
         return indexRow < streams.count ? streams[indexRow] : nil
     }
