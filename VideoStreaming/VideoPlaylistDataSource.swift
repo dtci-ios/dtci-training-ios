@@ -40,13 +40,6 @@ class VideoPlaylistDataSource {
         }
     }
     
-    func clean() -> Bool {
-        streams.removeAll()
-        gameId = nil
-        
-        return streamCount == 0 && gameId == nil
-    }
-    
     func getStream(withRow indexRow: Int) -> Stream? {
         return indexRow < streams.count ? streams[indexRow] : nil
     }

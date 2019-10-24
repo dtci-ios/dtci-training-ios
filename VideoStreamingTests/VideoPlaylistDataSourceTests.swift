@@ -130,24 +130,6 @@ class VideoPlaylistDataSourceTests: XCTestCase {
         XCTAssertEqual(secondCount, 1)
     }
     
-    func testDataSourceClean() {
-        // given
-        apiManager = MockGameStreamsAPI(result: .success(streams))
-        dataSource = VideoPlaylistDataSource(apiManager: apiManager!, gameId: "")
-        
-        // when
-        let expectation = self.expectation(description: "Loading Data")
-        dataSource?.load { _ in
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: 5, handler: nil)
-        guard let isEmpty = dataSource?.clean() else { return XCTFail() }
-        
-        // then
-        XCTAssert(isEmpty)
-        XCTAssertEqual(dataSource?.streamCount, 0)
-    }
-    
     func testDataSourceContains() {
         // given
         apiManager = MockGameStreamsAPI(result: .success(streams))
