@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Game: Codable {
+struct Game: Codable, Equatable {
     var id: String?
     var name: String?
     var boxArtUrl: String?
@@ -86,7 +86,6 @@ struct User: Codable {
     let displayName: String
     let type: String
     let description: String
-    let email: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -94,7 +93,6 @@ struct User: Codable {
         case displayName = "display_name"
         case type
         case description
-        case email
     }
 }
 

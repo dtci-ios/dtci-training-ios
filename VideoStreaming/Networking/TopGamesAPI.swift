@@ -14,6 +14,7 @@ protocol TopGamesAPIProtocol {
 }
 
 class TopGamesAPI: NetworkManager, TopGamesAPIProtocol {
+
     var request = "https://api.twitch.tv/helix/games/top"
  
     func fetchTopGames(completion:  @escaping (Swift.Result<[Game],APIError>) -> Void) {

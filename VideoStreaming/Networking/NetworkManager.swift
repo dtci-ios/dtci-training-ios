@@ -39,7 +39,7 @@ enum APIError: Error, Equatable {
         return lhs.localizedDescription == rhs.localizedDescription
     }
 }
-
+	
 protocol NetworkManager {
     typealias QueryString = [String:Any]
     var request: String { get }

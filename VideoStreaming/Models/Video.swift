@@ -18,6 +18,7 @@ struct Video: Codable {
     let publishedAt: String
     let url: String
     let thumbnailUrl: String
+    let type: String
     let viewCount: Int
     
     var durationAndDate: String? {
@@ -51,6 +52,7 @@ struct Video: Codable {
         case publishedAt = "published_at"
         case url
         case thumbnailUrl = "thumbnail_url"
+        case type
         case viewCount = "view_count"
     }
 }

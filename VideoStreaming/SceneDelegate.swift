@@ -17,8 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-        let navController = UINavigationController(rootViewController: TopGamesCollectionViewController(topGamesAPI: TopGamesAPI()))
-        
+        let navController = UINavigationController(rootViewController: TopGamesCollectionViewController(dataSource: TopGamesDataSource(topGamesAPI: TopGamesAPI())))
+
         navController.navigationBar.barTintColor = UIColor.black
         navController.navigationBar.tintColor = UIColor.white
         navController.navigationBar.barStyle = .black
