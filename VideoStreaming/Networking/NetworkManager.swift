@@ -17,6 +17,7 @@ import Alamofire
 enum APIError: Error, Equatable {
     case responseDataNil
     case emptyDataArray
+    case wrongAPI
     case jsonError(Error)
     case alamofireError(Error)
     case urlError(Error)
@@ -26,13 +27,14 @@ enum APIError: Error, Equatable {
         switch self {
             case .responseDataNil: return "Data is nil"
             case .emptyDataArray: return "Data Array is empty"
+            case .wrongAPI: return "Wrong API"
             case .jsonError(let jsonError): return jsonError.localizedDescription
             case .alamofireError(let afError): return afError.localizedDescription
             case .urlError(let urlError): return urlError.localizedDescription
             case .unknownError(let unknownError): return unknownError.localizedDescription
         }
     }
-
+    
     static func == (lhs: APIError, rhs: APIError) -> Bool {
         return lhs.localizedDescription == rhs.localizedDescription
     }
@@ -44,6 +46,7 @@ protocol NetworkManager {
 }
 
 extension NetworkManager {
+    
     static var headers: HTTPHeaders {
         return ["Client-ID": "xzpd1f4527fu8fct7p7own0pgi35v5"]
     }

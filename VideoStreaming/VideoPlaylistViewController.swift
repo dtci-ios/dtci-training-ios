@@ -14,19 +14,18 @@ class VideoPlaylistViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private let networkManager = GameStreamsAPI()
-    private var streams: [Stream?] = []
     private var gameName: String?
-    private var gameId: String?
+    private var dataSource: VideoPlaylistDataSource!
 
     static var nibName: String {
         return String(describing: self)
     }
     
     init(with game: Game) {
-        super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
         gameName = game.name
-        gameId = game.id
+        dataSource = VideoPlaylistDataSource(apiManager: GameStreamsAPI(), gameId: game.id)
+        
+        super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -40,6 +39,8 @@ class VideoPlaylistViewController: UIViewController {
         
         showHUD()
         
+        dataSource.load(completion: errorCompletionHandler(error:))
+        
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         
@@ -47,24 +48,17 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl?.tintColor = .white
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         
-
-        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
     }
     
     @objc private func refreshData(_ sender: Any) {
         tableView.refreshControl?.endRefreshing()
-        networkManager.fetchGameStreams(ofGame: gameId ?? "", completion: fetchCompletionHandler(result:))
+        dataSource.load(completion: errorCompletionHandler(error:))
     }
     
-    func fetchCompletionHandler(result: Swift.Result<[Stream], APIError>) {
+    func errorCompletionHandler(error: APIError?) {
         dismissHUD()
-        switch result {
-        case .success(let gameStreams):
-            streams = gameStreams
-            tableView.reloadData()
-        case .failure(let error):
-            popUpAlert(for: error)
-        }
+        tableView.reloadData()
+        if let error = error { popUpAlert(for: error) }
     }
     
     private func createPlayer(with streamingURL: String?, title: String, andRelatedVideosFor userId: String) {
@@ -103,7 +97,7 @@ class VideoPlaylistViewController: UIViewController {
     }
 }
 
-
+// MARK: TableViewDelegate & TableViewDataSource
 
 extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -111,34 +105,33 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         return 100
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return streams.count
+        return section == 0 ? dataSource.streamCount : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.Constants.reuseIdentifier,
-                                                       for: indexPath) as? VideoTableViewCell else {
-            return VideoTableViewCell()
-        }
+                                                       for: indexPath) as? VideoTableViewCell else { return VideoTableViewCell() }
         
-        guard let video = streams[indexPath.row] else {
-            return VideoTableViewCell()
-        }
+        guard let stream = dataSource.getStream(withRow: indexPath.row) else { return VideoTableViewCell() }
         
-        cell.configure(with: video)
+        cell.configure(with: stream)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let userId = streams[indexPath.row]?.userId else { return }
+        guard let streamUserId = dataSource.getStream(withRow: indexPath.row)?.userId else { return }
         
         let usersAPI = UsersAPI()
         
         showHUD()
         
-        usersAPI.fetchUsers(userId: userId) { (result) in
+        usersAPI.fetchUsers(userId: streamUserId) { (result) in
             
             switch result {
             case .success(let users):
@@ -148,8 +141,8 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
                     
                     switch result {
                     case .success(let urls):
-                        self?.createOptionsForPlayer(with: urls, title: self?.streams[indexPath.row]?.title ?? "NO TITLE",
-                                                     andRelatedVideosFor: userId)
+                        self?.createOptionsForPlayer(with: urls, title: self?.dataSource.getStream(withRow: indexPath.row)?.title ?? "NO TITLE",
+                                                     andRelatedVideosFor: streamUserId)
                     case .failure(let error):
                         self?.popUpAlert(for: error)
                     }

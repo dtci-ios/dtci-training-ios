@@ -40,13 +40,17 @@
 		9C04F3DA233045CC005FBE8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C04F3D9233045CC005FBE8E /* Assets.xcassets */; };
 		9C04F3DD233045CC005FBE8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C04F3DB233045CC005FBE8E /* LaunchScreen.storyboard */; };
 		9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */; };
+		A72289F7234E5B36002755B8 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; };
 		A72C3A4E233565BF00723C01 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A72C3A4F233565BF00723C01 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A74E15E9234F7EB8004B9562 /* VideoPlaylistDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74E15E8234F7EB8004B9562 /* VideoPlaylistDataSource.swift */; };
 		A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7518BEB233D09570050D8D5 /* NetworkManager.swift */; };
 		A7518BEF233D09570050D8D5 /* TopGamesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7518BEC233D09570050D8D5 /* TopGamesAPI.swift */; };
 		A7518BF0233D09570050D8D5 /* GameStreamsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7518BED233D09570050D8D5 /* GameStreamsAPI.swift */; };
 		A7518BF2233D09650050D8D5 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7518BF1233D09650050D8D5 /* Models.swift */; };
 		A783F1A52333E38D0098DAD8 /* VideoPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */; };
+		A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */; };
+		A7CBE5D82354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CBE5D72354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,11 +116,14 @@
 		9C04F3E9233045CC005FBE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C2D59D8BDC18EE4657E2A6D /* Pods-VideoStreaming.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreaming.release.xcconfig"; path = "Target Support Files/Pods-VideoStreaming/Pods-VideoStreaming.release.xcconfig"; sourceTree = "<group>"; };
 		A72C3A4D233565BF00723C01 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		A74E15E8234F7EB8004B9562 /* VideoPlaylistDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaylistDataSource.swift; sourceTree = "<group>"; };
 		A7518BEB233D09570050D8D5 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A7518BEC233D09570050D8D5 /* TopGamesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopGamesAPI.swift; sourceTree = "<group>"; };
 		A7518BED233D09570050D8D5 /* GameStreamsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStreamsAPI.swift; sourceTree = "<group>"; };
 		A7518BF1233D09650050D8D5 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlaylistViewController.xib; sourceTree = "<group>"; };
+		A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlaylistViewController.swift; sourceTree = "<group>"; };
+		A7CBE5D72354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaylistDataSourceTests.swift; sourceTree = "<group>"; };
 		D2EFEC0284DAB6E93FF6ACEB /* Pods-VideoStreamingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreamingTests.debug.xcconfig"; path = "Target Support Files/Pods-VideoStreamingTests/Pods-VideoStreamingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E98740DF5946522F98B6926B /* Pods_VideoStreamingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoStreamingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA6398922C61190E70F2DEB /* Pods_VideoStreaming.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoStreaming.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,6 +249,8 @@
 				A783F1A32333E38D0098DAD8 /* VideoPlaylistViewController.xib */,
 				2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */,
 				5CFB597B233CDF87009C1220 /* VideosAPI.swift */,
+				A783F1A42333E38D0098DAD8 /* VideoPlaylistViewController.swift */,
+				A74E15E8234F7EB8004B9562 /* VideoPlaylistDataSource.swift */,
 				9C04F3D9233045CC005FBE8E /* Assets.xcassets */,
 				9C04F3DE233045CC005FBE8E /* Info.plist */,
 				5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */,
@@ -265,8 +274,16 @@
 				9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */,
 				2629401B2354EC0A00C0C557 /* TopGamesDataSourceTests.swift */,
 				9C04F3E9233045CC005FBE8E /* Info.plist */,
+				A7CBE5D72354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift */,
 			);
 			path = VideoStreamingTests;
+			sourceTree = "<group>";
+		};
+		A7132DD3234E516400DB2A36 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		A79B1D62233C07DD003D4099 /* Networking */ = {
@@ -494,6 +511,7 @@
 				5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */,
 				A7518BF2233D09650050D8D5 /* Models.swift in Sources */,
 				A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */,
+				A74E15E9234F7EB8004B9562 /* VideoPlaylistDataSource.swift in Sources */,
 				5C1A527023622FE7007062D2 /* VideoPlaylistViewController.swift in Sources */,
 				5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */,
 				262940182354C84700C0C557 /* ColumnsLayout.swift in Sources */,
@@ -517,6 +535,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7CBE5D82354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift in Sources */,
 				9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */,
 				2629401E2354EC8C00C0C557 /* TopGamesAPIMock.swift in Sources */,
 				2629401C2354EC0A00C0C557 /* TopGamesDataSourceTests.swift in Sources */,

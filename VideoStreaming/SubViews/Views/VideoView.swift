@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
  
 class VideoView: UIView, NibLoadable {
+    
     @IBOutlet private weak var videoImageView: UIImageView!
     @IBOutlet private weak var videoStack: UIStackView!
     @IBOutlet private weak var videoTitle: UILabel!
@@ -65,5 +66,4 @@ class VideoView: UIView, NibLoadable {
         videoDurationAndDate.text = nil
         liveLabel.isHidden = true
     }
-    
 }
