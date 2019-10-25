@@ -29,7 +29,7 @@ class StreamPlayerDataSource {
 
     func loadData(completion: @escaping (APIError?) -> Void) {
         guard let userId = userId else {
-            completion(nil)
+            completion(.responseDataNil)
             return
         }
         
@@ -47,7 +47,7 @@ class StreamPlayerDataSource {
 
     func release() -> Bool {
         relatedVideos.removeAll()
-        return relatedVideos.count == 0 ? true : false
+        return relatedVideos.count == 0
     }
 
     func containsVideo(withId id: String) -> Bool {

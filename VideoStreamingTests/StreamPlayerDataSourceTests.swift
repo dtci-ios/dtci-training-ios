@@ -43,9 +43,8 @@ class StreamPlayerDataSourceTests: XCTestCase {
         // given
         apiManager = MockVideosAPI(fetchedResult: .success(videos))
         
-        guard let dummyURL = URL(string: "https://dummy.com") else { return }
-        
-        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: dummyURL, videoTitle: "", userId: "")
+        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: URL(string: "https://dummy.com")!,
+                                            videoTitle: "", userId: "")
         
         // when
         let expectation = self.expectation(description: "Loading Data")
@@ -67,9 +66,8 @@ class StreamPlayerDataSourceTests: XCTestCase {
         // given
         apiManager = MockVideosAPI(fetchedResult: .success(videos))
         
-        guard let dummyURL = URL(string: "http://dummy.com") else { return }
-        
-        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: dummyURL, videoTitle: "Streaming Title", userId: "")
+        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: URL(string: "https://dummy.com")!,
+                                            videoTitle: "Streaming Title", userId: "")
         
         // when
         let expectation = self.expectation(description: "Loading Data")
@@ -86,11 +84,10 @@ class StreamPlayerDataSourceTests: XCTestCase {
     
     func testDataSourceDidNotLoadNilDataError() {
         // given
-        apiManager = MockVideosAPI(fetchedResult: .success(videos))
-        
-        guard let dummyURL = URL(string: "https://dummy.com") else { return }
-        
-        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: dummyURL, videoTitle: "", userId: nil)
+        apiManager = MockVideosAPI(fetchedResult: .failure(.responseDataNil))
+                
+        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: URL(string: "https://dummy.com")!,
+                                            videoTitle: "", userId: nil)
         
         // when
         let expectation = self.expectation(description: "Loading Data")
@@ -105,20 +102,17 @@ class StreamPlayerDataSourceTests: XCTestCase {
         
         // then
         XCTAssertNotEqual(dataSource.relatedVideosCount, videos.count)
-        
-        guard let error = completionError else { return }
-        
-        XCTAssert(error == APIError.responseDataNil)
-        XCTAssert(error != APIError.emptyDataArray)
+        XCTAssertNotNil(completionError)
+        XCTAssert(completionError == APIError.responseDataNil)
+        XCTAssert(completionError != APIError.emptyDataArray)
     }
     
     func testDataSourceContains() {
         // given
         apiManager = MockVideosAPI(fetchedResult: .success(videos))
         
-        guard let dummyURL = URL(string: "https://dummy.com") else { return }
-        
-        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: dummyURL, videoTitle: "", userId: "")
+        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: URL(string: "https://dummy.com")!,
+                                            videoTitle: "", userId: "")
         
         // when
         let expectation = self.expectation(description: "Loading Data")
@@ -139,9 +133,8 @@ class StreamPlayerDataSourceTests: XCTestCase {
         // given
         apiManager = MockVideosAPI(fetchedResult: .success(videos))
         
-        guard let dummyURL = URL(string: "https://dummy.com") else { return }
-        
-        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: dummyURL, videoTitle: "", userId: "")
+        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: URL(string: "https://dummy.com")!,
+                                            videoTitle: "", userId: "")
         
         // when
         let expectation = self.expectation(description: "Loading Data")
@@ -163,9 +156,8 @@ class StreamPlayerDataSourceTests: XCTestCase {
         // given
         apiManager = MockVideosAPI(fetchedResult: .success(videos))
         
-        guard let dummyURL = URL(string: "https://dummy.com") else { return }
-        
-        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: dummyURL, videoTitle: "", userId: "")
+        dataSource = StreamPlayerDataSource(apiManager: apiManager, url: URL(string: "https://dummy.com")!,
+                                            videoTitle: "", userId: "")
         
         // when
         let expectation = self.expectation(description: "Loading Data")
