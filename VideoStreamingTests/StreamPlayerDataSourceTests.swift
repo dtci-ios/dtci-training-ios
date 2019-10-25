@@ -9,27 +9,6 @@
 import XCTest
 @testable import VideoStreaming
 
-class MockVideosAPI: VideosAPIProtocol {
-    private var fetchedResult: Swift.Result<[Video], APIError>
-    
-    init(fetchedResult: Swift.Result<[Video], APIError>) {
-        self.fetchedResult = fetchedResult
-    }
-    
-    func fetchVideoList(byGameId gameId: String, completion: @escaping (Result<[Video], APIError>) -> Void) {
-        DispatchQueue.main.async {
-            completion(self.fetchedResult)
-        }
-    }
-    
-    func fetchVideoList(byUserId userId: String, completion: @escaping (Result<[Video], APIError>) -> Void) {
-        DispatchQueue.main.async {
-            completion(self.fetchedResult)
-        }
-    }
-    
-}
-
 class StreamPlayerDataSourceTests: XCTestCase {
     private var apiManager: MockVideosAPI!
     private var dataSource: StreamPlayerDataSource!

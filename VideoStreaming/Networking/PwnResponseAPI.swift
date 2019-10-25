@@ -12,13 +12,11 @@ import Alamofire
 class PwnServiceAPI {
     var requestURL: String
 
-    
     private enum Constants {
         static let twitchURL = "https://twitch.tv"
         static let serviceURL = "https://pwn.sh/tools/streamapi.py"
     }
     
-
     init?(forUser user: String) {
         guard let twitchURL = URL(string: Constants.twitchURL) else { return nil }
         

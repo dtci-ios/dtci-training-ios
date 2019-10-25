@@ -1,35 +1,12 @@
 //
-//  Models.swift
+//  Stream.swift
 //  VideoStreaming
 //
-//  Created by Natalia Brasesco on 23/09/2019.
+//  Created by Rodrigo Cian Berrios on 25/10/2019.
 //  Copyright © 2019 ESPN. All rights reserved.
 //
 
 import Foundation
-
-struct Game: Codable, Equatable {
-    var id: String?
-    var name: String?
-    var boxArtUrl: String?
-    
-    func boxArtThumbnailUrl (width: Int? = nil, height: Int? = nil) -> String {
-        guard let unBoxArtUrl = boxArtUrl else {
-            return ""
-        }
-        guard let unWidth = width, let unHeight = height else {
-            //for full size image.
-            return unBoxArtUrl.replacingOccurrences(of: "{width}x{height}", with: "x")
-        }
-        return unBoxArtUrl.replacingOccurrences(of: "{width}x{height}", with: "\(unWidth)x\(unHeight)")
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case boxArtUrl = "box_art_url"
-    }
-}
 
 struct Stream: Codable {
     let id: String?
@@ -43,18 +20,18 @@ struct Stream: Codable {
     let language: String?
     let thumbnailUrl: String?
     let tagIds: [String?]?
-    
+
     var durationAndDate: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        
+
         guard let startedAtDate = dateFormatter.date(from: startedAt ?? "") else {
             return "- • --"
         }
-        
+
         dateFormatter.dateFormat = "HH:mm • E, MM/dd"
         let startedAtFormatted = dateFormatter.string(from: startedAtDate)
-        
+
         return startedAtFormatted
     }
 
@@ -64,7 +41,7 @@ struct Stream: Codable {
         let url = URL(string: thumbnailUrlWithWidthAndHeight ?? "")
         return url
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
@@ -78,33 +55,4 @@ struct Stream: Codable {
         case thumbnailUrl = "thumbnail_url"
         case tagIds = "tag_ids"
     }
-}
-
-struct User: Codable {
-    let id: String
-    let login: String
-    let displayName: String
-    let type: String
-    let description: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case login
-        case displayName = "display_name"
-        case type
-        case description
-    }
-}
-
-struct ReceivedData<T:Codable>: Codable {
-    var dataArray: [T]
-    
-    enum CodingKeys: String, CodingKey {
-        case dataArray = "data"
-    }
-}
-
-struct PwnResponse: Codable {
-    typealias QualityUrls = [String:String]
-    let urls: QualityUrls
 }

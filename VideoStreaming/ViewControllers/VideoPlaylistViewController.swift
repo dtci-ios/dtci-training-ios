@@ -47,7 +47,6 @@ class VideoPlaylistViewController: UIViewController {
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.tintColor = .white
         tableView.refreshControl?.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        
     }
     
     @objc private func refreshData(_ sender: Any) {
@@ -72,7 +71,7 @@ class VideoPlaylistViewController: UIViewController {
         guard let userLoginName = users.first?.login else { return "" }
         return userLoginName
     }
-    
+
 
     private func createOptionsForPlayer(with urls: PwnResponse.QualityUrls, title: String, andRelatedVideosFor userId: String) {
 
@@ -135,24 +134,20 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
             switch result {
             case .success(let users):
                 let pwnServiceAPI = PwnServiceAPI(forUser: self.takeUserLoginName(from: users))
-                    
+
                 pwnServiceAPI?.fetchM3U8Urls { [weak self] (result) in
-                    
+
                     switch result {
                     case .success(let urls):
-                        self?.createOptionsForPlayer(with: urls, title: self?.dataSource.getStream(withRow: indexPath.row)?.title ?? "NO TITLE",
-                                                     andRelatedVideosFor: streamUserId)
+                        self?.createOptionsForPlayer(with: urls, title: self?.dataSource.getStream(withRow: indexPath.row)?.title ?? "NO TITLE", andRelatedVideosFor: streamUserId)
                     case .failure(let error):
                         self?.popUpAlert(for: error)
                     }
-                    
                     self?.dismissHUD()
                 }
-    
             case .failure(let error):
                 self.popUpAlert(for: error)
             }
-    
         }
     }
 }
