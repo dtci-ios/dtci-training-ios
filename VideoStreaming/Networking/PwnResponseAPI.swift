@@ -10,26 +10,23 @@ import Foundation
 import Alamofire
 
 class PwnServiceAPI {
-    private var requestURL: String?
-    private var streamerName: String?
+    var requestURL: String
+
     
     private enum Constants {
         static let twitchURL = "https://twitch.tv"
         static let serviceURL = "https://pwn.sh/tools/streamapi.py"
     }
     
-    init(userName name: String) {
-        streamerName = name
-    }
-    
-    func fetchStreamingM3U8Urls(completion: @escaping (Swift.Result<PwnResponse.QualityUrls, APIError>) -> Void) {
-        guard let twitchURL = URL(string: Constants.twitchURL) else { return }
+
+    init?(forUser user: String) {
+        guard let twitchURL = URL(string: Constants.twitchURL) else { return nil }
         
         var componentsForTwitchURL = URLComponents(url: twitchURL, resolvingAgainstBaseURL: false)
         
-        componentsForTwitchURL?.path = "/\(streamerName ?? "")"
+        componentsForTwitchURL?.path = "/\(user)"
         
-        guard let serviceURL = URL(string: Constants.serviceURL) else { return }
+        guard let serviceURL = URL(string: Constants.serviceURL) else { return nil }
 
         var componentsForServiceURL = URLComponents(url: serviceURL, resolvingAgainstBaseURL: false)
         
@@ -37,8 +34,33 @@ class PwnServiceAPI {
             URLQueryItem(name: "url", value: componentsForTwitchURL?.url?.absoluteString ?? "")
         ]
         
-        guard let requestURL = componentsForServiceURL?.url?.absoluteString else { return }
+        guard let url = componentsForServiceURL?.url?.absoluteString else { return nil }
         
+        requestURL = url
+    }
+    
+    init?(with videoId: String) {
+        guard let twitchURL = URL(string: Constants.twitchURL) else { return nil }
+        
+        var componentsForTwitchURL = URLComponents(url: twitchURL, resolvingAgainstBaseURL: false)
+        
+        componentsForTwitchURL?.path = "/videos/\(videoId)"
+        
+        guard let serviceURL = URL(string: Constants.serviceURL) else { return nil }
+
+        var componentsForServiceURL = URLComponents(url: serviceURL, resolvingAgainstBaseURL: false)
+        
+        componentsForServiceURL?.queryItems = [
+            URLQueryItem(name: "url", value: componentsForTwitchURL?.url?.absoluteString ?? "")
+        ]
+
+        guard let url = componentsForServiceURL?.url?.absoluteString else { return nil }
+        
+        requestURL = url
+    }
+    
+    
+    func fetchM3U8Urls(completion: @escaping (Swift.Result<PwnResponse.QualityUrls, APIError>) -> Void) {
         Alamofire.request(requestURL, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
             switch response.result {
             case .success:

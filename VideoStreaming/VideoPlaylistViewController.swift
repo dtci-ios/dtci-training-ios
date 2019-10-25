@@ -67,13 +67,11 @@ class VideoPlaylistViewController: UIViewController {
         }
     }
     
-    private func playVideo(with streamingURL: String?) {
+    private func createPlayer(with streamingURL: String?, title: String, andRelatedVideosFor userId: String) {
         if let url = streamingURL, let m3u8URL = URL(string: url) {
-            let streamPlayerViewController = StreamPlayerViewController(streamingUrl: m3u8URL)
-                           
+            let streamPlayerViewController = StreamPlayerViewController(with: m3u8URL, title: title,
+                                                                        andRelatedVideosFor: userId)
             present(streamPlayerViewController, animated: true)
-                           
-            streamPlayerViewController.play()
         }
     }
     
@@ -82,12 +80,14 @@ class VideoPlaylistViewController: UIViewController {
         return userLoginName
     }
     
-    private func createOptions(for urls: PwnResponse.QualityUrls) {
+
+    private func createOptionsForPlayer(with urls: PwnResponse.QualityUrls, title: String, andRelatedVideosFor userId: String) {
+
         let alert = UIAlertController(title: "Choose the streaming quality", message: nil, preferredStyle: .actionSheet)
         
         for key in urls.keys.sorted(by: { $0.localizedStandardCompare($1) == .orderedAscending }) {
             alert.addAction(UIAlertAction(title: key, style: .default, handler: { (_) in
-                self.playVideo(with: urls[key])
+                self.createPlayer(with: urls[key], title: title, andRelatedVideosFor: userId)
             }))
         }
             
@@ -100,20 +100,6 @@ class VideoPlaylistViewController: UIViewController {
         let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true)
-    }
-    
-    private func createServicesToRetriveURLs(searchingURLsFor loginName: String) {
-        let pwnServiceAPI = PwnServiceAPI(userName: loginName)
-        
-        pwnServiceAPI.fetchStreamingM3U8Urls { [weak self] (result) in
-            switch result {
-            case .success(let urls):
-                self?.createOptions(for: urls)
-            case .failure(let error):
-                self?.popUpAlert(for: error)
-            }
-            self?.dismissHUD()
-        }
     }
 }
 
@@ -146,27 +132,35 @@ extension VideoPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let streamUserId = streams[indexPath.row]?.userId else { return }
+        guard let userId = streams[indexPath.row]?.userId else { return }
         
         let usersAPI = UsersAPI()
-            
+        
         showHUD()
         
-        usersAPI.fetchUsers(userId: streamUserId) { (result) in
-
+        usersAPI.fetchUsers(userId: userId) { (result) in
+            
             switch result {
             case .success(let users):
-                let loginName = self.takeUserLoginName(from: users)
-                if !loginName.isEmpty {
-                    self.createServicesToRetriveURLs(searchingURLsFor: loginName)
-                } else {
-                    let alert = UIAlertController(title: "ERROR", message: "Cannot create API to retrieve urls without user's login name", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true)
+                let pwnServiceAPI = PwnServiceAPI(forUser: self.takeUserLoginName(from: users))
+                    
+                pwnServiceAPI?.fetchM3U8Urls { [weak self] (result) in
+                    
+                    switch result {
+                    case .success(let urls):
+                        self?.createOptionsForPlayer(with: urls, title: self?.streams[indexPath.row]?.title ?? "NO TITLE",
+                                                     andRelatedVideosFor: userId)
+                    case .failure(let error):
+                        self?.popUpAlert(for: error)
+                    }
+                    
+                    self?.dismissHUD()
                 }
+    
             case .failure(let error):
                 self.popUpAlert(for: error)
             }
+    
         }
     }
 }

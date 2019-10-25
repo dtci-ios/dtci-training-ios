@@ -17,7 +17,12 @@ import UIKit
         static let placeholderImg = "Placeholder"
     }
     
-    func configure(with video: Stream) {
+    func configure(with stream: Stream) {
+        videoView.configure(with: stream)
+        videoView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+    }
+    
+    func configure(with video: Video) {
         videoView.configure(with: video)
         videoView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
     }
