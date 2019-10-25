@@ -22,10 +22,12 @@
 		5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */; };
 		5C1A527023622FE7007062D2 /* VideoPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A526F23622FE7007062D2 /* VideoPlaylistViewController.swift */; };
 		5C206257233C186C00A3859E /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
+		5C21BBD22360A8020057C37B /* StreamPlayerDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C21BBD12360A8020057C37B /* StreamPlayerDataSourceTests.swift */; };
 		5C24B7AE233C09F100DE2123 /* SDWebImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C6EB7233A830700829078 /* MainViewController.swift */; };
 		5C61ADC22346661300342FC7 /* StreamPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */; };
 		5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */; };
+		5C6C8754235E4F9C0013DE5E /* StreamPlayerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C8753235E4F9C0013DE5E /* StreamPlayerDataSource.swift */; };
 		5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */; };
 		5CE97CE723317662008CF451 /* VideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CE97CE623317662008CF451 /* VideoView.xib */; };
 		5CE97CE92331786F008CF451 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CE82331786F008CF451 /* VideoView.swift */; };
@@ -91,11 +93,13 @@
 		265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameCollectionViewCell.xib; sourceTree = "<group>"; };
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
 		5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerViewController.swift; sourceTree = "<group>"; };
+		5C21BBD12360A8020057C37B /* StreamPlayerDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerDataSourceTests.swift; sourceTree = "<group>"; };
 		5C1A526F23622FE7007062D2 /* VideoPlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlaylistViewController.swift; sourceTree = "<group>"; };
 		5C24B7AD233C09F100DE2123 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		5C5C6EB7233A830700829078 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
 		5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		5C6C8753235E4F9C0013DE5E /* StreamPlayerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerDataSource.swift; sourceTree = "<group>"; };
 		5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PwnResponseAPI.swift; sourceTree = "<group>"; };
 		5CE97CE623317662008CF451 /* VideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoView.xib; sourceTree = "<group>"; };
 		5CE97CE82331786F008CF451 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
@@ -178,6 +182,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5C6C8752235E4F570013DE5E /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				5C6C8753235E4F9C0013DE5E /* StreamPlayerDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
 		5CE97E4F2331854F00D844CB /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +250,7 @@
 		9C04F3CF233045CA005FBE8E /* VideoStreaming */ = {
 			isa = PBXGroup;
 			children = (
+				5C6C8752235E4F570013DE5E /* DataSources */,
 				5CE97E512331857900D844CB /* Models */,
 				5CE97E4F2331854F00D844CB /* SubViews */,
 				A79B1D62233C07DD003D4099 /* Networking */,
@@ -274,6 +287,7 @@
 				9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */,
 				2629401B2354EC0A00C0C557 /* TopGamesDataSourceTests.swift */,
 				9C04F3E9233045CC005FBE8E /* Info.plist */,
+				5C21BBD12360A8020057C37B /* StreamPlayerDataSourceTests.swift */,
 				A7CBE5D72354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift */,
 			);
 			path = VideoStreamingTests;
@@ -524,6 +538,7 @@
 				5CE97CEB2331793D008CF451 /* Video.swift in Sources */,
 				9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */,
 				A7518BEF233D09570050D8D5 /* TopGamesAPI.swift in Sources */,
+				5C6C8754235E4F9C0013DE5E /* StreamPlayerDataSource.swift in Sources */,
 				5CFC76B3235611BF00B58CE1 /* UsersAPI.swift in Sources */,
 				2677444D2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift in Sources */,
 				5CFFC5432332A3A400D78035 /* VideoTableViewCell.swift in Sources */,
@@ -537,6 +552,7 @@
 			files = (
 				A7CBE5D82354BAB0000750E8 /* VideoPlaylistDataSourceTests.swift in Sources */,
 				9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */,
+				5C21BBD22360A8020057C37B /* StreamPlayerDataSourceTests.swift in Sources */,
 				2629401E2354EC8C00C0C557 /* TopGamesAPIMock.swift in Sources */,
 				2629401C2354EC0A00C0C557 /* TopGamesDataSourceTests.swift in Sources */,
 			);

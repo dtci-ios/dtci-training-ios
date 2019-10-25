@@ -17,33 +17,18 @@ class StreamPlayerViewController: UIViewController {
     @IBOutlet private weak var relatedVideosTableView: UITableView!
     
     private var playerViewController: AVPlayerViewController!
-    private var player: AVPlayer!
     private var landscapeVideoView: UIView!
-    private var videosAPI = VideosAPI() 
-    private var url: URL
-    private var userId: String
-    private var titleText: String
-    private var relatedVideos: [Video] = [Video]()
+    private var player: AVPlayer!
+    private var dataSource: StreamPlayerDataSource
 
     static var nibName: String {
         return String(describing: self)
     }
     
-    init(with url: URL, title: String, andRelatedVideosFor userId: String) {
-        self.url = url
-        self.userId = userId
-        titleText = title
-        super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
+    init(with dataSource: StreamPlayerDataSource) {
+        self.dataSource = dataSource
         
-        videosAPI.fetchVideoList(byUserId: userId) { [weak self] (result) in
-            switch result {
-            case .success(let relatedVideos):
-                self?.relatedVideos = relatedVideos
-                self?.relatedVideosTableView.reloadData()
-            case .failure(let error):
-                self?.popUpAlert(for: error)
-            }
-        }
+        super.init(nibName: StreamPlayerViewController.nibName, bundle: nil)
         
         setupPlayerViewController()
     }
@@ -55,20 +40,22 @@ class StreamPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataSource.loadData(completion: errorCompletionHandler(error:))
+
         relatedVideosTableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
-                           forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
+            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
         
         relatedVideosTableView.backgroundColor = .black
         
         descriptionLabel.lineBreakMode = .byWordWrapping
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.text = titleText
+        descriptionLabel.text = dataSource.videoTitle
         
         videoPlayerView.addSubview(playerViewController.view)
         
         playerViewController.view.frame = videoPlayerView.bounds
         
-        player = AVPlayer(url: url)
+        player = AVPlayer(url: dataSource.url)
         playerViewController.player = player
         playerViewController.player?.play()
     }
@@ -119,34 +106,40 @@ class StreamPlayerViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    private func popUpAlert(for error: APIError) {
-        let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true)
+    private func errorCompletionHandler(error: APIError?) {
+        relatedVideosTableView.reloadData()
+        if let error = error {
+            let alert = UIAlertController(title: "ERROR", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
+        }
     }
 }
 
 extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return relatedVideos.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell") as? VideoTableViewCell else {
             return UITableViewCell()
         }
     
-        cell.configure(with: relatedVideos[indexPath.row])
+        guard let video = dataSource.getVideo(at: indexPath.row) else { return UITableViewCell() }
+        
+        cell.configure(with: video)
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource.relatedVideosCount
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let videoId = relatedVideos[indexPath.row].id
+        guard let videoId = dataSource.getVideo(at: indexPath.row)?.id else  { return }
         
         let pwnServiceAPI = PwnServiceAPI(with: videoId)
         
@@ -157,10 +150,10 @@ extension StreamPlayerViewController: UITableViewDelegate, UITableViewDataSource
             
             switch result {
             case .success(let urls):
-                strongSelf.titleText = strongSelf.relatedVideos[indexPath.row].title
-                strongSelf.setCell(with: urls, andTitle: strongSelf.titleText)
+                let title = strongSelf.dataSource.getVideo(at: indexPath.row)?.title
+                strongSelf.setCell(with: urls, andTitle: title ?? "NO TITLE")
             case .failure(let error):
-                strongSelf.popUpAlert(for: error)
+                strongSelf.errorCompletionHandler(error: error)
             }
             
             self?.dismissHUD()
