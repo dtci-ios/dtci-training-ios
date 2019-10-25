@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		262940182354C84700C0C557 /* ColumnsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262940172354C84700C0C557 /* ColumnsLayout.swift */; };
+		2629401A2354CB1F00C0C557 /* TopGamesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262940192354CB1F00C0C557 /* TopGamesDataSource.swift */; };
+		2629401C2354EC0A00C0C557 /* TopGamesDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2629401B2354EC0A00C0C557 /* TopGamesDataSourceTests.swift */; };
+		2629401E2354EC8C00C0C557 /* TopGamesAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2629401D2354EC8C00C0C557 /* TopGamesAPIMock.swift */; };
+		2629401F2354F59E00C0C557 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A72C3A4D233565BF00723C01 /* Alamofire.framework */; };
+		262940202354F5A400C0C557 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C24B7AD233C09F100DE2123 /* SDWebImage.framework */; };
 		263E8575233CF331003D3DC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 263E8573233CF331003D3DC9 /* Main.storyboard */; };
 		265C74E3233A4E150033C139 /* TopGamesCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 265C74E2233A4E150033C139 /* TopGamesCollectionViewController.xib */; };
 		265C74E5233A4FEF0033C139 /* TopGamesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265C74E4233A4FEF0033C139 /* TopGamesCollectionViewController.swift */; };
@@ -70,6 +76,10 @@
 
 /* Begin PBXFileReference section */
 		1C0440054E5099523CAFE5C3 /* Pods-VideoStreaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreaming.debug.xcconfig"; path = "Target Support Files/Pods-VideoStreaming/Pods-VideoStreaming.debug.xcconfig"; sourceTree = "<group>"; };
+		262940172354C84700C0C557 /* ColumnsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsLayout.swift; sourceTree = "<group>"; };
+		262940192354CB1F00C0C557 /* TopGamesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesDataSource.swift; sourceTree = "<group>"; };
+		2629401B2354EC0A00C0C557 /* TopGamesDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesDataSourceTests.swift; sourceTree = "<group>"; };
+		2629401D2354EC8C00C0C557 /* TopGamesAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesAPIMock.swift; sourceTree = "<group>"; };
 		263E8574233CF331003D3DC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		265C74E2233A4E150033C139 /* TopGamesCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopGamesCollectionViewController.xib; sourceTree = "<group>"; };
 		265C74E4233A4FEF0033C139 /* TopGamesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +136,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2629401F2354F59E00C0C557 /* Alamofire.framework in Frameworks */,
+				262940202354F5A400C0C557 /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +150,14 @@
 				A72C3A4D233565BF00723C01 /* Alamofire.framework */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		26A310FA234E59DF008021EF /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				2629401D2354EC8C00C0C557 /* TopGamesAPIMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		4F911E12C06233FA6283BEFF /* Pods */ = {
@@ -228,6 +248,8 @@
 				5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */,
 				265C74E2233A4E150033C139 /* TopGamesCollectionViewController.xib */,
 				265C74E4233A4FEF0033C139 /* TopGamesCollectionViewController.swift */,
+				262940192354CB1F00C0C557 /* TopGamesDataSource.swift */,
+				262940172354C84700C0C557 /* ColumnsLayout.swift */,
 				265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */,
 				265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */,
 				5C5C6EB7233A830700829078 /* MainViewController.swift */,
@@ -239,7 +261,9 @@
 		9C04F3E6233045CC005FBE8E /* VideoStreamingTests */ = {
 			isa = PBXGroup;
 			children = (
+				26A310FA234E59DF008021EF /* Mocks */,
 				9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */,
+				2629401B2354EC0A00C0C557 /* TopGamesDataSourceTests.swift */,
 				9C04F3E9233045CC005FBE8E /* Info.plist */,
 			);
 			path = VideoStreamingTests;
@@ -472,9 +496,11 @@
 				A783F1A62333E38D0098DAD8 /* VideoPlaylistViewController.swift in Sources */,
 				A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */,
 				5C5C6EB8233A830700829078 /* MainViewController.swift in Sources */,
+				262940182354C84700C0C557 /* ColumnsLayout.swift in Sources */,
 				5CE97CE92331786F008CF451 /* VideoView.swift in Sources */,
 				5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */,
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
+				2629401A2354CB1F00C0C557 /* TopGamesDataSource.swift in Sources */,
 				A7518BF0233D09570050D8D5 /* GameStreamsAPI.swift in Sources */,
 				5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */,
 				5CE97CEB2331793D008CF451 /* Video.swift in Sources */,
@@ -492,6 +518,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C04F3E8233045CC005FBE8E /* VideoStreamingTests.swift in Sources */,
+				2629401E2354EC8C00C0C557 /* TopGamesAPIMock.swift in Sources */,
+				2629401C2354EC0A00C0C557 /* TopGamesDataSourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +649,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -693,6 +722,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4QBG52MSRJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = VideoStreamingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -716,6 +749,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4QBG52MSRJ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = VideoStreamingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
