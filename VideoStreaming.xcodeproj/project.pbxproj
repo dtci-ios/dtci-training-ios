@@ -95,6 +95,7 @@
 		265C74E4233A4FEF0033C139 /* TopGamesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopGamesCollectionViewController.swift; sourceTree = "<group>"; };
 		265C74EA233A5B320033C139 /* GameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewCell.swift; sourceTree = "<group>"; };
 		265C74EC233A65B00033C139 /* GameCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameCollectionViewCell.xib; sourceTree = "<group>"; };
+		26768A0C2367535400E7AE74 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2677444C2332CE36003E4B52 /* UIViewController+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MBProgressHUD.swift"; sourceTree = "<group>"; };
 		26B7B36E23637F3100AC361A /* ColumnsLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnsLayoutHelper.swift; sourceTree = "<group>"; };
 		26B7B3712363805B00AC361A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -127,7 +128,6 @@
 		9C04F3DC233045CC005FBE8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C04F3E3233045CC005FBE8E /* VideoStreamingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoStreamingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C04F3E7233045CC005FBE8E /* VideoStreamingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStreamingTests.swift; sourceTree = "<group>"; };
-		9C04F3E9233045CC005FBE8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C2D59D8BDC18EE4657E2A6D /* Pods-VideoStreaming.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoStreaming.release.xcconfig"; path = "Target Support Files/Pods-VideoStreaming/Pods-VideoStreaming.release.xcconfig"; sourceTree = "<group>"; };
 		A72C3A4D233565BF00723C01 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		A74E15E8234F7EB8004B9562 /* VideoPlaylistDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaylistDataSource.swift; sourceTree = "<group>"; };
@@ -344,7 +344,7 @@
 		9C04F3E6233045CC005FBE8E /* VideoStreamingTests */ = {
 			isa = PBXGroup;
 			children = (
-				9C04F3E9233045CC005FBE8E /* Info.plist */,
+				26768A0C2367535400E7AE74 /* Info.plist */,
 				26A310FA234E59DF008021EF /* Mocks */,
 				5C21BBD12360A8020057C37B /* StreamPlayerDataSourceTests.swift */,
 				2629401B2354EC0A00C0C557 /* TopGamesDataSourceTests.swift */,
