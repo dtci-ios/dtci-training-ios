@@ -60,11 +60,22 @@ class StreamPlayerViewController: UIViewController {
         playerViewController.player?.play()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if UIDevice.current.orientation.isLandscape {
+            landscapeVideoView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
+            view.addSubview(landscapeVideoView)
+            playerViewController.view.frame = landscapeVideoView.bounds
+            landscapeVideoView.addSubview(playerViewController.view)
+        }
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
         if landscapeVideoView == nil {
-            landscapeVideoView  = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.height, height: view.frame.width))
+            landscapeVideoView  = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.height, height: UIScreen.main.bounds.size.width))
             view.addSubview(landscapeVideoView)
             playerViewController.view.frame = landscapeVideoView.bounds
             landscapeVideoView.addSubview(playerViewController.view)
