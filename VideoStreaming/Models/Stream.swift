@@ -21,7 +21,7 @@ struct Stream: Codable {
     let thumbnailUrl: String?
     var tagIds: [String?]? {
         willSet {
-            streamCategories = tagIds?.compactMap { Category(rawValue: $0 ?? "") }
+            streamCategories = tagIds?.compactMap { Category($0 ?? "") }
         }
     }
 

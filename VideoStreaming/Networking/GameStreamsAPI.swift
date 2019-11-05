@@ -9,16 +9,20 @@
 import Foundation
 
 protocol GameStreamsAPIProtocol {
-    func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void)
+    func fetchStraems(completion: @escaping (Result<[Stream],APIError>) -> Void))
+    func fetchStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void)
 }
 
 class GameStreamsAPI: NetworkManager, GameStreamsAPIProtocol {
 
     var request = "https://api.twitch.tv/helix/streams"
     
-    func fetchGameStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void) {
-        var params: [String:Any] = ["game_id":gameId]
-        params.updateValue(100, forKey: "first")
+    func fetchStreams(completion: @escaping (Result<[Stream],APIError>) {
+        
+    }
+    
+    func fetchStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void) {
+        let params: [String:Any] = ["game_id":gameId]
         fetchData(request: request, parameters: params, completion: completion)
     }
 

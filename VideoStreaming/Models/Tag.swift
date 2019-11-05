@@ -9,7 +9,7 @@
 import Foundation
 
 struct Tag: Codable, Equatable {
-    let id: String
+    let tagId: String
     let localizationNames: [String:String]
     
     var localizatedName: String {
@@ -17,7 +17,7 @@ struct Tag: Codable, Equatable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case tagId = "tag_id"
         case localizationNames = "localization_names"
     }
 }
