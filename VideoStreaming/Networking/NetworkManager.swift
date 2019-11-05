@@ -59,25 +59,25 @@ extension NetworkManager {
             .validate(statusCode: 200 ..< 300)
             .responseJSON { (response) in
                 switch response.result {
-                    case .success:
-                        guard let data = response.data else {
-                            completion(.failure(APIError.responseDataNil))
-                            return
-                        }
-                        
-                        do {
-                            let dataResponse = try JSONDecoder().decode(ReceivedData<T>.self, from: data)
-                            if dataResponse.dataArray.isEmpty {
-                                completion(.failure(APIError.emptyDataArray))
-                            } else { completion(.success(dataResponse.dataArray)) }
-                        } catch let jsonError { completion(.failure(APIError.jsonError(jsonError))) }
+                case .success:
+                    guard let data = response.data else {
+                        completion(.failure(APIError.responseDataNil))
+                        return
+                    }
+
+                    do {
+                        let dataResponse = try JSONDecoder().decode(ReceivedData<T>.self, from: data)
+                        if dataResponse.dataArray.isEmpty {
+                            completion(.failure(APIError.emptyDataArray))
+                        } else { completion(.success(dataResponse.dataArray)) }
+                    } catch let jsonError { completion(.failure(APIError.jsonError(jsonError))) }
                     
-                    case .failure(let error):
-                        if let error = error as? AFError {
-                            completion(.failure(APIError.alamofireError(error)))
-                        } else if let error = error as? URLError {
-                            completion(.failure(APIError.urlError(error)))
-                        } else { completion(.failure(APIError.unknownError(error))) }
+                case .failure(let error):
+                    if let error = error as? AFError {
+                        completion(.failure(APIError.alamofireError(error)))
+                    } else if let error = error as? URLError {
+                        completion(.failure(APIError.urlError(error)))
+                    } else { completion(.failure(APIError.unknownError(error))) }
                 }
         }
     }

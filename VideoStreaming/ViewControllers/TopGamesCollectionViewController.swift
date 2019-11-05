@@ -12,7 +12,7 @@ class TopGamesCollectionViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    private var columnsLayout = ColumnsLayout(itemsWidthPercentage: 0.88, cellAspectRatio: CellAspectRatio(width: 3, height: 4))
+    private var columnsLayout = TopGamesCollectionViewLayout(itemsWidthPercentage: 0.88, cellAspectRatio: CellAspectRatio(width: 3, height: 4))
     private var dataSource: TopGamesDataSource!
 
     static var nibName: String {

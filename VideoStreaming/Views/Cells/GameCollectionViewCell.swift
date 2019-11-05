@@ -37,5 +37,4 @@ class GameCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         game = nil
     }
-
 }

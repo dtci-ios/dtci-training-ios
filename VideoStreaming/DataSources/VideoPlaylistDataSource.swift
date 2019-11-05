@@ -47,5 +47,4 @@ class VideoPlaylistDataSource {
     func indexOfStream(withId streamId: String?) -> Int? {
         return streams.firstIndex { $0.id == streamId }
     }
-    
 }
