@@ -55,11 +55,14 @@ extension NetworkManager {
                                 parameters: QueryString = [:],
                                 completion: @escaping ((Swift.Result<[T],APIError>)->Void)) {
         
+        
         Alamofire.request(request, parameters: parameters, headers: Self.headers)
             .validate(statusCode: 200 ..< 300)
             .responseJSON { (response) in
+                
                 switch response.result {
                 case .success:
+                    
                     guard let data = response.data else {
                         completion(.failure(APIError.responseDataNil))
                         return
@@ -80,6 +83,7 @@ extension NetworkManager {
                     }
                     
                 case .failure(let error):
+                    
                     if let error = error as? AFError {
                         completion(.failure(APIError.alamofireError(error)))
                     } else if let error = error as? URLError {
@@ -87,7 +91,9 @@ extension NetworkManager {
                     } else {
                         completion(.failure(APIError.unknownError(error)))
                     }
+                    
                 }
+                
         }
     }
 }

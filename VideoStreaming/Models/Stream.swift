@@ -19,8 +19,14 @@ struct Stream: Codable {
     let startedAt: String?
     let language: String?
     let thumbnailUrl: String?
-    let tagIds: [String?]?
+    var tagIds: [String?]? {
+        willSet {
+            streamCategories = tagIds?.compactMap { Category(rawValue: $0 ?? "") }
+        }
+    }
 
+    var streamCategories: [Category]?
+    
     var durationAndDate: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
