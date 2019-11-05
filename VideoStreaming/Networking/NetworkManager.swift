@@ -66,18 +66,27 @@ extension NetworkManager {
                     }
 
                     do {
+                        
                         let dataResponse = try JSONDecoder().decode(ReceivedData<T>.self, from: data)
+                        
                         if dataResponse.dataArray.isEmpty {
                             completion(.failure(APIError.emptyDataArray))
-                        } else { completion(.success(dataResponse.dataArray)) }
-                    } catch let jsonError { completion(.failure(APIError.jsonError(jsonError))) }
+                        } else {
+                            completion(.success(dataResponse.dataArray))
+                        }
+                        
+                    } catch let jsonError {
+                        completion(.failure(APIError.jsonError(jsonError)))
+                    }
                     
                 case .failure(let error):
                     if let error = error as? AFError {
                         completion(.failure(APIError.alamofireError(error)))
                     } else if let error = error as? URLError {
                         completion(.failure(APIError.urlError(error)))
-                    } else { completion(.failure(APIError.unknownError(error))) }
+                    } else {
+                        completion(.failure(APIError.unknownError(error)))
+                    }
                 }
         }
     }

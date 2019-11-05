@@ -34,6 +34,7 @@
 		5C61ADC22346661300342FC7 /* StreamPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */; };
 		5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */; };
 		5C6C8754235E4F9C0013DE5E /* StreamPlayerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C8753235E4F9C0013DE5E /* StreamPlayerDataSource.swift */; };
+		5CB019B32371C23B00DFF36D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB019B22371C23A00DFF36D /* Category.swift */; };
 		5CBAFB91234E603E00C70400 /* PwnResponseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */; };
 		5CE97CE723317662008CF451 /* VideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CE97CE623317662008CF451 /* VideoView.xib */; };
 		5CE97CE92331786F008CF451 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE97CE82331786F008CF451 /* VideoView.swift */; };
@@ -111,6 +112,7 @@
 		5C61ADC12346661300342FC7 /* StreamPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StreamPlayerViewController.xib; sourceTree = "<group>"; };
 		5C63FDA723477A7D0022C7E0 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		5C6C8753235E4F9C0013DE5E /* StreamPlayerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerDataSource.swift; sourceTree = "<group>"; };
+		5CB019B22371C23A00DFF36D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PwnResponseAPI.swift; sourceTree = "<group>"; };
 		5CE97CE623317662008CF451 /* VideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoView.xib; sourceTree = "<group>"; };
 		5CE97CE82331786F008CF451 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */,
 				5CFC76B2235611BF00B58CE1 /* UsersAPI.swift */,
 				5CFB597B233CDF87009C1220 /* VideosAPI.swift */,
+				5CB019B22371C23A00DFF36D /* Category.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				265C74E5233A4FEF0033C139 /* TopGamesCollectionViewController.swift in Sources */,
+				5CB019B32371C23B00DFF36D /* Category.swift in Sources */,
 				265C74EB233A5B320033C139 /* GameCollectionViewCell.swift in Sources */,
 				5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */,
 				26B7B36F23637F3100AC361A /* ColumnsLayoutHelper.swift in Sources */,
