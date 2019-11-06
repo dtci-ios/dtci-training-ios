@@ -16,7 +16,6 @@ class VideoPlaylistViewController: UIViewController {
     
     private var gameName: String?
     private var dataSource: VideoPlaylistDataSource!
-    private var homePageDataSource: HomePageDataSource!
 
     static var nibName: String {
         return String(describing: self)
@@ -42,7 +41,6 @@ class VideoPlaylistViewController: UIViewController {
         showHUD()
         
         dataSource.load(byCategory: .irl, completion: errorCompletionHandler(error:))
-        homePageDataSource.load(completion: errorCompletionHandler(error:))
         
         tableView.register(UINib(nibName: VideoTableViewCell.Constants.nibName, bundle: nil),
                            forCellReuseIdentifier: VideoTableViewCell.Constants.reuseIdentifier)
