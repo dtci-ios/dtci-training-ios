@@ -9,7 +9,7 @@
 import Foundation
 
 class TwitchAPI {
-    private let streamsAPIManager = StreamsAPI() // StreamsAPI()
+    private let streamsAPIManager = StreamsAPI()
     private let topGamesAPIManager = TopGamesAPI()
     private let gamesAPIManager = GamesAPI()
     
