@@ -28,9 +28,7 @@
 		26B7B3822363877C00AC361A /* ReceivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B7B3812363877C00AC361A /* ReceivedData.swift */; };
 		5C037224237343040024F57F /* HomePageDataSoruce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C037223237343030024F57F /* HomePageDataSoruce.swift */; };
 		5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */; };
-		5C14AFB52371E6F30096C75D /* TagsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14AFB42371E6F30096C75D /* TagsAPI.swift */; };
 		5C14AFB72371E71D0096C75D /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14AFB62371E71D0096C75D /* Tag.swift */; };
-		5C14AFB92371F1450096C75D /* TwitchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14AFB82371F1450096C75D /* TwitchAPI.swift */; };
 		5C14AFBB2371F3120096C75D /* GamesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14AFBA2371F3120096C75D /* GamesAPI.swift */; };
 		5C14AFBD23720E260096C75D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14AFBC23720E260096C75D /* Category.swift */; };
 		5C1A527023622FE7007062D2 /* VideoPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1A526F23622FE7007062D2 /* VideoPlaylistViewController.swift */; };
@@ -112,9 +110,7 @@
 		26B7B38B2363922000AC361A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C037223237343030024F57F /* HomePageDataSoruce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageDataSoruce.swift; sourceTree = "<group>"; };
 		5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerViewController.swift; sourceTree = "<group>"; };
-		5C14AFB42371E6F30096C75D /* TagsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsAPI.swift; sourceTree = "<group>"; };
 		5C14AFB62371E71D0096C75D /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
-		5C14AFB82371F1450096C75D /* TwitchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchAPI.swift; sourceTree = "<group>"; };
 		5C14AFBA2371F3120096C75D /* GamesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesAPI.swift; sourceTree = "<group>"; };
 		5C14AFBC23720E260096C75D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		5C1A526F23622FE7007062D2 /* VideoPlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlaylistViewController.swift; sourceTree = "<group>"; };
@@ -377,8 +373,6 @@
 				5CBAFB90234E603E00C70400 /* PwnResponseAPI.swift */,
 				5CFC76B2235611BF00B58CE1 /* UsersAPI.swift */,
 				5CFB597B233CDF87009C1220 /* VideosAPI.swift */,
-				5C14AFB42371E6F30096C75D /* TagsAPI.swift */,
-				5C14AFB82371F1450096C75D /* TwitchAPI.swift */,
 				5C14AFBA2371F3120096C75D /* GamesAPI.swift */,
 				5C14AFBC23720E260096C75D /* Category.swift */,
 			);
@@ -596,7 +590,6 @@
 				265C74E5233A4FEF0033C139 /* TopGamesCollectionViewController.swift in Sources */,
 				265C74EB233A5B320033C139 /* GameCollectionViewCell.swift in Sources */,
 				5C63FDA823477A7D0022C7E0 /* NibLoadable.swift in Sources */,
-				5C14AFB92371F1450096C75D /* TwitchAPI.swift in Sources */,
 				26B7B36F23637F3100AC361A /* ColumnsLayoutHelper.swift in Sources */,
 				A7518BF2233D09650050D8D5 /* PwnResponse.swift in Sources */,
 				A7518BEE233D09570050D8D5 /* NetworkManager.swift in Sources */,
@@ -615,7 +608,6 @@
 				5C037224237343040024F57F /* HomePageDataSoruce.swift in Sources */,
 				5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */,
 				5CE97CEB2331793D008CF451 /* Video.swift in Sources */,
-				5C14AFB52371E6F30096C75D /* TagsAPI.swift in Sources */,
 				26B7B374236380E300AC361A /* Game.swift in Sources */,
 				9C04F3D3233045CA005FBE8E /* SceneDelegate.swift in Sources */,
 				A7518BEF233D09570050D8D5 /* TopGamesAPI.swift in Sources */,

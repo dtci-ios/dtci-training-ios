@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HomePagaDataSource {
+class HomePageDataSource {
     private var streamsAPIManager: StreamsAPIProtocol
     private var videosAPIManager: VideosAPIProtocol
     private var streams: [Stream] = []
@@ -21,8 +21,7 @@ class HomePagaDataSource {
     }
     
     public func load(completion: @escaping (APIError?) -> Void) {
-        loadStreams(completion: completion)
-        loadVideos(userIds: userIds, completion: completion)
+        loadStreams(completion: completion)        
     }
     
     private func loadStreams(completion: @escaping (APIError?) -> Void) {
@@ -30,7 +29,7 @@ class HomePagaDataSource {
             switch result {
             case .success(let retrievedStreams):
                 self.streams = retrievedStreams
-                self.userIds = retrievedStreams.map { ($0.userId ?? "") }
+                self.loadVideos(userIds: retrievedStreams.compactMap { $0.userId }, completion: completion)
                 completion(nil)
             case .failure(let error):
                 completion(error)
