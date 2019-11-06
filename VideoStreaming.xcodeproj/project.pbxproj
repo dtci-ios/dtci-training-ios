@@ -26,6 +26,7 @@
 		26B7B37E2363853E00AC361A /* MockVideosAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B7B37D2363853E00AC361A /* MockVideosAPI.swift */; };
 		26B7B3802363857300AC361A /* MockGameStreamsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B7B37F2363857300AC361A /* MockGameStreamsAPI.swift */; };
 		26B7B3822363877C00AC361A /* ReceivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B7B3812363877C00AC361A /* ReceivedData.swift */; };
+		5C037224237343040024F57F /* HomePageDataSoruce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C037223237343030024F57F /* HomePageDataSoruce.swift */; };
 		5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */; };
 		5C14AFB52371E6F30096C75D /* TagsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14AFB42371E6F30096C75D /* TagsAPI.swift */; };
 		5C14AFB72371E71D0096C75D /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14AFB62371E71D0096C75D /* Tag.swift */; };
@@ -109,6 +110,7 @@
 		26B7B37F2363857300AC361A /* MockGameStreamsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGameStreamsAPI.swift; sourceTree = "<group>"; };
 		26B7B3812363877C00AC361A /* ReceivedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedData.swift; sourceTree = "<group>"; };
 		26B7B38B2363922000AC361A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C037223237343030024F57F /* HomePageDataSoruce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageDataSoruce.swift; sourceTree = "<group>"; };
 		5C0CBDD123429F6E00D2973B /* StreamPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPlayerViewController.swift; sourceTree = "<group>"; };
 		5C14AFB42371E6F30096C75D /* TagsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsAPI.swift; sourceTree = "<group>"; };
 		5C14AFB62371E71D0096C75D /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				5C6C8753235E4F9C0013DE5E /* StreamPlayerDataSource.swift */,
 				A74E15E8234F7EB8004B9562 /* VideoPlaylistDataSource.swift */,
 				262940192354CB1F00C0C557 /* TopGamesDataSource.swift */,
+				5C037223237343030024F57F /* HomePageDataSoruce.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				9C04F3D1233045CA005FBE8E /* AppDelegate.swift in Sources */,
 				2629401A2354CB1F00C0C557 /* TopGamesDataSource.swift in Sources */,
 				A7518BF0233D09570050D8D5 /* GameStreamsAPI.swift in Sources */,
+				5C037224237343040024F57F /* HomePageDataSoruce.swift in Sources */,
 				5C0CBDD323429F6E00D2973B /* StreamPlayerViewController.swift in Sources */,
 				5CE97CEB2331793D008CF451 /* Video.swift in Sources */,
 				5C14AFB52371E6F30096C75D /* TagsAPI.swift in Sources */,

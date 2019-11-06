@@ -14,11 +14,11 @@ protocol StreamsAPIProtocol {
 }
 
 class StreamsAPI: NetworkManager, StreamsAPIProtocol {
+    
     var request = "https://api.twitch.tv/helix/streams"
     
     func fetchStreams(completion: @escaping (Result<[Stream], APIError>) -> Void) {
-        let parameters: [String:Any] = ["first":100]
-        fetchData(request: request, parameters: parameters, completion: completion)
+        fetchData(request: request, completion: completion)
     }
     
     func fetchStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void) {

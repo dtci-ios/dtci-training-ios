@@ -23,31 +23,22 @@ class VideoPlaylistDataSource {
         self.gameId = gameId
     }
     
-    func load(completion: @escaping (APIError?) -> Void) {
-//        guard let gameId = gameId else {
-//            completion(.responseDataNil)
-//            return
-//        }
+    
+    func load(byCategory category: Category, completion: @escaping (APIError?) -> Void) {
+        guard let gameId = gameId else {
+            completion(.responseDataNil)
+            return
+        }
         
-        apiManager.fetchStreams() { result in
+        apiManager.fetchStreams(ofGame: gameId) { result in
             switch result {
-            case .success(let retrievedStreams):
-                self.streams = retrievedStreams
+            case .success(let gameStreams):
+                self.streams = gameStreams
                 completion(nil)
             case .failure(let error):
                 completion(error)
             }
         }
-        
-//        apiManager.fetchStreams(ofGame: gameId) { result in
-//            switch result {
-//            case .success(let gameStreams):
-//                self.streams = gameStreams
-//                completion(nil)
-//            case .failure(let error):
-//                completion(error)
-//            }
-//        }
     }
     
     func getStream(withRow indexRow: Int) -> Stream? {
