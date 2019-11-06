@@ -9,7 +9,7 @@
 import Foundation
 
 class TwitchAPI {
-    private let streamsAPIManager = GameStreamsAPI() // StreamsAPI()
+    private let streamsAPIManager = StreamsAPI() // StreamsAPI()
     private let topGamesAPIManager = TopGamesAPI()
     private let gamesAPIManager = GamesAPI()
     
@@ -18,6 +18,6 @@ class TwitchAPI {
     }
     
     public func fetchtStreams() {
-        streamsAPIManager.
+        
     }
 }

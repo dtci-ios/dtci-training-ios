@@ -59,7 +59,7 @@ class PwnServiceAPI {
     
     
     func fetchM3U8Urls(completion: @escaping (Swift.Result<PwnResponse.QualityUrls, APIError>) -> Void) {
-        Alamofire.request(requestURL, parameters: nil, headers: GameStreamsAPI.headers).responseJSON { (response) in
+        Alamofire.request(requestURL, parameters: nil, headers: StreamsAPI.headers).responseJSON { (response) in
             switch response.result {
             case .success:
                 

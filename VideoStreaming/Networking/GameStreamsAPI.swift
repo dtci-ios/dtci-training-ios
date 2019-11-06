@@ -8,17 +8,16 @@
 
 import Foundation
 
-protocol GameStreamsAPIProtocol {
-    func fetchStraems(completion: @escaping (Result<[Stream],APIError>) -> Void))
+protocol StreamsAPIProtocol {
+    func fetchStraems(completion: @escaping (Result<[Stream],APIError>) -> Void)
     func fetchStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void)
 }
 
-class GameStreamsAPI: NetworkManager, GameStreamsAPIProtocol {
-
+class StreamsAPI: NetworkManager, StreamsAPIProtocol {
     var request = "https://api.twitch.tv/helix/streams"
     
-    func fetchStreams(completion: @escaping (Result<[Stream],APIError>) {
-        
+    func fetchStraems(completion: @escaping (Result<[Stream], APIError>) -> Void) {
+        //
     }
     
     func fetchStreams(ofGame gameId: String, completion: @escaping (Result<[Stream],APIError>) -> Void) {

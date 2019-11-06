@@ -12,13 +12,13 @@ class VideoPlaylistDataSource {
     
     private var streams: [Stream] = []
     private var gameId: String?
-    private let apiManager: GameStreamsAPIProtocol
+    private let apiManager: StreamsAPIProtocol
     
     var streamCount: Int {
         return streams.count
     }
     
-    init(apiManager: GameStreamsAPIProtocol, gameId: String?) {
+    init(apiManager: StreamsAPIProtocol, gameId: String?) {
         self.apiManager = apiManager
         self.gameId = gameId
     }
@@ -29,7 +29,7 @@ class VideoPlaylistDataSource {
             return
         }
         
-        apiManager.fetchGameStreams(ofGame: gameId) { result in
+        apiManager.fetchStreams(ofGame: gameId) { result in
             switch result {
             case .success(let gameStreams):
                 self.streams = gameStreams
