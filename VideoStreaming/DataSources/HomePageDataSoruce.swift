@@ -21,7 +21,7 @@ class HomePageDataSource {
     }
     
     public func load(completion: @escaping (APIError?) -> Void) {
-        loadStreams(completion: completion)        
+        loadStreams(completion: completion)
     }
     
     private func loadStreams(completion: @escaping (APIError?) -> Void) {
@@ -29,7 +29,7 @@ class HomePageDataSource {
             switch result {
             case .success(let retrievedStreams):
                 self.streams = retrievedStreams
-                self.loadVideos(userIds: retrievedStreams.compactMap { $0.userId }, completion: completion)
+                self.loadRelatedVideos(userIds: retrievedStreams.compactMap { $0.userId }, completion: completion)
                 completion(nil)
             case .failure(let error):
                 completion(error)
@@ -37,7 +37,7 @@ class HomePageDataSource {
         }
     }
     
-    private func loadVideos(userIds: [String], completion: @escaping (APIError?) -> Void) {
+    private func loadRelatedVideos(userIds: [String], completion: @escaping (APIError?) -> Void) {
         userIds.forEach { userId in
             videosAPIManager.fetchVideoList(byUserId: userId) { result in
                 switch result {
