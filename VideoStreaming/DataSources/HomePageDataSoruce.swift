@@ -28,6 +28,10 @@ class HomePageDataSource {
         loadStreams(completion: completion)
     }
     
+    public func getStream(at indexRow: Int) -> Stream? {
+        return indexRow >= 0 && indexRow < streams.count ? streams[indexRow] : nil
+    }
+    
     public func getVideo(at indexRow: Int) -> Video? {
         return indexRow >= 0 && indexRow < relatedVideos.count ? relatedVideos[indexRow] : nil
     }
