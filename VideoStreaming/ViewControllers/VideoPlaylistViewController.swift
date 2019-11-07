@@ -24,7 +24,6 @@ class VideoPlaylistViewController: UIViewController {
     init(with game: Game) {
         gameName = game.name
         dataSource = VideoPlaylistDataSource(apiManager: StreamsAPI(), gameId: game.id)
-        homePageDataSource = HomePageDataSource(streamsAPIManager: StreamsAPI(), videosAPIManager: VideosAPI())
         
         super.init(nibName: VideoPlaylistViewController.nibName, bundle: nil)
     }

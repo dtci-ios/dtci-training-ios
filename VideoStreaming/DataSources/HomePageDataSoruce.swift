@@ -15,6 +15,10 @@ class HomePageDataSource {
     private var relatedVideos: [Video] = []
     private var userIds: [String] = []
     
+    var relatedVideosCount: Int {
+        return relatedVideos.count
+    }
+    
     init(streamsAPIManager: StreamsAPIProtocol, videosAPIManager: VideosAPIProtocol) {
         self.streamsAPIManager = streamsAPIManager
         self.videosAPIManager = videosAPIManager
@@ -22,6 +26,10 @@ class HomePageDataSource {
     
     public func load(completion: @escaping (APIError?) -> Void) {
         loadStreams(completion: completion)
+    }
+    
+    public func getVideo(at indexRow: Int) -> Video? {
+        return indexRow >= 0 && indexRow < relatedVideos.count ? relatedVideos[indexRow] : nil
     }
     
     private func loadStreams(completion: @escaping (APIError?) -> Void) {
