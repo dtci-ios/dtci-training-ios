@@ -29,6 +29,10 @@ class HomePageDataSource {
         loadStreams(completion: completion)
     }
     
+    public func getName(at indexRow: Int) -> String? {
+        return indexRow >= 0 && indexRow < userNames.count ? userNames[indexRow] : nil
+    }
+    
     public func getStream(at indexRow: Int) -> Stream? {
         return indexRow >= 0 && indexRow < streams.count ? streams[indexRow] : nil
     }
