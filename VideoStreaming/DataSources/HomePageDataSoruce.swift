@@ -14,6 +14,7 @@ class HomePageDataSource {
     private var streams: [Stream] = []
     private var relatedVideos: [Video] = []
     private var userIds: [String] = []
+    private var userNames: [String] = []
     
     var relatedVideosCount: Int {
         return relatedVideos.count
@@ -41,6 +42,7 @@ class HomePageDataSource {
             switch result {
             case .success(let retrievedStreams):
                 self.streams = retrievedStreams
+                self.userNames = retrievedStreams.compactMap { $0.userName }
                 self.loadRelatedVideos(userIds: retrievedStreams.compactMap { $0.userId }, completion: completion)
                 completion(nil)
             case .failure(let error):
